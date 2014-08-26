@@ -1,0 +1,292 @@
+
+			<section id="header" class="dark">
+				<header>
+					<h1>Islami Sangh Nepal</h1>
+					<p>A Leading Organization of Dawah and Reformation</p>
+				</header>
+				<footer>
+					<a href="#first" class="button scrolly">Brief Introduction</a>
+				</footer>
+			</section>
+			
+		<!-- First -->
+			<section id="first" class="main">
+				<header>
+					<div class="container">
+						<h2><?php echo $about['Page']['title'];?></h2>
+						<p><?php echo $about['Page']['description'];?></p>
+                        <?php
+                        foreach($achild as $ac)
+                        {
+                            ?>
+                            <h2><?php echo $ac['Page']['title'];?></h2>
+						<p><?php echo $ac['Page']['description'];?></p>
+                            <?php
+                        }
+                        ?>
+					</div>
+				</header>
+				<div class="content dark style1 featured"  id="second">
+                <h2 style="margin-bottom:70px;font-size:38px;"><?php echo $depart['Page']['title'];?></h2>
+					<div class="container">
+						
+                            <?php
+                            $i=0;
+                            foreach($child as $c)
+                            {
+                                $i++;
+                                if(($i-1)%3==0)
+                                {
+                                    
+                                    ?>
+                                    <div class="row">                                  
+                                    <?php
+                                                                    
+                                }                                                                
+                                ?>
+                                <div class="4u">
+								<section>
+									<span class="feature-icon"><span class="fa"><?php echo $i;?></span></span>
+									<header>
+										<h3><?php echo $c['Page']['title'];?></h3>
+									</header>
+									<div class="div"><?php echo substr($c['Page']['description'],0,170);?><span class="hide<?php echo $i;?>">...</span><span style="display: none;" class="continue<?php echo $i?>"><?php echo substr($c['Page']['description'],200);?></span><br /><a href="javascript:void(0)" class="read" id="read<?php echo $i?>">Continue Reading</a></div>
+								</section>
+							     </div>
+                                <?php
+                                if($i%3==0)
+                                    {
+                                        ?>
+                                        </div>
+                                        <?php
+                                    }
+                            }
+                            if($i%3!=0)
+                            {
+                                ?>
+                                </div>
+                                <?php
+                            }
+                            ?>
+							
+							
+						</div>
+						<div class="row">
+							<div class="12u">
+								<footer>
+									<a href="#third" class="button scrolly">Activites Of ISN</a>
+								</footer>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		<!-- Second -->
+			<section id="third" class="main">
+				<header>
+					<div class="container">
+						<h2><?php echo $act['Page']['title'];?></h2>
+						<p>
+                            <?php echo $act['Page']['description'];?>
+                        </p>
+                        <?php
+                        if($actc)
+                        {
+                            foreach($actc as $atc)
+                            {
+                                ?>
+                                <h2><?php echo $atc['Page']['title'];?></h2>
+        						<p>
+                                    <?php echo $atc['Page']['description'];?>
+                                </p>
+                                <?php                                
+                            }
+                        }
+                        ?>
+					</div>
+				</header>
+				<div class="content dark style2">
+                <h2 style="margin-bottom:70px;font-size:38px;text-align: center;">Activites Gallery</h2>
+					<div class="container">
+						<div class="row">
+							<div class="12u">
+									<?php
+                                     if($actimg)
+                                        {
+                                            $i = 0;
+                                        foreach($actimg as $img)
+                                            {
+                                                $i++;
+                                                if((($i-1)%3)==0)
+                                                {
+                                                    ?>
+                                                    <div class="row no-collapse">
+                                                    <?php
+                                                }
+                                            ?>
+                                            <div class="4u"><a href="javascript:void(0);" class="image full"><img src="<?php echo $this->webroot; ?>doc/<?php echo $img['Image']['file'];?>" alt="<?php echo $img['Image']['title'];?>" /></a></div>
+                                            
+                                <?php   
+                                if(($i%3) == 0)
+                                {?>
+                                </div>
+                                <?php }                             
+                            }
+                        }
+                        ?>
+						
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+		<!-- Third -->
+			<section class="main" id="fourth">
+				<header>
+					<div class="container">
+						<h2>ISN Media</h2>
+						<p>We are pleased to introduce all of our media including print, publication and audio visual to all of our viewers. Feel free to access each of them and take benefit from them. Please browse below to see our listed media.</p>
+					</div>
+				</header>
+				<div class="content dark style3">
+					<div class="container">
+                    <div  class="popover mfp-hide" title="test">        
+                    </div>
+						<span class="image featured"><img src="images/pic10.jpg" alt="" /></span>
+						<div class="row">
+							<div class="4u">
+								<h3>Print</h3>
+								<div class="div">
+                                    <?php
+                                    foreach($print as $p)
+                                    {
+                                        ?>
+                                        <div class="medialist">
+                                            <div class="title"><?php echo $p['Media']['title'];?></div><div class="action"><a href="javascript:void(0)" class="open-popup-link" onclick="$('.popover').html('<iframe src=\'https://docs.google.com/gview?url=<?php echo urlencode('http://web-nepal.com/isangh/doc/'.$p['Media']['file']);?>&embedded=true\' style=\'width:500px; height:630px;\' frameborder=\'0\'></iframe><p>');$('.popover').dialog({modal:true,width:555});" class="media"><span class="fa fa-eye smalllink"></span></a> &nbsp; <a href="http://web-nepal.com/isangh/doc/<?php echo $p['Media']['file'];?>"><span class="fa fa-download smalllink"></span></a></div> 
+                                        </div>
+                                        <?php
+                                        
+                                    }
+                                    ?>
+                                </div>
+							</div>
+							<div class="4u">
+                                <h3>Publication</h3>
+								<div class="div">
+                                    <?php
+                                    foreach($publication as $p)
+                                    {
+                                        ?>
+                                        
+                                        <div class="medialist">
+                                            <div class="title"><?php echo $p['Media']['title'];?></div><div class="action"><a href="javascript:void(0)" class="open-popup-link" onclick="$('.popover').html('<iframe src=\'https://docs.google.com/gview?url=<?php echo urlencode('http://web-nepal.com/isangh/doc/'.$p['Media']['file']);?>&embedded=true\' style=\'width:500px; height:630px;\' frameborder=\'0\'></iframe><p>');$('.popover').dialog({modal:true,width:555});" class="media"><span class="fa fa-eye smalllink"></span></a> &nbsp; <a href="http://web-nepal.com/isangh/doc/<?php echo $p['Media']['file'];?>"><span class="fa fa-download smalllink"></span></a></div> 
+                                        </div>
+                                        <?php
+                                        
+                                    }
+                                    ?>
+                                </div>
+							</div>
+							<div class="4u">
+                                <h3>Audio-Visual</h3>
+								<div class="div">
+                                    <?php
+                                    foreach($av as $p)
+                                    {
+                                        ?>
+                                        <div class="medialist">
+                                            <div class="title"><?php echo $p['Media']['title'];?></div><div class="action"><a href="javascript:void(0)" class="open-popup-link" onclick="$('.popover').load('<?php echo $this->webroot;?>pages/player/<?php echo $p['Media']['id'];?>');$('.popover').dialog({modal:true,width:<?php if($p['Media']['file']){?>355<?php }else{?>555<?php }?>});"><span class="fa fa-play smalllink"></span></a> &nbsp; <a href="http://web-nepal.com/isangh/doc/<?php echo $p['Media']['file'];?>"><span class="fa fa-download smalllink"></span></a></div> 
+                                        </div>
+                                        <?php
+                                        
+                                    }
+                                    ?>
+                                </div>
+								<footer>
+									<a href="#fourth" class="button scrolly">Ipsum ornare lorem dolor</a>
+								</footer>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		
+		
+		<!-- Fourth -->
+			<section id="fifth" class="main">
+				<header>
+					<div class="container">
+						<h2>Contact Us</h2>
+						<p>Assalam - Alaikum. For any kinds of queries don't hezitate to contact us. We will get you back earliest possible.</p>
+					</div>
+				</header>
+				<div class="content style4 featured">
+					<div class="container small">
+						<form method="post" action="<?php echo $this->webroot;?>pages/contact">
+							<div class="row half">
+								<div class="6u"><input type="text" class="text" placeholder="Name" name="name" /></div>
+								<div class="6u"><input type="text" class="text" placeholder="Email" name="email" /></div>
+							</div>
+							<div class="row half">
+								<div class="12u"><textarea name="message" placeholder="Message" name="message"></textarea></div>
+							</div>
+							<div class="row">
+								<div class="12u">
+									<ul class="actions">
+										<li><input type="submit" class="button" value="Send Message" /></li>
+										<li><input type="reset" class="button alt" value="Clear Form" /></li>
+									</ul>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</section>
+			
+		<!-- Footer -->
+        <script>
+            $(function(){
+                
+               <?php
+               $flash =  $this->Session->flash();
+               if($flash){
+                ?>
+                alert('<?php echo strip_tags($flash);?>');
+                <?php
+               }?>
+               $('.read').click(function(){
+                if($(this).attr('class').replace('no')==$(this).attr('class'))
+                $(this).html('Hide Detail');
+                else
+                $(this).html('Continue Reading');
+                var id = $(this).attr('id');
+                var id = id.replace('read','');
+                if($(this).attr('class').replace('no')==$(this).attr('class')){
+                $('.hide'+id).hide();
+                $('.continue'+id).show();
+                $(this).addClass('no');
+                }
+                else
+                {
+                    $('.hide'+id).show();
+                $('.continue'+id).hide();
+                $(this).removeClass('no');
+                
+                }
+                
+                //$(this).attr('id','noread'+id);
+                //$(this).removeClass('read');
+                
+                
+               });
+              
+            });
+        </script>
+		
+        <style>
+        .mfp-hide{display:none;}
+        
+	</style>

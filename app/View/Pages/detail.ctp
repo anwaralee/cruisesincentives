@@ -1,0 +1,2 @@
+<h1 class="title"><span><?php echo $this->requestAction('/pages/getParent/'.$pages['Page']['slug']);?><?php echo $pages['Page']['title'];?></span></h1>
+<div class="description"><?php echo $pages['Page']['description'];?></div>
