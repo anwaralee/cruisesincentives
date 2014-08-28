@@ -1,25 +1,32 @@
 
     <a href="javascript:void(0)" id="addmore" class="btn btn-primary">Add Banner</a>
-    <hr />
-    <div class="left bannerlist" style="float: left;">
+    <form action="" method="post" id="myform">
+    <div class="bannerlist" >
+    
 <?php 
+$cnt =0;
 foreach($banners as $banner){
+    if($cnt >= $banner['Banner']['id'])
+        $cnt =$cnt;
+    else
+        $cnt =$banner['Banner']['id'];
     ?>
     <div class="banner">
     <div class="bannerimg left" id="image_<?php echo $banner['Banner']['id'];?>">
     <img src="<?php echo $this->webroot;?>doc/thumb/<?php echo $banner['Banner']['file'];?>"  />
     </div>
     <div class="right banneropt">
-    <label>Link (Optional)</label><input type="text" name="link[]" value="<?php echo $banner['Banner']['link'];?>" />
+    <label>Link (Optional)</label><input type="text" class="url" name="link[]" value="<?php echo $banner['Banner']['link'];?>" />
     <label>Opens in</label>
     <select  name="target[]">
     <option value="0" <?php echo ($banner['Banner']['target']=='0')?"selected='selected'":"" ?>>Same Window</option>
     <option value="1" <?php echo ($banner['Banner']['target']=='1')?"selected='selected'":"" ?>>New Window</option>
     </select>
     </div>
+    <input type="hidden" name="file[]" class="required" id="file_<?php echo $banner['Banner']['id'];?>" value="<?php if(file_exists(APP."webroot/doc/thumb/".$banner['Banner']['file']))echo $banner['Banner']['file'];?>" />
     <div class="clear"></div>
     <hr />
-    <a id="upload_<?php echo $banner['Banner']['id'];?>" class="btn btn-info" href="javascript:void(0);" accesskey="<?php echo $banner['Banner']['id'];?>">Browse</a> &nbsp; <a href="javascript:void(0)" class="recrop btn btn-primary" title="<?php echo $banner['Banner']['id'];?>" >Recrop</a><input type="hidden" name="file[]" id="image<?php echo $banner['Banner']['id'];?>" value="<?php echo $banner['Banner']['file'];?>" /> &nbsp; <a href="javascript:void(0);" style="display: none;" class="savecrop btn btn-inverse" id="savecrop<?php echo $banner['Banner']['id'];?>" title="<?php echo $banner['Banner']['id'];?>">Crop</a> &nbsp; <a href="javascript:void(0)" onclick="$(this).parent().remove();" class="btn btn-danger">Remove</a>
+    <a id="upload_<?php echo $banner['Banner']['id'];?>" class="btn btn-info" href="javascript:void(0);" accesskey="<?php echo $banner['Banner']['id'];?>">Browse</a> &nbsp; <a href="javascript:void(0)" class="recrop btn btn-primary" title="<?php echo $banner['Banner']['id'];?>" >Recrop</a><input type="hidden" id="image<?php echo $banner['Banner']['id'];?>" value="<?php echo $banner['Banner']['file'];?>" /> &nbsp; <a href="javascript:void(0);" style="display: none;" class="savecrop btn btn-inverse" id="savecrop<?php echo $banner['Banner']['id'];?>" title="<?php echo $banner['Banner']['id'];?>">Crop</a> &nbsp; <a href="javascript:void(0)" onclick="$(this).parent().remove();" class="btn btn-danger">Remove</a>
     
 <script>
 $(function(){
@@ -31,72 +38,88 @@ $(function(){
     });
     
 </script>
-  </div> 
+  </div>
+
+  
 <?php }?>
 </div>
-<div class="right" style="float: right;width:400px;margin-left:15px;">
+<input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
+</form>
 <div class="crop" style="display: none;">
 <hr />
-<div class="savecrop label btn btn-inverse" >Crop</div><div class="fields"></div><div class="clear"></div>
+Select the area to crop.
+<span class="savecrop  btn btn-inverse" >Crop</span>
+<span class="btn " onclick="$('.crop').dialog('close');">Cancel</span>
+<div class="fields"></div><div class="clear"></div>
 <input type="hidden" name="x" class="x" value="" />
 <input type="hidden" name="y" class="y" value="" />
 <input type="hidden" name="w" class="w" value="" />
 <input type="hidden" name="h" class="h" value="" />
-<input type="hidden" name="file" class="image" value="" />
+
 <input type="hidden" name="nu" value="0" class="nu" />
 <input type="hidden" name="added_on" value="<?php echo date('Y-m-d H:i:s');?>" />
 </div>
-</div> 
-<div class="clear"></div>   
+
 <script>
 $(function(){
     $('.savecrop').live('click',function(){
         var id = $(this).attr("title");
         //$('#image_<?php echo $banner['Banner']['id'];?>').html("");
        $.ajax({
-            'url':'<?php $this->webroot;?>savecrop',
+            'url':'<?php echo $this->webroot;?>admin/savecrop',
             'type':'post',
             'data':'file='+$('#image'+id).val()+'&x='+$('.x').val()+'&y='+$('.y').val()+'&w='+$('.w').val()+'&h='+$('.h').val(),
             success:function(msg)
             {
                 $('#image_'+id).html("<img src='<?php echo $this->webroot;?>doc/temp/thumb/"+msg+"' />");
+                $('#file_'+id).val(msg);
                 $('.crop').hide();
                 $('#savecrop'+id).hide();
+                $('.crop').dialog('close');
+                $('#image'+id).val(msg);
+                
             }
-        
        }); 
     });
+    var cn = "<?php echo $cnt;?>";
    $('#addmore').click(function(){
-    $('.bannerlist').prepend('<div class="banner"><div class="bannerimg left" id="image_0">'+
-    '</div><div class="banneropt right"><label>Link (Optional)</label><input type="text" name="link[]" value="" />'+
+    cn = Number(cn)+Number(1);
+    //alert(cn);
+    $('.bannerlist').prepend('<div class="banner"><div class="bannerimg left" id="image_'+cn+'">'+
+    '</div><div class="banneropt right"><label>Link (Optional)</label><input type="text" class="url" name="link[]" value="" />'+
     '<label>Opens in</label><select  name="target[]">'+
     '<option value="0" >Same Window</option>'+
     '<option value="1" >New Window</option></select></div><div class="clear"></div><hr/>'+
-    '<a id="upload_0" class="btn btn-info" href="javascript:void(0);">Browse</a> &nbsp; '+
-    '<a href="javascript:void(0)" class="recrop btn btn-primary" title="0" >Recrop</a> &nbsp; '+
-    '<input type="hidden" name="file[]" id="image0" value="" />'+ 
-    '<a href="javascript:void(0);" style="display: none;" class="savecrop btn btn-inverse" id="savecrop0" title="0">Crop</a> &nbsp; <a href="javascript:void(0)" onclick="$(this).parent().remove();" class="btn btn-danger">Remove</a>');
-    
-    initiate_ajax_upload('upload_0');
+    '<a id="upload_'+cn+'" class="btn btn-info" href="javascript:void(0);">Browse</a> &nbsp; '+
+    '<a href="javascript:void(0)" class="recrop btn btn-primary" title="'+cn+'" >Recrop</a> &nbsp; '+
+    '<input type="hidden" name="file[]" id="image'+cn+'" value="" />'+ 
+    '<a href="javascript:void(0);" style="display: none;" class="savecrop btn btn-inverse" id="savecrop'+cn+'" title="0">Crop</a> &nbsp; <a href="javascript:void(o)" onclick="$(this).parent().remove();" class="btn btn-danger">Remove</a>');
+    $('.newr').hide();
+    initiate_ajax_upload('upload_'+cn);
     
    })
    $('#myform').validate();
    $('.recrop').live('click',function(){
-    $('#savecrop'+$(this).attr('title')).show();
+    if($('#file_'+$(this).attr('title')).val()==""){
+        alert("Image not selected");
+        return false;
+        }
     $('.crop').show();
-    $('.crop .fields').html('<img src="<?php echo $this->webroot.'doc/'?>'+$("#image"+$(this).attr('title')).val()+'" style="max-width:1000px;" id="tocrop"/>');
+    $('.crop').dialog({width:'auto',resizable: false,
+            modal: true,});
+    $('.savecrop').attr('title',$(this).attr('title'));
+    $('.crop .fields').html('<img src="<?php echo $this->webroot.'doc/temp/'?>'+$("#image"+$(this).attr('title')).val()+'" style="max-width:1000px;" id="tocrop"/>');
     $('#tocrop').Jcrop({
                     onSelect: showCoords,
                     onChange: showCoords,
                     bgColor:     'black',
                     bgOpacity:   .4,
-                    setSelect:   [ 0, 0, 580, 195 ],
-                    aspectRatio: 580 / 195,
-                        minSize: [580,195]
+                    setSelect:   [ 0, 0, 300, 180 ],
+                    aspectRatio: 300 / 180,
+                        minSize: [300,180]
                     
                 });
-                
-                $('.nu').val('1');
+         $('.nu').val('1');
    });
   
 });
@@ -138,7 +161,9 @@ function initiate_ajax_upload(button_id){
             onComplete: function(file, response){
                 //alert(button_id);
                 var id= button_id.replace("upload_","");
-                //alert(id);
+                
+                if(id ==0)
+                $('.newr').show();//alert(id);
                 //alert(response);
                     button.text('Upload');
                     window.clearInterval(interval);
@@ -148,18 +173,21 @@ function initiate_ajax_upload(button_id){
                     
                     $('#savecrop'+id).show();
                     $('.crop').show();
-                     $('.crop .fields').html('<img src="<?php echo $this->webroot.'doc';?>/'+response+'" style="max-width:1000px;" id="tocrop"/>');
+                    $('.savecrop').attr('title',id);
+                    $('.crop').dialog({width:'auto',resizable: false,
+                         modal: true,});
+                     $('.crop .fields').html('<img src="<?php echo $this->webroot.'doc/temp';?>/'+response+'" style="max-width:1000px;" id="tocrop"/>');
                     $('#tocrop').Jcrop({
                         onSelect: showCoords,
                         onChange: showCoords,
                         bgColor:     'black',
                         bgOpacity:   .4,
-                        setSelect:   [ 0, 0, 580, 195 ],
-                        aspectRatio: 580 / 195,
-                        minSize: [580,195]
+                        setSelect:   [ 0, 0, 300, 180 ],
+                        aspectRatio: 300 / 180,
+                        minSize: [300,180]
                         
                     });
-                    $('.thumb').html('<img src="<?php echo $this->webroot.'doc';?>/'+response+'" style="width:350x;"/>');
+                    //$('.thumb').html('<img src="<?php echo $this->webroot.'doc';?>/'+response+'" style="width:350x;"/>');
                     $('#image'+id).val(response);
                     $('.image').val(response);
                     $('.nu').val('1');               

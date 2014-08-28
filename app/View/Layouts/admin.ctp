@@ -10,7 +10,9 @@
 			<link href="<?php echo $this->webroot;?>css/admin.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo $this->webroot;?>css/bootstrap.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo $this->webroot;?>css/jquery.Jcrop.css" rel="stylesheet" type="text/css" />
+            <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
             <script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.js" type="text/javascript"></script>
             <script type="text/javascript" src="<?php echo $this->webroot;?>js/ajaxupload.3.6.js"></script>
             <script type="text/javascript" src="<?php echo $this->webroot;?>js/ckeditor/ckeditor.js"></script>
             <script type="text/javascript" src="<?php echo $this->webroot;?>js/ckfinder/ckfinder.js"></script>

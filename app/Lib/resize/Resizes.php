@@ -27,8 +27,7 @@ class Resizes {
  
    function load($filename) {
  
-        $filename = $filename;
-      $image_info = getimagesize($filename);
+       $image_info = getimagesize($filename);
       $this->image_type = $image_info[2];
       if( $this->image_type == IMAGETYPE_JPEG ) {
  
@@ -40,6 +39,12 @@ class Resizes {
  
          $this->image = imagecreatefrompng($filename);
       }
+   }
+   function getimgtype($filename)
+   {
+        $image_info = getimagesize($filename);
+      return $this->image_type = $image_info[2];
+
    }
    function save($filename, $image_type=IMAGETYPE_JPEG, $compression=75, $permissions=null) {
     //$filename = "http://localhost".$filename;

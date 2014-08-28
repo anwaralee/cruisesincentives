@@ -19,9 +19,100 @@ class AdminController extends AppController
     {
         
     }
+    function cruiseline()
+    {
+        $this->loadModel('Cruiseline');
+        $this->set('cruiselines',$this->Cruiseline->find('all',array('conditions'=>array('parent_id'=>0),'order'=>array('sort'=>'ASC'))));
+        $this->set('cl',$this->Cruiseline);
+    }
+    function cruiseline_add()
+    {
+        $this->loadModel('Cruiseline');
+        $this->set('cruiselines',$this->Cruiseline->find('all',array('conditions'=>array('parent_id'=>0),'order'=>array('sort'=>'ASC'))));
+        if(isset($_POST['submit']))
+        {
+            foreach($_POST as $k=>$v ){
+                $arr[$k] =$v;
+            }
+            $whiteSpace = '';  //if you dnt even want to allow white-space set it to ''
+            $pattern = '/[^a-zA-Z0-9-_'  . $whiteSpace . ']/u';
+            $arr['slug'] = preg_replace($pattern, '_', (string) $arr['title']);
+            
+            if($x = $this->Cruiseline->find('first',array('conditions'=>array('slug'=>$arr['slug']))))
+            $arr['slug']=$arr['slug'].'_'.$x['Cruiseline']['id'];
+            $this->Cruiseline->create();
+            if($this->Cruiseline->save($arr))
+            {
+                $this->Session->setFlash("Cruiseline Saved.");
+                $this->redirect("cruiseline");
+            }
+        }
+        $this->render('cruiseline_edit');
+    }
+    function cruiseline_edit($id)
+    {
+        $this->loadModel('Cruiseline');
+        $this->set('cruiselines',$this->Cruiseline->find('all',array('conditions'=>array('parent_id'=>0),'order'=>array('sort'=>'ASC'))));
+        $this->set('cruise',$this->Cruiseline->findById($id));
+        if(isset($_POST['submit']))
+        {
+            $this->Cruiseline->id = $id;
+            foreach($_POST as $k=>$v ){
+                $this->Cruiseline->saveField($k,$v);
+            }
+            
+                $this->Session->setFlash("Cruiseline Updated.");
+                $this->redirect("cruiseline");
+        }
+        
+    }
+    function sort()
+    {
+        $this->loadModel('Cruiseline');
+        if (isset($_GET['list'])) {
+            $items=$_GET['list'];
+            $items=explode(',',$items);
+            if(is_array($items))
+            {
+              $i = 1;
+              foreach ($items as $item) {
+                    $this->Cruiseline->id = $item;
+                    $this->Cruiseline->saveField('sort',$i);
+                    $i++;
+              }
+           	echo '<div id="successmsg">Successfully saved.</div>';
+           	//make the success message disappear slowly
+           	echo '<script type="text/javascript">$(document).ready(function(){ $("#successmsg").fadeOut(2000); });</script>';  
+            
+            }
+        }
+        die();
+    }
     function banners(){
         
         $this->set('banners',$this->Banner->find('all'));
+        if(isset($_POST['submit']))
+        {
+            //var_dump($_POST); die();
+            $this->Banner->deleteAll(array('id >0 '));
+            foreach($_POST['file'] as $k=>$v)
+            {
+                if($v!=""){
+                    $source = APP."webroot/doc/temp/thumb/".$v;
+                    $destination = APP."webroot/doc/thumb/".$v;
+                    if(copy($source,$destination))
+                        unlink(APP."webroot/doc/temp/thumb/".$v);
+                    $arr['file'] =$v;
+                    $arr['link'] = $_POST['link'][$k];
+                    $arr['target'] = $_POST['target'][$k];
+                    $this->Banner->create();
+                    $this->Banner->save($arr);
+                }
+            }
+           $this->Session->setFlash("Banner Save Successfull.");
+        $this->redirect('');  
+        }
+       
         
     }
     function add_banner(){
@@ -75,24 +166,28 @@ class AdminController extends AppController
     function savecrop()
     {
         App::uses('Resizes', 'resize');
-        $configs['source_image'] = '/doc/'.$_POST['file'];
-        $configs['new_image'] = 'doc/temp/'.$_POST['file'];
+        $configs['source_image'] = 'doc/temp/'.$_POST['file'];
+        $arr = explode('.',$_POST['file']);
+        $ext = end($arr);
+        $rand = rand(10000000,99999999).'_'.rand(10000,99999).'.'.$ext;
+        $configs['new_image'] = 'doc/temp/thumb/'.$rand;
+        copy(APP.'webroot/doc/temp/'.$_POST['file'],APP."webroot/doc/temp/".$rand);
         $img =  new Resizes();
         if ($croped = $img->cropImage($_POST['w'],$_POST['x'],$_POST['y'],$_POST['w'],$_POST['h'],$configs['new_image'],$configs['source_image']))
         {
             //echo $croped;
-            $img->load(APP.'webroot/doc/temp/'.$_POST['file']);
-            $img->resizeToWidth(580);
-          	$img->save(APP.'webroot/doc/temp/thumb/'.$_POST['file']);
+            $img->load(APP.'webroot/doc/temp/thumb/'.$rand);
+            $img->resizeToWidth(300);
+          	$img->save(APP.'webroot/doc/temp/thumb/'.$rand);
            
 			
-           echo $_POST['file'];
+           echo $rand;
         }
         else
         {
             echo "couldnot crop";
             
-            //unlink($this->webroot.'doc/'.$_POST['file']);
+            unlink(APP.'webroot/doc/temp/'.$_POST['file']);
         } die();
          
     }

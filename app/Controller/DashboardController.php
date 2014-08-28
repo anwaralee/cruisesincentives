@@ -330,11 +330,11 @@ class DashboardController extends AppController
             move_uploaded_file($_FILES['file']['tmp_name'],APP.'webroot/doc/'.$rand);
             
             $img->load(APP.'webroot/doc/'.$rand);
+            $ty=$img->getimgtype(APP.'webroot/doc/'.$rand);
             if($img->getWidth()>1000){
                 $img->resizeToWidth(900);
             }
-            
-				$img->save(APP.'webroot/doc/temp/thumb/'.$rand);
+                $img->save(APP.'webroot/doc/temp/'.$rand,$ty);
             
             //$img->resizeToWidth(700);
             
