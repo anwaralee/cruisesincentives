@@ -26,11 +26,12 @@
     <div class="header">
         <div class="logo"></div>
         <ul>
-            <li><a href="<?php echo $this->webroot;?>admin/">Home</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/pages">Content</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/media">Media</a></li>
+            <li><a href="<?php echo $this->webroot;?>admin/pages">Pages</a></li>
+            <li><a href="<?php echo $this->webroot;?>admin/destinations">Destinations</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/settings">Settings</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/banners">Banners</a></li>
+            <li><a href="<?php echo $this->webroot;?>admin/cruiseline">Cruiseline</a></li>
+            <li><a href="<?php echo $this->webroot;?>admin/news">News/ Deals</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/logout">Logout</a></li>
             
         </ul>

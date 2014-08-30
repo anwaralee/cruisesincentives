@@ -1,4 +1,4 @@
-<aside class="left_body addArticles contentPage">
+<aside class="left_body1 addArticles contentPage">
 <div class="line"></div>
 <h1>ADD/EDIT Cruiseline </h1>
 <div class="line"></div>
@@ -22,9 +22,9 @@
         	var CustomHTML = CKEDITOR.replace( 'ck');
                                 CKFinder.setupCKEditor( CustomHTML, '<?php echo $this->webroot;?>js/ckfinder/' );
         </script>
-        <label>SEO title</label>
+        <label>SEO Title</label>
         <input type="text" value="<?php if(isset($cruise)&& $cruise['Cruiseline']['seo_title']!= "" )echo $cruise['Cruiseline']['seo_title'];?>" name="seo_title" class="" />
-        <label>Seo Description</label>
+        <label>SEO Description</label>
         <textarea name="seo_desc" class="" ><?php if(isset($cruise)&& $cruise['Cruiseline']['seo_desc']!= "" )echo $cruise['Cruiseline']['seo_desc'];?></textarea>
         
         <hr />
@@ -34,7 +34,7 @@
     </form>
 
 </aside>
-<aside class="right_body floatRight">
+<aside class="right_body1 floatRight">
   
     <a href="<?php echo $this->webroot;?>admin/cruiseline" class="btn ">Cancel</a>
 </aside>

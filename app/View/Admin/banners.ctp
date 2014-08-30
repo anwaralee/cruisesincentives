@@ -26,7 +26,8 @@ foreach($banners as $banner){
     <input type="hidden" name="file[]" class="required" id="file_<?php echo $banner['Banner']['id'];?>" value="<?php if(file_exists(APP."webroot/doc/thumb/".$banner['Banner']['file']))echo $banner['Banner']['file'];?>" />
     <div class="clear"></div>
     <hr />
-    <a id="upload_<?php echo $banner['Banner']['id'];?>" class="btn btn-info" href="javascript:void(0);" accesskey="<?php echo $banner['Banner']['id'];?>">Browse</a> &nbsp; <a href="javascript:void(0)" class="recrop btn btn-primary" title="<?php echo $banner['Banner']['id'];?>" >Recrop</a><input type="hidden" id="image<?php echo $banner['Banner']['id'];?>" value="<?php echo $banner['Banner']['file'];?>" /> &nbsp; <a href="javascript:void(0);" style="display: none;" class="savecrop btn btn-inverse" id="savecrop<?php echo $banner['Banner']['id'];?>" title="<?php echo $banner['Banner']['id'];?>">Crop</a> &nbsp; <a href="javascript:void(0)" onclick="$(this).parent().remove();" class="btn btn-danger">Remove</a>
+    <a id="upload_<?php echo $banner['Banner']['id'];?>" class="btn btn-info" href="javascript:void(0);" accesskey="<?php echo $banner['Banner']['id'];?>">Browse</a> &nbsp; 
+    <a href="javascript:void(0)" class="recrop btn btn-primary" title="<?php echo $banner['Banner']['id'];?>" >Recrop</a><input type="hidden" id="image<?php echo $banner['Banner']['id'];?>" value="<?php echo $banner['Banner']['file'];?>" /> &nbsp; <a href="javascript:void(0);" style="display: none;" class="savecrop btn btn-inverse" id="savecrop<?php echo $banner['Banner']['id'];?>" title="<?php echo $banner['Banner']['id'];?>">Crop</a> &nbsp; <a href="javascript:void(0)" onclick="$(this).parent().remove();" class="btn btn-danger">Remove</a>
     
 <script>
 $(function(){
@@ -137,13 +138,21 @@ function initiate_ajax_upload(button_id){
         var button = $('#'+button_id), interval;
         new AjaxUpload(button,{
             action: '<?php echo $this->webroot.'dashboard/upload'; ?>', 
-             
+            
             name: 'file',
             onSubmit : function(file, ext){
                 // change button text, when user selects file
                			
                 button.text('Uploading');
-	
+	           if(ext == "jpg" || ext == "GIF" || ext =="gif" || ext =="JPG" || ext =="png" || ext =="JPEG" || ext =="jepg" || ext== "PNG")		
+                {
+                    return true;
+                }
+                else
+                {
+                       alert("Invalid Image file");
+                    return false;
+                }
                 // If you want to allow uploading only 1 file at time,
                 // you can disable upload button
                 this.disable();
@@ -159,13 +168,17 @@ function initiate_ajax_upload(button_id){
                 }, 200);
             },
             onComplete: function(file, response){
-                //alert(button_id);
+                
                 var id= button_id.replace("upload_","");
                 
                 if(id ==0)
                 $('.newr').show();//alert(id);
                 //alert(response);
                     button.text('Upload');
+                    if( response=='')
+                    {   alert('Invalid Image Dimension.Minmum image dimension: 300X180')
+                        return false;
+                    }
                     window.clearInterval(interval);
 					
                     // enable upload button

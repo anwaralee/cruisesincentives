@@ -49,6 +49,7 @@ class AdminController extends AppController
         }
         $this->render('cruiseline_edit');
     }
+    
     function cruiseline_edit($id)
     {
         $this->loadModel('Cruiseline');
@@ -66,6 +67,121 @@ class AdminController extends AppController
         }
         
     }
+    function cruiseline_delete($id)
+    {
+        $this->loadModel("Cruiseline");
+        if($c = $this->Cruiseline->findById($id))
+        {
+            $parent_id =$c['Cruiseline']['parent_id'];
+            //die($parent_id);
+            if($parent_id == 0)
+            {
+                $this->Cruiseline->deleteAll(array('parent_id'=>$c['Cruiseline']['id']));
+                
+            }
+            if($this->Cruiseline->delete(array('id'=>$id)))
+            {
+                $this->Session->setFlash('Cruiseline Deleted.');
+                
+            }
+            
+        }
+        $this->redirect("cruiseline");
+        
+    }
+    
+    function destinations($id ="")
+    {
+        $this->loadModel('Destination');
+        $this->loadModel('Highlight');
+        $this->set('destinations',$this->Destination->find('all'));
+        if($id!="")
+        {
+            $this->set('dest',$this->Destination->findById($id));
+            $this->set('high',$this->Highlight->find('all',array('conditions'=>array('destination_id'=>$id))));
+            if(isset($_POST['submit']))
+            {
+                $this->Destination->id = $id;
+                foreach($_POST as $k=>$val)
+                {
+                    $this->Destination->saveField($k,$val);
+                    if($k == 'youtube_link')
+                    {
+                        $url = $val;
+                        parse_str( parse_url( $url, PHP_URL_QUERY ) );
+                        $this->Destination->saveField('thumb_img',"http://img.youtube.com/vi/".$v."/1.jpg");
+                    }
+                }
+                $this->Highlight->deleteAll(array('destination_id'=>$id));
+                foreach($_POST['highlight'] as $desc)
+                {
+                    $high['destination_id'] = $id;
+                    $high['desc'] =$desc;
+                    $this->Highlight->create();
+                    $this->Highlight->save($high);
+                }
+                $this->Session->setFlash("Destination Updated");
+                $this->redirect("");
+            }
+        }
+    }
+    function news($id = ""){
+        $this->loadModel('News');
+        $this->set('id',$id);
+        $this->set('allnews',$this->News->find('all'));
+        if($id != "" && $id != "add")
+            $this->set('news',$this->News->findById($id));
+        if(isset($_POST['submit']))
+        {
+            //var_dump($_POST);
+          foreach($_POST as $k=>$v)
+          {
+            if($k =='banner')
+                $banner= $v;
+            if($id =="add")
+                $new[$k] = $v;
+            else
+            {
+                $this->News->id = $id;
+                $this->News->saveField($k,$v);
+            }
+          }
+            $source = APP."webroot/doc/temp/thumb/".$banner;
+            $destination = APP."webroot/doc/thumb/".$banner;
+            if(copy($source,$destination))
+            unlink(APP."webroot/doc/temp/thumb/".$banner);
+          if($id =="add"){
+            $whiteSpace = '';  //if you dnt even want to allow white-space set it to ''
+            $pattern = '/[^a-zA-Z0-9-_'  . $whiteSpace . ']/u';
+            $new['slug'] = preg_replace($pattern, '_', (string) $new['title']);
+             if($x = $this->News->find('first',array('conditions'=>array('slug'=>$new['slug']))))
+                $new['slug']=$new['slug'].'_'.$x['News']['id'];
+            $this->News->create();
+          
+              if($this->News->save($new))
+              {
+                $this->Session->setFlash("News/ Deal Added.");
+                
+              } 
+          }
+          $this->redirect("news");
+        }
+        
+    }
+    function news_delete($id)
+    {
+        $this->loadModel('News');
+        $img = $this->News->findById($id);
+        $img = $img['News']['banner'];
+        if($this->News->delete(array('id'=>$id)))
+        {
+            unlink(APP."webroot/doc/thumb/".$img);
+            unlink(APP."webroot/doc/temp/".$img);
+            $this->Session->setFlash("News Deleted.");
+            $this->redirect('news');
+        }
+    }
+    
     function sort()
     {
         $this->loadModel('Cruiseline');
@@ -163,7 +279,48 @@ class AdminController extends AppController
             }
         
     }
-    function savecrop()
+    function resources($id ="")
+    {
+        $this->loadModel('Resource');
+        $this->set("resources",$this->Resource->find("all"));
+        $this->set('id',$id);
+        if($id!="" && $id != 'add')
+        {
+            $this->set('res',$this->Resource->findById($id));
+        }
+          if(isset($_POST['submit']))
+        {
+            //var_dump($_POST);
+          foreach($_POST as $k=>$v)
+          {
+            
+            if($id =="add")
+                $new[$k] = $v;
+            else
+            {
+                $this->Resource->id = $id;
+                $this->Resource->saveField($k,$v);
+            }
+          }
+            
+          if($id =="add"){
+            $whiteSpace = '';  //if you dnt even want to allow white-space set it to ''
+            $pattern = '/[^a-zA-Z0-9-_'  . $whiteSpace . ']/u';
+            $new['slug'] = preg_replace($pattern, '_', (string) $new['title']);
+             if($x = $this->Resource->find('first',array('conditions'=>array('slug'=>$new['slug']))))
+                $new['slug']=$new['slug'].'_'.$x['News']['id'];
+            $this->Resource->create();
+          
+              if($this->Resource->save($new))
+              {
+                $this->Session->setFlash("Resource Center Added.");
+                
+              } 
+          }
+          $this->redirect("resources");
+        }
+    }
+    function savecrop($wdth=300)
     {
         App::uses('Resizes', 'resize');
         $configs['source_image'] = 'doc/temp/'.$_POST['file'];
@@ -172,14 +329,15 @@ class AdminController extends AppController
         $rand = rand(10000000,99999999).'_'.rand(10000,99999).'.'.$ext;
         $configs['new_image'] = 'doc/temp/thumb/'.$rand;
         copy(APP.'webroot/doc/temp/'.$_POST['file'],APP."webroot/doc/temp/".$rand);
+        
         $img =  new Resizes();
         if ($croped = $img->cropImage($_POST['w'],$_POST['x'],$_POST['y'],$_POST['w'],$_POST['h'],$configs['new_image'],$configs['source_image']))
         {
             //echo $croped;
             $img->load(APP.'webroot/doc/temp/thumb/'.$rand);
-            $img->resizeToWidth(300);
+            $img->resizeToWidth($wdth);
           	$img->save(APP.'webroot/doc/temp/thumb/'.$rand);
-           
+            unlink(APP."webroot/doc/temp/".$_POST['file']);
 			
            echo $rand;
         }

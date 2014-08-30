@@ -15,7 +15,7 @@ $(function(){
     });
 });
 </script>
-<aside class="left_body floatLeft">
+<aside class="left_body1 floatLeft">
 <div class="line"></div>
 <h1><span class="green"> List of Cruiselines </span></h1>
 <div class="line"></div>
@@ -29,7 +29,9 @@ $(function(){
         <div class="floatLeft margintop5"><?php echo ucwords($cruise['Cruiseline']['title']);?></div>
         <div class="floatRight">
     	<?php echo $this->Html->link('Edit','cruiseline_edit/'.$cruise['Cruiseline']['id'],array('class'=>'btn btn-info'))?>
-    	</div>
+    	<?php echo $this->Html->link('Delete','cruiseline_delete/'.$cruise['Cruiseline']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?")?>
+    	
+        </div>
         <div class="clear"></div>
         
         <?php if($cls = $cl->find('all',array('conditions'=>array('parent_id'=>$cruise['Cruiseline']['id']),'order'=>array('sort'=>'ASC')))){
@@ -41,7 +43,8 @@ $(function(){
                     <div class="floatLeft margintop5"><?php echo ucwords($c['Cruiseline']['title']);?></div>
                     <div class="floatRight">
                 	<?php echo $this->Html->link('Edit','cruiseline_edit/'.$c['Cruiseline']['id'],array('class'=>'btn btn-info'))?>
-                	</div>
+                	<?php echo $this->Html->link('Delete','cruiseline_delete/'.$c['Cruiseline']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?")?>
+                    </div>
                     <div class="clear"></div>
                     </li>
                <?php
@@ -61,7 +64,7 @@ $(function(){
 
 
 
-<aside class="right_body floatRight" >
+<aside class="right_body1 floatRight" >
 	<a href="<?php echo $this->webroot.'admin/cruiseline_add'?>" class="btn">+Add Cruiselines</a>
 </aside>
 

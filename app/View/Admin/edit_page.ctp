@@ -13,9 +13,9 @@
 	var CustomHTML = CKEDITOR.replace( 'ck');
                         CKFinder.setupCKEditor( CustomHTML, '<?php echo $this->webroot;?>js/ckfinder/' );
 </script>
-<label>SEO title</label>
+<label>SEO Title</label>
 <input type="text" value="<?php echo $c['Page']['seo_title'];?>" name="seo_title" class="" />
-<label>Seo Description</label>
+<label>SEO Description</label>
 <textarea name="seo_desc" class="" ><?php echo $c['Page']['seo_desc'];?></textarea>
 
 <hr />

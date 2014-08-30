@@ -25,7 +25,13 @@ h1,h2{font-size:20px!important;color:#444!important;}
 .floatLeft{float:left;}	
 .floatRight{float:right;}
 .left_body{ float: left;
-    width: 600px;}
+    width: 340px;
+    margin-right: 20px;
+    }
+.left_body1{ float: left;
+    width: 600px;
+    
+    }
 #parent_item.pageManagerList {
     background: url("../images/lock.png") no-repeat scroll 8px center #f2f2f2;
     cursor: no-drop;
@@ -37,9 +43,14 @@ h1,h2{font-size:20px!important;color:#444!important;}
     padding: 6px 6px 6px 36px;
 }
 .right_body {
+    float: left;
+    margin-top: 48px;
+    width: 600px;
+}
+.right_body1 {
     float: right;
     margin-top: 48px;
-    width: 340px;
+    width: 380px;
 }
 .fa
 	{

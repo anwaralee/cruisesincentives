@@ -318,7 +318,7 @@ class DashboardController extends AppController
         
         
     }
-    function upload()
+    function upload($from="")
         {
             App::uses('Resizes', 'resize');
             $img = new Resizes();
@@ -330,12 +330,29 @@ class DashboardController extends AppController
             move_uploaded_file($_FILES['file']['tmp_name'],APP.'webroot/doc/'.$rand);
             
             $img->load(APP.'webroot/doc/'.$rand);
-            $ty=$img->getimgtype(APP.'webroot/doc/'.$rand);
+            
+            switch($from){
+                case 'news':
+                    $min_width = 600;
+                    $min_height = 250; 
+                    break;
+                
+                default:
+                    $min_width = 300;
+                    $min_height = 180; 
+        
+            }
+            if($img->getWidth()< $min_width || $img->getHeight()<$min_height)
+            {
+                unlink(APP.'webroot/doc/'.$rand);
+                echo $from;die();
+            }
+            $ty= $img->getimgtype(APP.'webroot/doc/'.$rand);
             if($img->getWidth()>1000){
                 $img->resizeToWidth(900);
             }
                 $img->save(APP.'webroot/doc/temp/'.$rand,$ty);
-            
+            unlink(APP.'webroot/doc/'.$rand);
             //$img->resizeToWidth(700);
             
             //$config['height'] = 540;            
