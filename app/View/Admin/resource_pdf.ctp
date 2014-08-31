@@ -1,30 +1,42 @@
-<?php
+<aside class="left_body floatLeft">
+<div class="line"></div>
+<h1><span class="green"> Resource Center </span></h1>
+<ul>
+<?php foreach($resources as $resource)
+{?>
+    <li><a href="<?php echo $this->webroot;?>admin/resources/<?php echo $resource['Resource']['id'];?>"><?php echo $resource['Resource']['title'];?></a>
+        </li>
+<?php 
+}?>
+</ul>
+</aside>
+<aside class="right_body floatRight" >
+<h1><?php if(isset($c) && $c['ResourcePdf']['id']!="")echo "Edit";else echo "Add";?> Pdf - <?php if(isset($title))echo $title;?></h1>
+<form action="" method="post" id="myform">
+<input type="hidden" name="resource_id" value="<?php echo $rid;?>" />
+<label>Parent</label>
+<select name="parent_id">
+    <option value="0"> Parent</option>
+    <?php foreach($pdfs as $pdf){?>
+    <option value="<?php echo $pdf['ResourcePdf']['id'];?>" <?php if(isset($c) && $pdf['ResourcePdf']['id']!="" && $pdf['ResourcePdf']['id'] ==$c['ResourcePdf']['parent_id'] )echo "selected='selected'";?>><?php echo $pdf['ResourcePdf']['title'];?></option>    
+    <?php
+        }?>
+</select>
+<label>Resource Title</label>
+<input type="text" value="<?php if(isset($c) && $c['ResourcePdf']['title']!="")echo $c['ResourcePdf']['title'];?>" name="title" class="required" />
 
-    $c = $content;
-    
-?>
-<h1>Edit Page - <?php echo $c['Page']['title'];?></h1>
-<form action="<?php echo $this->webroot; ?>admin/editPage/<?php echo $c['Page']['id']; ?>" method="post" id="myform">
-<label>Page Title</label>
-<input type="text" value="<?php echo $c['Page']['title'];?>" name="title" class="required" />
-<label>Page Description</label>
-<textarea name="description" class="CKEDITOR required" id="ck"><?php echo $c['Page']['description'];?></textarea>
-<script type="text/javascript">
-	var CustomHTML = CKEDITOR.replace( 'ck');
-                        CKFinder.setupCKEditor( CustomHTML, '<?php echo $this->webroot;?>js/ckfinder/' );
-</script>
-<label>SEO Title</label>
-<input type="text" value="<?php echo $c['Page']['seo_title'];?>" name="seo_title" class="" />
-<label>SEO Description</label>
-<textarea name="seo_desc" class="" ><?php echo $c['Page']['seo_desc'];?></textarea>
 <label>Pdf</label>  
-<div class="pdf"><?php echo $c['Page']['pdf'];?></div><a href="javascript:void(0);" class="btn btn-danger" id="remove" style="display: <?php if($c['Page']['pdf']=="")echo "none";?>;">Remove</a><br />
+<div class="pdf"><?php if(isset($c) && $c['ResourcePdf']['pdf']!="")echo $c['ResourcePdf']['pdf'];?></div>
+<a href="javascript:void(0);" class="btn btn-danger" id="remove" style="display: <?php if((isset($c) && $c['ResourcePdf']['pdf']=="") || $id=='add')echo "none";?>;">Remove</a><br />
 <a href="javascript:void(0);" class="btn btn-primary" id="upload">Upload</a>
-<input type="hidden" name="pdf" value="" id="pdf" />
+<input type="hidden" name="pdf" value="<?php if(isset($c) && $c['ResourcePdf']['pdf']!="" && file_exists(APP."webroot/pdf/".$c['ResourcePdf']['pdf']))echo $c['ResourcePdf']['pdf'];?>" id="pdf" />
 <hr />
  
-<input type="submit" value="Edit" name="submit" class="btn btn-primary" />
+<input type="submit" value="<?php if(isset($c) && $c['ResourcePdf']['id']!="")echo 'Edit'; else echo "Add";?>" name="submit" class="btn btn-primary" />
 </form>
+</aside>
+
+<div class="clear"></div>
 <script>
 $(function(){
    $('#myform').validate();

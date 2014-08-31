@@ -34,7 +34,7 @@
 <textarea name="seo_desc" class="" ><?php echo (isset($news)&& $news['News']['seo_desc']!="")?$news['News']['seo_desc']:""; ?></textarea>
 
 <hr />
-
+<input type="hidden" name="added_on" value="<?php echo date('Y-m-d H:i:s');?>" />
 <input type="submit" value="<?php echo (isset($news)&& $news['News']['id']!="")?'Edit':'Add';?>" name="submit" class="btn btn-primary " />
 <?php if(isset($news)&& $news['News']['id']!=""){ echo $this->Html->link("Delete","news_delete/".$news['News']['id'],array('class'=>'btn btn-danger'),"Confirm Delete News?");}?>
 </form>
@@ -50,7 +50,7 @@ Select the area to crop.
 <input type="hidden" name="h" class="h" value="" />
 
 <input type="hidden" name="nu" value="0" class="nu" />
-<input type="hidden" name="added_on" value="<?php echo date('Y-m-d H:i:s');?>" />
+
 </div>
 <?php }
 else
@@ -133,7 +133,7 @@ function initiate_ajax_upload(button_id){
             name: 'file',
             onSubmit : function(file, ext){
               // change button text, when user selects file
-                button.text('Uploading');
+                
                	if(ext == "jpg" || ext == "GIF" || ext =="gif" || ext =="JPG" || ext =="png" || ext =="JPEG" || ext =="jepg" || ext== "PNG")		
                 {
                     return true;
@@ -143,7 +143,7 @@ function initiate_ajax_upload(button_id){
                        alert("Invalid Image file");
                     return false;
                 }
-                
+                button.text('Uploading');
 	
                 // If you want to allow uploading only 1 file at time,
                 // you can disable upload button

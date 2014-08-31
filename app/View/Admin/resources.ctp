@@ -4,7 +4,8 @@
 <ul>
 <?php foreach($resources as $resource)
 {?>
-    <li><a href="<?php echo $this->webroot;?>admin/resources/<?php echo $resource['Resource']['id'];?>"><?php echo $resource['Resource']['title'];?></a></li>
+    <li><a href="<?php echo $this->webroot;?>admin/resources/<?php echo $resource['Resource']['id'];?>"><?php echo $resource['Resource']['title'];?></a>
+        </li>
 <?php 
 }?>
 </ul>
@@ -23,11 +24,33 @@
         <input type="submit" value="<?php echo (isset($res)&& $res['Resource']['id']!="")?"Edit":"Add";?>" name="submit" class="btn btn-primary " />
         <?php if(isset($res)&& $res['Resource']['id']!=""){ echo $this->Html->link("Delete","resource_delete/".$res['Resource']['id'],array('class'=>'btn btn-danger'),"Confirm Delete Resource Center?");}?>
     </form>
-
+    <hr />
+  <h3>Resource Pdfs  <a href="<?php echo $this->webroot.'admin/resource_pdf/'.$resource['Resource']['id'].'/add'?>" class="btn">Add Pdf</a></h3>
+  <ul>
+  <?php foreach($pdfs as $pdf)
+  {?>
+    <li><?php echo $pdf['ResourcePdf']['title'];?> <a href="<?php echo $this->webroot;?>admin/resource_pdf/<?php echo $id."/".$pdf['ResourcePdf']['id'];?>" class="btn btn-success">Edit</a>
+    <?php echo $this->Html->link("Delete","pdf_delete/".$pdf['ResourcePdf']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?");?>
+    <?php if( $child_pdf = $rp->find('all',array('conditions'=>array('parent_id'=>$pdf['ResourcePdf']['id'],'resource_id'=>$id))))
+            {?>
+             <ul>
+                <?php foreach($child_pdf as $ch)
+                  {?>
+                  <li><?php echo $ch['ResourcePdf']['title'];?> <a href="<?php echo $this->webroot;?>admin/resource_pdf/<?php echo $id."/".$ch['ResourcePdf']['id'];?>" class="btn btn-success">Edit</a>
+                  <?php echo $this->Html->link("Delete","pdf_delete/".$ch['ResourcePdf']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?");?></li>
+                <?php }?>
+             </ul>   
+                
+            <?php
+            }?>
+    </li>
+  <?php } ?>  
+  </ul>
 <?php }
 else
 {?>
     <a href="<?php echo $this->webroot.'admin/resources/add'?>" class="btn">Add Resource</a>
+    
 <?php }?>	
 </aside>
 

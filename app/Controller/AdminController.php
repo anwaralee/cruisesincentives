@@ -139,8 +139,11 @@ class AdminController extends AppController
             if($k =='banner')
                 $banner= $v;
             if($id =="add")
+            {
                 $new[$k] = $v;
-            else
+                $new['added_on'] = date('Y-m-d H:i:s');
+            } 
+           else
             {
                 $this->News->id = $id;
                 $this->News->saveField($k,$v);
@@ -235,7 +238,7 @@ class AdminController extends AppController
         
         $this->set('banners',$this->Banner->find('all'));
         App::uses('Resizes', 'resize');
-        App::uses('Imagelib','Imaze');
+        
             if(isset($_POST['submit']))
             {
                 //var_dump($_POST);
@@ -282,11 +285,14 @@ class AdminController extends AppController
     function resources($id ="")
     {
         $this->loadModel('Resource');
+        $this->loadModel('ResourcePdf');
         $this->set("resources",$this->Resource->find("all"));
         $this->set('id',$id);
         if($id!="" && $id != 'add')
         {
             $this->set('res',$this->Resource->findById($id));
+            $this->set('pdfs',$this->ResourcePdf->find('all',array('conditions'=>array('resource_id'=>$id,'parent_id'=>0))));
+            $this->set('rp',$this->ResourcePdf);
         }
           if(isset($_POST['submit']))
         {
@@ -319,6 +325,94 @@ class AdminController extends AppController
           }
           $this->redirect("resources");
         }
+    }
+    function resource_delete($id)
+    {
+        $this->loadModel('ResourcePdf');
+        $this->loadModel('Resource');
+        if($this->Resource->delete(array('id'=>$id)))
+        {
+            $res = $this->ResourcePdf->find('all',array('conditions'=>array('resource_id'=>$id)));
+            foreach($res as $r)
+            {
+                if($r['ResourcePdf']['pdf']!= "")
+                unlink(APP.'webroot/pdf/'.$r['ResourcePdf']['pdf']);
+            }
+            $this->ResourcePdf->deleteAll(array('resource_id'=>$id));
+            $this->Session->setFlash("Resource Center Deleted.");
+            $this->redirect('resources');
+        }
+        
+    }
+    function pdf_delete($id)
+    {
+        $this->loadModel('ResourcePdf');
+        $r = $this->ResourcePdf->findById($id);
+        if($r['ResourcePdf']['parent_id']==0)
+        {
+            $res = $this->ResourcePdf->find('all',array('conditions'=>array('resource_id'=>$r['ResourcePdf']['resource_id'],'parent_id'=>$id)));
+            foreach($res as $r)
+            {
+                if($r['ResourcePdf']['pdf']!= "")
+                unlink(APP.'webroot/pdf/'.$r['ResourcePdf']['pdf']);
+            }
+            $this->ResourcePdf->deleteAll(array('parent_id'=>$id,'resource_id'=>$r['ResourcePdf']['resource_id']));
+        }
+        if($this->ResourcePdf->delete(array('id'=>$id)))
+        {
+           
+            $this->Session->setFlash("Resource Pdf Deleted.");
+            $this->redirect('resources');
+        }
+        
+    }
+    function resource_pdf($rid,$id = "")
+    {
+        $this->loadModel('ResourcePdf');
+        $this->loadModel('Resource');
+        $this->set("resources",$this->Resource->find("all"));
+        $this->set('id',$id);
+        if($rid !=""){
+            $this->set('rid',$rid);
+            $r = $this->Resource->findById($rid);
+            $this->set('title',$r['Resource']['title']);
+        }
+        $this->set('pdfs',$this->ResourcePdf->find('all',array('conditions'=>array('resource_id'=>$rid,'parent_id'=>0))));
+        if($id!= "" && $id!= 'add')
+        {
+            $this->set('c',$this->ResourcePdf->findById($id));
+        }
+        if(isset($_POST['submit']))
+        {
+            //var_dump($_POST);
+          foreach($_POST as $k=>$v)
+          {
+            
+            if($id =="add")
+            {
+                $new[$k] = $v;
+                
+            } 
+           else
+            {
+                $this->ResourcePdf->id = $id;
+                $this->ResourcePdf->saveField($k,$v);
+            }
+          }
+            
+          if($id =="add"){
+            
+            $this->ResourcePdf->create();
+          
+              if($this->ResourcePdf->save($new))
+              {
+                $this->Session->setFlash("Pdf Added.");
+                
+              } 
+          }
+          $this->redirect("resources");
+        }
+        
     }
     function savecrop($wdth=300)
     {

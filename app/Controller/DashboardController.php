@@ -362,6 +362,17 @@ class DashboardController extends AppController
             echo $rand;
             die();
         }
+        
+        function upload_pdf()
+        {
+            $name = $_FILES['file']['name'];
+            $arr = explode('.',$name);
+            $ext = end($arr);
+            $rand = rand(10000000,99999999).'_'.rand(10000,99999).'.'.$ext;
+            move_uploaded_file($_FILES['file']['tmp_name'],APP.'webroot/pdf/'.$rand);
+            echo $rand;
+            die();
+        }
         function links()
         {
             $this->loadModel('Link');
