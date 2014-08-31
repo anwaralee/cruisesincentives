@@ -26,6 +26,7 @@ $(function(){
     {
 ?>
         <li id="item_<?php echo $cruise['Cruiseline']['id'];?>" class="pageManagerList greybg" style="font-size:17px; color:#333;">
+        <span class="icons-drag"></span>
         <div class="floatLeft margintop5"><?php echo ucwords($cruise['Cruiseline']['title']);?></div>
         <div class="floatRight">
     	<?php echo $this->Html->link('Edit','cruiseline_edit/'.$cruise['Cruiseline']['id'],array('class'=>'btn btn-info'))?>
@@ -33,14 +34,14 @@ $(function(){
     	
         </div>
         <div class="clear"></div>
-        
+        <hr />
         <?php if($cls = $cl->find('all',array('conditions'=>array('parent_id'=>$cruise['Cruiseline']['id']),'order'=>array('sort'=>'ASC')))){
             if(is_array($cls)){?>
             <ul id="subPages" >
             <?php foreach($cls as $c)
                 {?>
                     <li id="item_<?php echo $c['Cruiseline']['id'];?>"class="pageManagerList greybg" style="font-size:17px; color:#333;">
-                    <div class="floatLeft margintop5"><?php echo ucwords($c['Cruiseline']['title']);?></div>
+                    <div class="floatLeft margintop5"><span class="icons-drag"></span><?php echo ucwords($c['Cruiseline']['title']);?></div>
                     <div class="floatRight">
                 	<?php echo $this->Html->link('Edit','cruiseline_edit/'.$c['Cruiseline']['id'],array('class'=>'btn btn-info'))?>
                 	<?php echo $this->Html->link('Delete','cruiseline_delete/'.$c['Cruiseline']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?")?>

@@ -36,12 +36,17 @@ h1,h2{font-size:20px!important;color:#444!important;}
     background: url("../images/lock.png") no-repeat scroll 8px center #f2f2f2;
     cursor: no-drop;
 }
-.type_listing .service_list, .resource_listing .resource_list, .pageManagerList {
+.type_listing .service_list, .resource_listing .resource_list {
     background: url("../images/drag.png") no-repeat scroll 8px center #f2f2f2;
     cursor: move;
     margin-bottom: 6px !important;
     padding: 6px 6px 6px 36px;
 }
+.pageManagerList{background: none repeat scroll 0 0 #e5e5e5;
+    border-radius: 10px;
+    cursor: move;
+    margin-bottom: 6px !important;
+    padding: 10px 14px;}
 .right_body {
     float: left;
     margin-top: 48px;
@@ -1480,3 +1485,9 @@ h1,h2{font-size:20px!important;color:#444!important;}
 label{font-weight:bold;}
 .bannerimg{width:300px;height:180px;background:#FFF;}
 .banneropt{width:325px;}
+#page-lists ul{list-style:none;}
+.icons-drag{background: url("../images/drag.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: block;
+    float: left;
+    height: 20px;
+    width: 31px;}
