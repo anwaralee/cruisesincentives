@@ -6,6 +6,7 @@
 <title>Cruise International</title>
 <script type="text/javascript" src="<?php echo $this->webroot;?>js/jquery-1.11.0.min.js"> </script>
 <script type="text/javascript" src="<?php echo $this->webroot;?>js/modernizr-2.6.2-respond-1.1.0.min.js"> </script>
+<script type="text/javascript" src="<?php echo $this->webroot;?>js/jquery.slicknav.min.js"> </script>
 <script type="text/javascript" src="<?php echo $this->webroot;?>js/main.js"> </script>
 <script type="text/javascript" src="<?php echo $this->webroot;?>js/jquery.slicknav.min.js"> </script>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->webroot;?>css/style.css"/>
