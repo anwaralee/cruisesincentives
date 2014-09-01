@@ -29,6 +29,9 @@ class AdminController extends AppController
     {
         $this->loadModel('Cruiseline');
         $this->set('cruiselines',$this->Cruiseline->find('all',array('conditions'=>array('parent_id'=>0),'order'=>array('sort'=>'ASC'))));
+        $this->set('cl',$this->Cruiseline);
+        
+        //$this->set('cruiselines',$this->Cruiseline->find('all',array('conditions'=>array('parent_id'=>0),'order'=>array('sort'=>'ASC'))));
         if(isset($_POST['submit']))
         {
             foreach($_POST as $k=>$v ){
@@ -52,9 +55,12 @@ class AdminController extends AppController
     
     function cruiseline_edit($id)
     {
+        
         $this->loadModel('Cruiseline');
+        //$this->set('cruiselines',$this->Cruiseline->find('all',array('conditions'=>array('parent_id'=>0),'order'=>array('sort'=>'ASC'))));
+        $this->set('cl',$this->Cruiseline);
         $this->set('cruiselines',$this->Cruiseline->find('all',array('conditions'=>array('parent_id'=>0),'order'=>array('sort'=>'ASC'))));
-        $this->set('cruise',$this->Cruiseline->findById($id));
+        $this->set('cruise1',$this->Cruiseline->findById($id));
         if(isset($_POST['submit']))
         {
             $this->Cruiseline->id = $id;
