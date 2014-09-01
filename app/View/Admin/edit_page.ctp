@@ -1,30 +1,67 @@
-<?php
+<div class="floatLeft sidebar">
+<ul>
+<li class="titles">PAGES</li>
+<?php 
+$pages = $this->requestAction('/admin/pages');
+if($pages) 
+{
 
-    $c = $content;
-    
+$i=0;
+foreach($pages as $p)
+{
+    $i++;
+    ?>
+
+    <li class="<?php if($content['Page']['id']==$p['Page']['id'])echo "active";?>">
+        <a href="<?php echo $this->webroot; ?>admin/editPage/<?php echo $p['Page']['id'];?>"><?php echo $p['Page']['title']?></a>
+    </li>
+    <?php 
+}
+
+ }
+ else echo "<li>No Pages Found</li>"; 
 ?>
-<h1>Edit Page - <?php echo $c['Page']['title'];?></h1>
-<form action="<?php echo $this->webroot; ?>admin/editPage/<?php echo $c['Page']['id']; ?>" method="post" id="myform">
-<label>Page Title</label>
-<input type="text" value="<?php echo $c['Page']['title'];?>" name="title" class="required" />
-<label>Page Description</label>
-<textarea name="description" class="CKEDITOR required" id="ck"><?php echo $c['Page']['description'];?></textarea>
-<script type="text/javascript">
-	var CustomHTML = CKEDITOR.replace( 'ck');
-                        CKFinder.setupCKEditor( CustomHTML, '<?php echo $this->webroot;?>js/ckfinder/' );
-</script>
-<label>SEO Title</label>
-<input type="text" value="<?php echo $c['Page']['seo_title'];?>" name="seo_title" class="" />
-<label>SEO Description</label>
-<textarea name="seo_desc" class="" ><?php echo $c['Page']['seo_desc'];?></textarea>
-<label>Pdf</label>  
-<div class="pdf"><?php echo $c['Page']['pdf'];?></div><a href="javascript:void(0);" class="btn btn-danger" id="remove" style="display: <?php if($c['Page']['pdf']=="")echo "none";?>;">Remove</a><br />
-<a href="javascript:void(0);" class="btn btn-primary" id="upload">Upload</a>
-<input type="hidden" name="pdf" value="" id="pdf" />
-<hr />
- 
-<input type="submit" value="Edit" name="submit" class="btn btn-primary" />
-</form>
+</ul>
+</div>
+<div class="floatRight contentRight">
+        <?php
+        
+            $c = $content;
+            
+        ?>
+        <h1 class="mytitle">Edit Page - <?php echo $c['Page']['title'];?></h1>
+        <form action="<?php echo $this->webroot; ?>admin/editPage/<?php echo $c['Page']['id']; ?>" method="post" id="myform">
+        <label>Page Title</label>
+        <input type="text" value="<?php echo $c['Page']['title'];?>" name="title" class="required" />
+        <label>Page Description</label>
+        <textarea name="description" class="CKEDITOR required" id="ck"><?php echo $c['Page']['description'];?></textarea>
+        <script type="text/javascript">
+        	var CustomHTML = CKEDITOR.replace( 'ck');
+                                CKFinder.setupCKEditor( CustomHTML, '<?php echo $this->webroot;?>js/ckfinder/' );
+        </script>
+        <label>SEO Title</label>
+        <input type="text" value="<?php echo $c['Page']['seo_title'];?>" name="seo_title" class="" />
+        <label>SEO Description</label>
+        <textarea name="seo_desc" class="" ><?php echo $c['Page']['seo_desc'];?></textarea>
+        <div class="pdfs">
+        <div class="pdf floatLeft"><?php echo $c['Page']['pdf'];?></div><a href="javascript:void(0);" class="btn btn-danger floatLeft marLeft10" id="remove" style="display: <?php if($c['Page']['pdf']=="")echo "none";?>;">Remove</a>
+        <div class="clearfix"></div>
+        <a href="javascript:void(0);" class="btn btn-info uploadbtn" id="upload">Upload PDF</a>
+        
+        </div>
+        <input type="hidden" name="pdf" value="" id="pdf" />
+        <hr />
+         
+        <input type="submit" value="Save" name="submit" class="btn btn-primary" />
+        </form>
+</div>
+<div class="clear"></div>
+
+
+
+
+
+
 <script>
 $(function(){
    $('#myform').validate();

@@ -503,7 +503,7 @@ class AdminController extends AppController
         
         $this->loadModel('Page');
         $q = $this->Page->find('all',array('conditions'=>array('parent'=>0)));
-        $this->set('pages',$q);
+        return $q;
     }
     function getChild($id)
     {

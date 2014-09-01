@@ -1,5 +1,9 @@
-<h2>Page Manager</h2>
+
+<div class="floatLeft sidebar">
+<ul>
+<li class="titles">PAGES</li>
 <?php 
+$pages = $this->requestAction('/admin/pages');
 if($pages) 
 {
 
@@ -9,18 +13,16 @@ foreach($pages as $p)
     $i++;
     ?>
 
-    <div class="list"><div class="number"><?php echo $i;?>.</div>
-        <div class="title"><?php echo $p['Page']['title']?></div>
-        <div class="action"><a href="<?php echo $this->webroot; ?>admin/editPage/<?php echo $p['Page']['id'];?>" class="btn btn-info">Edit</a>         </div>
-        <div class="clear"></div>
-    </div>
-
-    
-    
-    <hr />
+    <li class="">
+        <a href="<?php echo $this->webroot; ?>admin/editPage/<?php echo $p['Page']['id'];?>"><?php echo $p['Page']['title']?></a>
+    </li>
     <?php 
 }
 
  }
- else echo "No Pages Found"; 
+ else echo "<li>No Pages Found</li>"; 
 ?>
+</ul>
+</div>
+<div class="floatRight contentRight"></div>
+<div class="clear"></div>

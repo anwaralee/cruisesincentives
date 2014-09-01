@@ -5,16 +5,19 @@
 .clear{clear:both;}
 .left{float:left;}
 .right{float:right;}
-.header{background:#e5e5e5;color:#FFF;height:70px;padding:20px 10px 10px 20px;border-radius:10px 10px 0 0;}
-.header .logo{background:url(../img/admin/logo.png) no-repeat;width:220px;height:45px;float:left;}
+.header{color:#FFF;height:70px;padding:20px 10px 10px 0;margin-bottom:10px;}
+.header .logo{background:url(../img/admin/logo.png) no-repeat;width:220px;height:45px;float:left;margin-bottom:15px;margin-left:10px;}
 h1,h2{font-size:20px!important;color:#444!important;}
 .header h3{float:left;}
-.header ul{list-style: none;float: right;margin:0;padding:0}
+.header ul{list-style: none;margin:0;padding:0;background:#6999C1;}
 .header li{display:inline-block;}
-.header a{text-decoration: none;display:block;padding:20px 25px;color:#555;}
-.header a:hover{color:#000;font-weight:bold;}
+.header li.active,.header li:hover{background:#1A4C89;}
+.header li.active a{color:#fff;text-decoration:none;}
+.header a{text-decoration: none;display:block;padding:5px 24.8px;color:#FFF;}
+.header a:hover{color:#fff;text-decoration:none;}
 .header .active{color:#000;font-weight:bold;}
-.content{padding:20px 10px;border: 1px solid #999; border-radius:0 0 10px 10px;}
+.content{border-radius: 0 0 10px 10px;
+    padding: 20px 10px 20px 0;}
 .list{background:#e5e5e5;border-radius:5px;padding:10px;width:500px;margin:5px 0;}
 .list .number{width:50px;float:left;}
 .list .title{width:150px;float:left;}
@@ -1491,3 +1494,19 @@ label{font-weight:bold;}
     float: left;
     height: 20px;
     width: 31px;}
+.sidebar{width:250px;}
+.contentRight{padding-right: 0;
+    width: 800px;}    
+.sidebar ul{list-style:none;margin:0;background:#EEEEEE;padding:0;}
+.sidebar li{padding:0;}
+.sidebar a{color:#000;font-weight:bold;font-size:13px;display:block;height:100%;padding:7px 20px;}
+.sidebar a:hover{text-decoration:none;}
+.sidebar li.active{background:#D4DFE8!important;}
+.sidebar li:hover{background:#D4DFE8!important;}
+.sidebar .titles{background:#1A4C89;color:#FFF;font-weight:bold;text-align:center;font-size:17px;padding:10px 20px;}
+.sidebar .titles:hover{background:#1A4C89!important;}
+.mytitle{color:#1A4C89!important;margin-top:0!important;font-size:17px!important;}
+.cke_contents{height:350px!important;}
+#myform label{font-weight:bold;color:#666;}
+.marLeft10{margin-left:10px;}
+.pdfs{margin-top:5px;}
