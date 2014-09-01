@@ -25,6 +25,8 @@
     <div class="wrapper">
     <div class="header">
         <div class="logo"></div>
+        
+        <div class="clear"></div>
         <ul>
             <li><a href="<?php echo $this->webroot;?>admin/pages">Pages</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/destinations">Destinations</a></li>
@@ -32,11 +34,12 @@
             <li><a href="<?php echo $this->webroot;?>admin/banners">Banners</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/cruiseline">Cruiseline</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/resources">Resource Center</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/news">News/ Deals</a></li>
+            <li><a href="<?php echo $this->webroot;?>admin/news">News</a></li>
+            <li><a href="<?php echo $this->webroot;?>admin/news">CSI</a></li>
+            <li><a href="<?php echo $this->webroot;?>admin/news">Newsletter</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/logout">Logout</a></li>
             
         </ul>
-        <div class="clear"></div>
     </div>
     <div class="content">
     <?php echo $this->Session->flash();?>
