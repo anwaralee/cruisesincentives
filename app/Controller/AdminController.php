@@ -159,6 +159,14 @@ class AdminController extends AppController
             $destination = APP."webroot/doc/thumb/".$banner;
             if(copy($source,$destination))
             unlink(APP."webroot/doc/temp/thumb/".$banner);
+            
+            App::uses('Resizes', 'resize');
+            $img = new Resizes();
+            $img->load(APP.'webroot/doc/thumb/'.$banner);
+            $ty= $img->getimgtype(APP.'webroot/doc/thumb/'.$banner);
+            $img->resizeToWidth(120);
+        
+            $img->save(APP.'webroot/doc/thumb1/'.$banner,$ty);
           if($id =="add"){
             $whiteSpace = '';  //if you dnt even want to allow white-space set it to ''
             $pattern = '/[^a-zA-Z0-9-_'  . $whiteSpace . ']/u';
@@ -185,6 +193,7 @@ class AdminController extends AppController
         if($this->News->delete(array('id'=>$id)))
         {
             unlink(APP."webroot/doc/thumb/".$img);
+            unlink(APP."webroot/doc/thumb1/".$img);
             unlink(APP."webroot/doc/temp/".$img);
             $this->Session->setFlash("News Deleted.");
             $this->redirect('news');
