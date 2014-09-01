@@ -36,7 +36,7 @@
             <li><a href="<?php echo $this->webroot;?>admin/resources">Resource Center</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/news">News</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/news">CSI</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/news">Newsletter</a></li>
+            <li><a href="<?php echo $this->webroot;?>admin/newsletters">Newsletter</a></li>
             <li><a href="<?php echo $this->webroot;?>admin/logout">Logout</a></li>
             
         </ul>
@@ -47,7 +47,7 @@
     </div>
     <div class="footer">
         <hr />
-        &copy; Copyright 2014. Islamic Sangh Nepal<br />Powered by <a href="http://web-nepal.com/">Web-Nepal</a>
+        &copy; Copyright 2014. <a href="<?php echo $this->webroot;?>/">CSI</a>
     </div>
     </div>
     </body>

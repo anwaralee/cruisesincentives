@@ -1,7 +1,8 @@
-<aside class="left_body floatLeft">
-<div class="line"></div>
-<h1><span class="green"> News/Deals </span></h1>
+<aside class="sidebar floatLeft">
+
+
 <ul>
+<li class="titles">News/Deals</li>
 <?php foreach($allnews as $n)
 {?>
     <li><a href="<?php echo $this->webroot;?>admin/news/<?php echo $n['News']['id'];?>"><?php echo $n['News']['title'];?></a></li>
@@ -9,9 +10,9 @@
 }?>
 </ul>
 </aside>
-<aside class="right_body floatRight" >
+<aside class="contentRight floatRight" >
 <?php if($id != ""){?>
-<h3><?php echo ($id == "add")? "Add":"Edit"; ?> News or Deals </h3>
+<h3 class="mytitle"><?php echo ($id == "add")? "Add":"Edit"; ?> News or Deals </h3>
 <form action="<?php echo $this->webroot; ?>admin/news/<?php echo (isset($news)&& ($news['News']['id']!=""))?$news['News']['id']:"add"; ?>" method="post" id="myform">
 <label><strong>Banner Image</strong></label>
 <div class="thumb" style="margin-bottom: 5px;"><?php if(isset($news)&& $news['News']['banner']!="" && file_exists(APP."webroot/doc/thumb/".$news['News']['banner'])){?><img src="<?php echo $this->webroot.'doc/thumb/'.$news['News']['banner'];?>"/><?php }?></div>

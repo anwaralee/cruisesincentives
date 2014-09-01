@@ -852,6 +852,41 @@ class AdminController extends AppController
                 $this->redirect('links');
             }
         }
+        function newsletters($id=null,$page='info')
+        {
+            
+            $this->loadModel('Newsletter');
+            $this->set('page',$page);
+            $q = $this->Newsletter->find('all',array('order'=>'id DESC'));
+            $this->set('nl',$q);
+            if($id){
+            $q2 = $this->Newsletter->findById($id);
+            $this->set('news',$q2);
+            $this->loadModel('News');
+            $news = $q2['Newsletter']['news_id'];
+            
+            
+            
+            
+            if($news)
+            {
+                //echo $news;die();
+                $q3 = $this->News->find('all',array('conditions'=>array('id NOT IN('.$news.')')));
+            }
+            else
+            $q3 = $this->News->find('all');
+            $this->set('news_deals',$q3);
+            } 
+        }
+        function loadnews()
+        {
+            $this->layout = 'blank';
+            $id = $_POST['id'];
+            $this->loadModel('News');
+            $q = $this->News->find('all',array('conditions'=>array('id IN('.$id.')'),'order'=>'id DESC'));
+            $this->set('model',$q);
+            
+        }
 }
 
 ?>
