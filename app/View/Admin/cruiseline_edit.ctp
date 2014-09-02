@@ -70,7 +70,7 @@ foreach($cruiselines as $id=>$cruise)
 
 
 <div class="contentRight floatRight" >
-<?php if(isset($cruise1) && $cruise1['Cruiseline']['id']!=""){?><a href="<?php echo $this->webroot.'admin/cruiseline_add'?>" class="btn">+Add Cruiselines</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php }?>
+<?php if(isset($cruise1) && $cruise1['Cruiseline']['id']!=""){?><a href="<?php echo $this->webroot.'admin/cruiseline_add'?>" class="btn btn-info">+Add Cruiselines</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php }?>
 <a href="<?php echo $this->webroot;?>admin/cruiseline" class="btn ">Cancel</a>
 	<!--<a href="<?php echo $this->webroot.'admin/cruiseline_add'?>" class="btn">+Add Cruiselines</a>-->
     <h2 class="mytitle"><?php echo (isset($cruise1) && $cruise1['Cruiseline']['id']!="")?'EDIT':'ADD';?> Cruiseline </h2>
@@ -103,7 +103,7 @@ foreach($cruiselines as $id=>$cruise)
         <hr />
         
         <input type="submit" value="<?php echo (isset($cruise1['Cruiseline']['id']))?'Edit':'Add';?>" name="submit" class="btn btn-primary " />
-        <?php echo $this->Html->link('Delete','cruiseline_delete/'.$cruise1['Cruiseline']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?");?>
+        <?php if((isset($cruise1['Cruiseline']['id'])))echo $this->Html->link('Delete','cruiseline_delete/'.$cruise1['Cruiseline']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?");?>
     </form>
 </div>
 </div>

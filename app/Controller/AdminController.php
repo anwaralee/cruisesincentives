@@ -200,6 +200,57 @@ class AdminController extends AppController
         }
     }
     
+    function csi($id="")
+    {
+        $this->loadModel('Csi');
+        $this->set('csi',$this->Csi->find('all'));
+        $this->set('id',$id);
+        if($id!="" && $id!='add')
+        {
+            $this->set('csi1',$this->Csi->findById($id));
+        }
+        if(isset($_POST['submit']))
+        {
+            //var_dump($_POST);
+          foreach($_POST as $k=>$v)
+          {
+            
+            if($id =="add")
+                $new[$k] = $v;
+            else
+            {
+                $this->Csi->id = $id;
+                $this->Csi->saveField($k,$v);
+            }
+          }
+            
+          if($id =="add"){
+            $whiteSpace = '';  //if you dnt even want to allow white-space set it to ''
+            $pattern = '/[^a-zA-Z0-9-_'  . $whiteSpace . ']/u';
+            $new['slug'] = preg_replace($pattern, '_', (string) $new['title']);
+             if($x = $this->Csi->find('first',array('conditions'=>array('slug'=>$new['slug']))))
+                $new['slug']=$new['slug'].'_'.$x['News']['id'];
+            $this->Csi->create();
+          
+              if($this->Csi->save($new))
+              {
+                $this->Session->setFlash("CSI Added.");
+                
+              } 
+          }
+          $this->redirect("csi");
+        }
+        
+    }
+    function csi_delete($id)
+    {
+        $this->loadModel('Csi');
+        if($this->Csi->delete(array('id'=>$id)))
+        {
+            $this->Session->setFlash('CSI deleted.');
+            $this->redirect('csi');
+        }
+    }
     function sort()
     {
         $this->loadModel('Cruiseline');
@@ -309,7 +360,7 @@ class AdminController extends AppController
             $this->set('pdfs',$this->ResourcePdf->find('all',array('conditions'=>array('resource_id'=>$id,'parent_id'=>0))));
             $this->set('rp',$this->ResourcePdf);
         }
-          if(isset($_POST['submit']))
+        if(isset($_POST['submit']))
         {
             //var_dump($_POST);
           foreach($_POST as $k=>$v)
@@ -331,10 +382,12 @@ class AdminController extends AppController
              if($x = $this->Resource->find('first',array('conditions'=>array('slug'=>$new['slug']))))
                 $new['slug']=$new['slug'].'_'.$x['News']['id'];
             $this->Resource->create();
-          
+            
               if($this->Resource->save($new))
               {
+                $rid = $this->Resource->id;
                 $this->Session->setFlash("Resource Center Added.");
+                $this->redirect('resource_pdf/'.$rid."/add");
                 
               } 
           }
@@ -387,6 +440,7 @@ class AdminController extends AppController
         $this->loadModel('Resource');
         $this->set("resources",$this->Resource->find("all"));
         $this->set('id',$id);
+        $this->set('rid',$rid);
         if($rid !=""){
             $this->set('rid',$rid);
             $r = $this->Resource->findById($rid);

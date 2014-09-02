@@ -28,16 +28,16 @@
         
         <div class="clear"></div>
         <ul>
-            <li><a href="<?php echo $this->webroot;?>admin/pages">Pages</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/destinations">Destinations</a></li>
-            <li><a href="<?php echo $this->webroot;?>dashboard/settings">Settings</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/banners">Banners</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/cruiseline">Cruiseline</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/resources">Resource Center</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/news">News</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/news">CSI</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/news">Newsletter</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/logout">Logout</a></li>
+            <li <?php if($this->params['action']=='editPage')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/editPage/2">Pages</a></li>
+            <li <?php if($this->params['action']=='destinations')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/destinations/1">Destinations</a></li>
+            <li <?php if($this->params['action']=='page')echo "class='active'";?>><a href="<?php echo $this->webroot;?>dashboard/settings">Settings</a></li>
+            <li <?php if($this->params['action']=='banners')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/banners">Banners</a></li>
+            <li <?php if($this->params['action']=='cruiseline')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/cruiseline">Cruiseline</a></li>
+            <li <?php if($this->params['action']=='resources'|| $this->params['action']=='resource_pdf')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/resources">Resource Center</a></li>
+            <li <?php if($this->params['action']=='news')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/news">News</a></li>
+            <li <?php if($this->params['action']=='csi')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/csi">CSI</a></li>
+            <li <?php if($this->params['action']=='page')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/news">Newsletter</a></li>
+            <li ><a href="<?php echo $this->webroot;?>admin/logout">Logout</a></li>
             
         </ul>
     </div>

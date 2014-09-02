@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Islami Sangh Nepal</title>
+		<title>Cruises Incentives</title>
 			<link href="<?php echo $this->webroot;?>css/admin.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo $this->webroot;?>css/bootstrap.css" rel="stylesheet" type="text/css" />
 		

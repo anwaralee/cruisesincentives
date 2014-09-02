@@ -1,15 +1,19 @@
-<aside class="left_body floatLeft">
-<div class="line"></div>
-<h1><span class="green"> News/Deals </span></h1>
+<aside class="sidebar floatLeft">
+
+
 <ul>
+<li class="titles"> News/Deals </li>
 <?php foreach($allnews as $n)
 {?>
-    <li><a href="<?php echo $this->webroot;?>admin/news/<?php echo $n['News']['id'];?>"><?php echo $n['News']['title'];?></a></li>
+    <li><a href="<?php echo $this->webroot;?>admin/news/<?php echo $n['News']['id'];?>"><?php echo ucfirst($n['News']['title']);?></a></li>
 <?php 
 }?>
 </ul>
 </aside>
-<aside class="right_body floatRight" >
+<aside class="contentRight floatRight" >
+<?php if($id!="add"){?><a href="<?php echo $this->webroot.'admin/news/add'?>" class="btn btn-info">+Add News</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php }?>
+<?php if($id!=""){?><a href="<?php echo $this->webroot;?>admin/news" class="btn ">Cancel</a><?php }?>
+
 <?php if($id != ""){?>
 <h3><?php echo ($id == "add")? "Add":"Edit"; ?> News or Deals </h3>
 <form action="<?php echo $this->webroot; ?>admin/news/<?php echo (isset($news)&& ($news['News']['id']!=""))?$news['News']['id']:"add"; ?>" method="post" id="myform">
@@ -53,10 +57,7 @@ Select the area to crop.
 
 </div>
 <?php }
-else
-{?>
-    <a href="<?php echo $this->webroot.'admin/news/add'?>" class="btn">Add News</a>
-<?php }?>
+?>
 </aside>
 
 <div class="clear"></div>
