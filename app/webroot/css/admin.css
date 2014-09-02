@@ -1516,3 +1516,16 @@ label{font-weight:bold;}
 #parentPages{font-size:13px;}
 #parentPages a{cursor:move!important;}
 .botbor{border-bottom:1px solid #FFF;}
+.subnav{list-style:none;margin:0;padding:0;}
+.subnav li{display:inline-block;background:#e5e5e5;}
+.subnav li.active{background:#6999C1;color:#FFF;}
+.subnav a{display:block;height:100%;padding:5px 65px;}
+.subnav .active a{color:#FFF;}
+#myform select{margin-bottom:0;}
+#myform textarea{width:500px;height:120px;}
+.news-append .infolist{width:470px;background:#f5f5f5;border-radius:5px;margin: 10px 0;padding:10px;}
+.news-append strong{display:block;color:#2B579A;}
+.news-append span{display:block;font-size:12px;color:#777;}
+.news-append p{margin-top:10px;color:#555;font-style: italic;}
+.attachment_titles{display:inline-block;color:#9E0A0A;font-weight:bold;padding-left:10px;}
+.test input[type="text"]{margin-bottom:0;}

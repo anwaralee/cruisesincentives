@@ -2,6 +2,7 @@
 class AdminController extends AppController
 {
     public $components = array('ImageCropResize.Image');
+    
     //var $helpers = array('Cropimage');
     //var $components = array(..., 'JqImgcrop'); 
     function beforeFilter() //is called before any other function is called
@@ -915,6 +916,156 @@ class AdminController extends AppController
                 $this->redirect('links');
             }
         }
+        function newsletters($id=null,$page='info')
+        {
+            App::uses('CakeEmail', 'Network/Email');
+            $whole =  Router::url(null,true);
+                $base_url_arr = explode('/admin',$whole);
+                $base_url = $base_url_arr['0'];
+                $this->set('base_url',$base_url);
+            if($id==0 || $id>0)
+            $this->set('id_newsletter',$id);   
+            $this->loadModel('Newsletter');
+            if(isset($_POST['title'])&&$_POST['title'])
+            {
+                if($page=='info'){
+                if($id)
+                {
+                    $this->Newsletter->id = $id;
+                    $this->Newsletter->save($_POST);
+                }   
+                else
+                {
+                    $this->Newsletter->create();
+                    $this->Newsletter->save($_POST);
+                }
+                
+                }
+                $pages = array('info','preview','test','send');
+                $key = array_search($page,$pages);
+                //echo $key;die();
+                if($page!='send')
+                {
+                    $key++;
+                    $this->redirect('newsletters/'.$id.'/'.$pages[$key]);
+                }
+                else
+                $this->redirect('newsletters');
+                
+            }
+            if(isset($_POST['email']) && $_POST['email'])
+            {
+                $email = $_POST['email'];
+                $emails = new CakeEmail();
+                $emails->from(array('noreply@cruises.co.za'=>'CSI'));
+            
+                $emails->emailFormat('html');
+                
+                $emails->subject('CSI - Newsletter');
+                
+                
+                $message=file_get_contents($base_url.'/newsletters/preview/'.$id);
+                $emails->to($email);
+                $emails->send($message);
+                $this->Session->setFlash('Newsletter Succesfully Sent');
+                
+            }
+            
+            $this->set('page',$page);
+            $q = $this->Newsletter->find('all',array('order'=>'id DESC'));
+            $this->set('nl',$q);
+            if($id){
+            $q2 = $this->Newsletter->findById($id);
+            $this->set('news',$q2);
+            $this->loadModel('News');
+            $news = $q2['Newsletter']['news_id'];
+            
+            
+            
+            
+            if($news)
+            {
+                //echo $news;die();
+                $q3 = $this->News->find('all',array('conditions'=>array('id NOT IN('.$news.')')));
+            }
+            else
+            $q3 = $this->News->find('all');
+            $this->set('news_deals',$q3);
+            } 
+            if($page=='preview')
+            {
+                $this->render('newsletter_preview');
+            }
+            if($page=='test')
+            {
+                $this->render('newsletter_test');
+            }
+        }
+        function loadnews()
+        {
+            $this->layout = 'blank';
+            $id = $_POST['id'];
+            $this->loadModel('News');
+            $q = $this->News->find('all',array('conditions'=>array('id IN('.$id.')'),'order'=>'id DESC'));
+            $this->set('model',$q);
+            
+        }
+        
+        function cleanId($id)
+        {
+            
+            $ids = $_POST['ids'];
+            $arr = explode(',',$ids);
+            $i=0;
+            $ids = '';
+            foreach($arr as $a)
+            {
+                
+                if($a!=$id)
+                {
+                    $i++;
+                    if($i==1)
+                    $ids = $a;
+                    else
+                    $ids = $ids.','.$a;  
+                }
+            }
+            echo $ids;die();
+            
+        }
+        function loadNewsOption()
+        {
+             $this->loadModel('News');
+            echo $ids = $_GET['ids'];
+            $arr = explode(',',$ids);
+            $id='';
+            $i=0;
+            foreach($arr as $a)
+            {   
+                    $i++;
+                    if($i==1)
+                    $id = $a;
+                    else
+                    $id = $ids.','.$a;                
+            }
+            $news = $id;
+            if($news)
+            {
+                //echo $news;die();
+                $q3 = $this->News->find('all',array('conditions'=>array('id NOT IN('.$news.')')));
+            }
+            else
+            $q3 = $this->News->find('all');
+            $i=0;
+            echo "<option value=''>Choose News/Deals</option>";
+            foreach($q3 as $n)
+            {
+                echo"<option value='".$n['News']['id']."'>".$n['News']['title']."</option>";
+            }
+            die();
+            
+        }
+        
 }
 
 ?>

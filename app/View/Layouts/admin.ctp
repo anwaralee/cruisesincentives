@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Tessellate 1.0 by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 	<head>
 		<title>Cruises Incentives</title>
@@ -28,6 +24,7 @@
         
         <div class="clear"></div>
         <ul>
+
             <li <?php if($this->params['action']=='editPage')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/editPage/2">Pages</a></li>
             <li <?php if($this->params['action']=='destinations')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/destinations/1">Destinations</a></li>
             <li <?php if($this->params['action']=='page')echo "class='active'";?>><a href="<?php echo $this->webroot;?>dashboard/settings">Settings</a></li>
@@ -36,8 +33,9 @@
             <li <?php if($this->params['action']=='resources'|| $this->params['action']=='resource_pdf')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/resources">Resource Center</a></li>
             <li <?php if($this->params['action']=='news')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/news">News</a></li>
             <li <?php if($this->params['action']=='csi')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/csi">CSI</a></li>
-            <li <?php if($this->params['action']=='page')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/news">Newsletter</a></li>
+            <li <?php if($this->params['action']=='newsletters')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/newsletters">Newsletter</a></li>
             <li ><a href="<?php echo $this->webroot;?>admin/logout">Logout</a></li>
+
             
         </ul>
     </div>
@@ -47,7 +45,7 @@
     </div>
     <div class="footer">
         <hr />
-        &copy; Copyright 2014. Islamic Sangh Nepal<br />Powered by <a href="http://web-nepal.com/">Web-Nepal</a>
+        &copy; Copyright 2014. <a href="<?php echo $this->webroot;?>/">CSI</a>
     </div>
     </div>
     </body>
