@@ -50,11 +50,11 @@
         	<div class="book-title"> BOOK YOUR EVENT </div>
             <div class="book-details">
             <div class="detail">
-           	 	North America <br/>
+           	 	<strong>North America</strong><br/>
 				800-529-6916
 			</div>
             <div class="detail">
-			Outside of North America<br/>
+			<strong>Outside of North America</strong><br/>
 			+1 305-539-6918 
 			</div>
             <div class="detail">
@@ -107,11 +107,11 @@
                             </select>
                         	</div>
                             <div>
-                            	<label> <span class="req"> * </span> numbers of guest rooms </label>
+                            	<label> <span class="req"> * </span> Numbers of guest rooms </label>
                                 <input type="text">
                             </div>
                              <div>
-                            	<label> largets meeting rooms (seats) </label>
+                            	<label> Largest meeting rooms (seats) </label>
                                 <input type="text">
                             </div>
                        </div> <!-- sec_block -->
