@@ -127,7 +127,7 @@
 }
 
 .main-nav li:last-child a {
-    padding: 0 27px;
+    padding: 0 34px;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
  .main-nav li:first-child a {
