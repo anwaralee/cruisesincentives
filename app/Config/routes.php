@@ -25,7 +25,10 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
     
-	Router::connect('/', array('controller' => 'pages', 'action' => 'index'));
+	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
+    Router::connect("/pages/why_cruise", array('controller' => 'pages', 'action'=>'why_cruise'));
+    Router::connect("/csi/*", array('controller' => 'pages', 'action'=>'csi'));
+    Router::connect("/pages/*", array('controller' => 'pages', 'action'=>'index'));
     Router::connect('/view/*', array('controller' => 'pages', 'action' => 'detail'));
     Router::connect('/contact', array('controller' => 'pages', 'action' => 'contact'));
     Router::connect('/media/*', array('controller' => 'pages', 'action' => 'media'));

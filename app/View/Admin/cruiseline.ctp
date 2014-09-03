@@ -70,7 +70,7 @@ foreach($cruiselines as $id=>$cruise)
 
 
 <div class="contentRight floatRight" >
-	<a href="<?php echo $this->webroot.'admin/cruiseline_add'?>" class="btn">+Add Cruiselines</a>
+	<a href="<?php echo $this->webroot.'admin/cruiseline_add'?>" class="btn btn-info">+Add Cruiselines</a>
 </div>
 
 <div class="clear"></div>

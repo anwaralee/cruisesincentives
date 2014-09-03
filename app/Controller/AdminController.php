@@ -47,9 +47,27 @@ class AdminController extends AppController
             $this->Cruiseline->create();
             if($this->Cruiseline->save($arr))
             {
+                $id = $this->Cruiseline->id;
                 $this->Session->setFlash("Cruiseline Saved.");
                 $this->redirect("cruiseline");
             }
+        
+         $this->loadModel('Image');
+         $this->Image->deleteAll(array('type_id'=>$id,'type'=>'cruises'));
+          foreach($_POST['images'] as $image)
+          {
+                $img['file']= $image;
+                $img['type_id'] = $id;
+                $img['type'] = 'cruises';
+                $this->Image->create();
+                if($this->Image->save($img))
+                {
+                    $source1 = APP."webroot/doc/temp/thumb/".$image;
+                    $destination1 = APP."webroot/doc/thumb1/".$image;
+                    if(copy($source1,$destination1))
+                    unlink(APP."webroot/doc/temp/thumb/".$image);
+                }
+          }
         }
         $this->render('cruiseline_edit');
     }
@@ -68,6 +86,22 @@ class AdminController extends AppController
             foreach($_POST as $k=>$v ){
                 $this->Cruiseline->saveField($k,$v);
             }
+             $this->loadModel('Image');
+             $this->Image->deleteAll(array('type_id'=>$id,'type'=>'cruises'));
+              foreach($_POST['images'] as $image)
+              {
+                    $img['file']= $image;
+                    $img['type_id'] = $id;
+                    $img['type'] = 'cruises';
+                    $this->Image->create();
+                    if($this->Image->save($img))
+                    {
+                        $source1 = APP."webroot/doc/temp/thumb/".$image;
+                        $destination1 = APP."webroot/doc/thumb1/".$image;
+                        if(copy($source1,$destination1))
+                        unlink(APP."webroot/doc/temp/thumb/".$image);
+                    }
+              }
             
                 $this->Session->setFlash("Cruiseline Updated.");
                 $this->redirect("cruiseline");
@@ -134,10 +168,15 @@ class AdminController extends AppController
     }
     function news($id = ""){
         $this->loadModel('News');
+        $this->loadModel("Image");
         $this->set('id',$id);
         $this->set('allnews',$this->News->find('all'));
         if($id != "" && $id != "add")
+        {
             $this->set('news',$this->News->findById($id));
+            
+            
+        }
         if(isset($_POST['submit']))
         {
             //var_dump($_POST);
@@ -160,7 +199,7 @@ class AdminController extends AppController
             $destination = APP."webroot/doc/thumb/".$banner;
             if(copy($source,$destination))
             unlink(APP."webroot/doc/temp/thumb/".$banner);
-            
+            /*
             App::uses('Resizes', 'resize');
             $img = new Resizes();
             $img->load(APP.'webroot/doc/thumb/'.$banner);
@@ -168,6 +207,8 @@ class AdminController extends AppController
             $img->resizeToWidth(120);
         
             $img->save(APP.'webroot/doc/thumb1/'.$banner,$ty);
+            */
+            
           if($id =="add"){
             $whiteSpace = '';  //if you dnt even want to allow white-space set it to ''
             $pattern = '/[^a-zA-Z0-9-_'  . $whiteSpace . ']/u';
@@ -178,10 +219,28 @@ class AdminController extends AppController
           
               if($this->News->save($new))
               {
+                $id = $this->News->id;
                 $this->Session->setFlash("News/ Deal Added.");
                 
               } 
           }
+          
+          $this->Image->deleteAll(array('type_id'=>$id,'type'=>'news'));
+          foreach($_POST['images'] as $image)
+          {
+                $img['file']= $image;
+                $img['type_id'] = $id;
+                $img['type'] = 'news';
+                $this->Image->create();
+                if($this->Image->save($img))
+                {
+                    $source1 = APP."webroot/doc/temp/thumb/".$image;
+                    $destination1 = APP."webroot/doc/thumb1/".$image;
+                    if(copy($source1,$destination1))
+                    unlink(APP."webroot/doc/temp/thumb/".$image);
+                }
+          }
+           $this->Session->setFlash("News/ Deal Updated.");
           $this->redirect("news");
         }
         
@@ -189,8 +248,18 @@ class AdminController extends AppController
     function news_delete($id)
     {
         $this->loadModel('News');
+        $this->loadModel('Image');
         $img = $this->News->findById($id);
         $img = $img['News']['banner'];
+        $imgs = $this->Image->find('all',array('conditions'=>array('type_id'=>$id,'type'=>'news')));
+        foreach($imgs as $i)
+        {
+            $im = $i['Image']['file'];
+            unlink(APP."webroot/doc/thumb/".$im);
+            unlink(APP."webroot/doc/thumb1/".$im);
+            unlink(APP."webroot/doc/temp/".$im);
+        }
+        $this->Image->deleteAll(array('type_id'=>$id,'type'=>'news'));
         if($this->News->delete(array('id'=>$id)))
         {
             unlink(APP."webroot/doc/thumb/".$img);
@@ -201,6 +270,57 @@ class AdminController extends AppController
         }
     }
     
+    function csi($id="")
+    {
+        $this->loadModel('Csi');
+        $this->set('csi',$this->Csi->find('all'));
+        $this->set('id',$id);
+        if($id!="" && $id!='add')
+        {
+            $this->set('csi1',$this->Csi->findById($id));
+        }
+        if(isset($_POST['submit']))
+        {
+            //var_dump($_POST);
+          foreach($_POST as $k=>$v)
+          {
+            
+            if($id =="add")
+                $new[$k] = $v;
+            else
+            {
+                $this->Csi->id = $id;
+                $this->Csi->saveField($k,$v);
+            }
+          }
+            
+          if($id =="add"){
+            $whiteSpace = '';  //if you dnt even want to allow white-space set it to ''
+            $pattern = '/[^a-zA-Z0-9-_'  . $whiteSpace . ']/u';
+            $new['slug'] = preg_replace($pattern, '_', (string) $new['title']);
+             if($x = $this->Csi->find('first',array('conditions'=>array('slug'=>$new['slug']))))
+                $new['slug']=$new['slug'].'_'.$x['News']['id'];
+            $this->Csi->create();
+          
+              if($this->Csi->save($new))
+              {
+                $this->Session->setFlash("CSI Added.");
+                
+              } 
+          }
+          $this->redirect("csi");
+        }
+        
+    }
+    function csi_delete($id)
+    {
+        $this->loadModel('Csi');
+        if($this->Csi->delete(array('id'=>$id)))
+        {
+            $this->Session->setFlash('CSI deleted.');
+            $this->redirect('csi');
+        }
+    }
     function sort()
     {
         $this->loadModel('Cruiseline');
@@ -298,6 +418,7 @@ class AdminController extends AppController
             }
         
     }
+    
     function resources($id ="")
     {
         $this->loadModel('Resource');
@@ -310,21 +431,22 @@ class AdminController extends AppController
             $this->set('pdfs',$this->ResourcePdf->find('all',array('conditions'=>array('resource_id'=>$id,'parent_id'=>0))));
             $this->set('rp',$this->ResourcePdf);
         }
-          if(isset($_POST['submit']))
+        if(isset($_POST['submit']))
         {
-            //var_dump($_POST);
+            //var_dump($_POST);die();
           foreach($_POST as $k=>$v)
           {
             
             if($id =="add")
-                $new[$k] = $v;
+                $new[$k] = trim($v);
             else
             {
                 $this->Resource->id = $id;
-                $this->Resource->saveField($k,$v);
+                $this->Resource->saveField($k,trim($v));
             }
           }
-            
+          
+          //var_dump($new);die();
           if($id =="add"){
             $whiteSpace = '';  //if you dnt even want to allow white-space set it to ''
             $pattern = '/[^a-zA-Z0-9-_'  . $whiteSpace . ']/u';
@@ -332,14 +454,20 @@ class AdminController extends AppController
              if($x = $this->Resource->find('first',array('conditions'=>array('slug'=>$new['slug']))))
                 $new['slug']=$new['slug'].'_'.$x['News']['id'];
             $this->Resource->create();
-          
+            
               if($this->Resource->save($new))
               {
+                $rid = $this->Resource->id;
                 $this->Session->setFlash("Resource Center Added.");
+                $this->redirect('resource_pdf/'.$rid."/add");
                 
               } 
           }
-          $this->redirect("resources");
+          else
+          {
+            $this->Session->setFlash("Resource Center Updated.");
+            $this->redirect("resource_pdf/".$id."/add");
+          }
         }
     }
     function resource_delete($id)
@@ -388,6 +516,7 @@ class AdminController extends AppController
         $this->loadModel('Resource');
         $this->set("resources",$this->Resource->find("all"));
         $this->set('id',$id);
+        $this->set('rid',$rid);
         if($rid !=""){
             $this->set('rid',$rid);
             $r = $this->Resource->findById($rid);
@@ -426,7 +555,7 @@ class AdminController extends AppController
                 
               } 
           }
-          $this->redirect("resources");
+          $this->redirect("resources/".$rid);
         }
         
     }
@@ -530,6 +659,7 @@ class AdminController extends AppController
     function editPage($id)
     {
         $this->loadModel('Page');
+        $this->loadModel('Image');
         $q=$this->Page->find('first',array('conditions'=>array('id'=>$id)));
         $this->set('content',$q);
         if(isset($_POST['submit']))
@@ -541,8 +671,24 @@ class AdminController extends AppController
             $this->Page->id = $id;
            
             $this->Page->save($arr);
+            
+             $this->Image->deleteAll(array('type_id'=>$id,'type'=>'pages'));
+              foreach($_POST['images'] as $image)
+              {
+                    $img['file']= $image;
+                    $img['type_id'] = $id;
+                    $img['type'] = 'pages';
+                    $this->Image->create();
+                    if($this->Image->save($img))
+                    {
+                        $source1 = APP."webroot/doc/temp/thumb/".$image;
+                        $destination1 = APP."webroot/doc/thumb1/".$image;
+                        if(copy($source1,$destination1))
+                        unlink(APP."webroot/doc/temp/thumb/".$image);
+                    }
+              }
             $this->Session->setFlash('Page updated successfully');
-            $this->redirect('/dashboard/pages');
+            $this->redirect('editPage/'.$id);
         }
     }
     function addPage($id)
@@ -862,6 +1008,95 @@ class AdminController extends AppController
                 $this->redirect('links');
             }
         }
+        function del_img($mod,$file="",$id="")
+        {
+            $this->loadModel('Image');
+            if($mod == 'news'){
+                if($id!="")
+                {
+                    
+                    $p = $this->Image->findById($id);
+                    if($this->Image->delete(array('id'=>$id))&& file_exists(APP."webroot/doc/temp/".$p['Image']['file']))
+                    {
+                        unlink(APP."webroot/doc/temp/".$p['Image']['file']);
+                        unlink(APP."webroot/doc/temp/thumb/".$p['Image']['file']);
+                        echo "OK";
+                    } 
+                }
+                else
+                {
+                        unlink(APP."webroot/doc/temp/".$file);
+                        unlink(APP."webroot/doc/temp/thumb/".$file);
+                         echo "OK";
+                }
+            }
+             if($mod == 'pages'){
+                if($id!="")
+                {
+                    
+                    $p = $this->Image->findById($id);
+                    if($this->Image->delete(array('id'=>$id))&& file_exists(APP."webroot/doc/temp/".$p['Image']['file']))
+                    {
+                        unlink(APP."webroot/doc/temp/".$p['Image']['file']);
+                        unlink(APP."webroot/doc/temp/thumb/".$p['Image']['file']);
+                        echo "OK";
+                    } 
+                }
+                else
+                {
+                        unlink(APP."webroot/doc/temp/".$file);
+                        unlink(APP."webroot/doc/temp/thumb/".$file);
+                         echo "OK";
+                }
+            }
+            if($mod == 'cruises'){
+                if($id!="")
+                {
+                    
+                    $p = $this->Image->findById($id);
+                    if($this->Image->delete(array('id'=>$id))&& file_exists(APP."webroot/doc/temp/".$p['Image']['file']))
+                    {
+                        unlink(APP."webroot/doc/temp/".$p['Image']['file']);
+                        unlink(APP."webroot/doc/temp/thumb/".$p['Image']['file']);
+                        echo "OK";
+                    } 
+                }
+                else
+                {
+                        unlink(APP."webroot/doc/temp/".$file);
+                        unlink(APP."webroot/doc/temp/thumb/".$file);
+                         echo "OK";
+                }
+            }
+            die();
+        }
+        function del_pdf($mod,$id)
+        {
+            if($mod == 'page'){
+                $this->loadModel('Page');
+                $p = $this->Page->findById($id);
+                $this->Page->id = $p['Page']['id'];
+                if($this->Page->saveField('pdf',''))
+                {
+                    unlink(APP."webroot/pdf/".$p['Page']['pdf']);
+                    echo "OK";
+                }   
+                
+            }
+            elseif($mod == 'resource')
+            {
+                $this->loadModel('ResourcePdf');
+                $p = $this->ResourcePdf->findById($id);
+                $this->ResourcePdf->id = $p['ResourcePdf']['id'];
+                if($this->ResourcePdf->saveField('pdf',''))
+                {
+                    unlink(APP."webroot/pdf/".$p['ResourcePdf']['pdf']);
+                    echo "OK";
+                }     
+                
+            }
+            die();
+        }
         function newsletters($id=null,$page='info')
         {
             App::uses('CakeEmail', 'Network/Email');
@@ -947,6 +1182,7 @@ class AdminController extends AppController
                 $this->render('newsletter_test');
             }
         }
+        
         function loadnews()
         {
             $this->layout = 'blank';
@@ -1009,6 +1245,14 @@ class AdminController extends AppController
                 echo"<option value='".$n['News']['id']."'>".$n['News']['title']."</option>";
             }
             die();
+            
+        }
+        
+        function add_images($type, $id)
+        {
+            $this->layout = 'blank';
+            $this->loadModel("Image");
+            $this->set("images",$this->Image->find('all',array('conditions'=>array('type'=>$type,'type_id'=>$id))));
             
         }
         

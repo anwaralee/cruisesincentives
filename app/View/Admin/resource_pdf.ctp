@@ -1,17 +1,18 @@
-<aside class="left_body floatLeft">
-<div class="line"></div>
-<h1><span class="green"> Resource Center </span></h1>
+<aside class="sidebar floatLeft">
 <ul>
+<li class="titles"> Resource Center</li>
+
 <?php foreach($resources as $resource)
 {?>
-    <li><a href="<?php echo $this->webroot;?>admin/resources/<?php echo $resource['Resource']['id'];?>"><?php echo $resource['Resource']['title'];?></a>
+    <li><a href="<?php echo $this->webroot;?>admin/resources/<?php echo $resource['Resource']['id'];?>"><?php echo ucfirst($resource['Resource']['title']);?></a>
         </li>
 <?php 
 }?>
 </ul>
 </aside>
-<aside class="right_body floatRight" >
-<h1><?php if(isset($c) && $c['ResourcePdf']['id']!="")echo "Edit";else echo "Add";?> Pdf - <?php if(isset($title))echo $title;?></h1>
+<aside class="contentRight floatRight" >
+<?php if($id!=""){?><a href="<?php echo $this->webroot;?>admin/resources/<?php echo $rid;?>" class="btn ">Cancel</a><?php }?>
+<h2 class="mytitle"><?php if(isset($c) && $c['ResourcePdf']['id']!="")echo "Edit";else echo "Add";?> Pdf - <?php if(isset($title))echo $title;?></h1>
 <form action="" method="post" id="myform">
 <input type="hidden" name="resource_id" value="<?php echo $rid;?>" />
 <label>Parent</label>
@@ -25,10 +26,9 @@
 <label>Resource Title</label>
 <input type="text" value="<?php if(isset($c) && $c['ResourcePdf']['title']!="")echo $c['ResourcePdf']['title'];?>" name="title" class="required" />
 
-<label>Pdf</label>  
 <div class="pdf"><?php if(isset($c) && $c['ResourcePdf']['pdf']!="")echo $c['ResourcePdf']['pdf'];?></div>
 <a href="javascript:void(0);" class="btn btn-danger" id="remove" style="display: <?php if((isset($c) && $c['ResourcePdf']['pdf']=="") || $id=='add')echo "none";?>;">Remove</a><br />
-<a href="javascript:void(0);" class="btn btn-primary" id="upload">Upload</a>
+<a href="javascript:void(0);" class="btn btn-info" id="upload">Upload Pdf</a>
 <input type="hidden" name="pdf" value="<?php if(isset($c) && $c['ResourcePdf']['pdf']!="" && file_exists(APP."webroot/pdf/".$c['ResourcePdf']['pdf']))echo $c['ResourcePdf']['pdf'];?>" id="pdf" />
 <hr />
  
@@ -42,9 +42,16 @@ $(function(){
    $('#myform').validate();
    initiate_ajax_upload('upload'); 
    $('#remove').click(function(){
-        $('#pdf').val("");
-        $('.pdf').html("");
-        $(this).hide();
+        $.ajax({
+        'url':'<?php echo $this->webroot;?>admin/del_pdf/resource/<?php if(isset($c)&& $c['ResourcePdf']['id']!="") echo $c['ResourcePdf']['id'];?>',
+        'success':function(msg){
+            if(msg == "OK"){
+                $('#pdf').val("");
+                $('.pdf').html("");
+                $('#remove').hide();
+            }
+        }
+    });
    });
 });
 function initiate_ajax_upload(button_id){

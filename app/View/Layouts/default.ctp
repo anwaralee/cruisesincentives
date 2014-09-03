@@ -9,8 +9,10 @@
 <script type="text/javascript" src="<?php echo $this->webroot;?>js/jquery.slicknav.min.js"> </script>
 <script type="text/javascript" src="<?php echo $this->webroot;?>js/main.js"> </script>
 <script type="text/javascript" src="<?php echo $this->webroot;?>js/jquery.slicknav.min.js"> </script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.js" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->webroot;?>css/style.css"/>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->webroot;?>css/responsive.css"/>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -108,10 +110,10 @@
   	<ul class="clearfix">
     	<li> <a href="<?php echo $this->webroot;?>"> Home </a> </li>
         <li> <a href="<?php echo $this->webroot;?>pages/why_cruise"> Why cruise </a> </li>
-        <li> <a href="cruise-international.html"> Cruise International Experiences </a> </li>
-        <li> <a href="#"> Destinations </a> </li>
-        <li> <a href="#"> Resource Center </a> </li>
-         <li> <a href="cruise search.html"> Cruise Search </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>CruisesInternational"> Cruise International Experiences </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>destinations"> Destinations </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>resources"> Resource Center </a> </li>
+         <li> <a href="<?php echo $this->webroot;?>cruise-search"> Cruise Search </a> </li>
     </ul>
   </nav>
 </header> <!--  header -->
@@ -122,9 +124,9 @@
 
 <footer id="colophon">
 	<ul>
-    	<li> <a href="#">  legal </a> </li>
-         <li> <a href="#">  Privacy </a> </li>
-         <li> <a href="#">  copyrights </a> </li>
+    	<li> <a href="<?php echo $this->webroot;?>pages/legal">  legal </a> </li>
+         <li> <a href="<?php echo $this->webroot;?>pages/privacy">  Privacy </a> </li>
+         <li> <a href="<?php echo $this->webroot;?>pages/copyright">  copyrights </a> </li>
     </ul>
 </footer>
 </div>

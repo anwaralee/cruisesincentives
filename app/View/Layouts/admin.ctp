@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Tessellate 1.0 by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 	<head>
 		<title>Cruises Incentives</title>
@@ -19,6 +15,25 @@
             <script type="text/javascript" src="<?php echo $this->webroot;?>js/jquery.Jcrop.js"></script>
             <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 		
+        <script>
+        $(function(){
+           $('#flashMessage').fadeOut(3000,'linear'); 
+           
+           var h1 = $('.sidebar').height(); 
+           var h2 = $('.contentRight').height();
+           //var h3 = $('.CKEDITOR').height();
+            //h2 = Number(h3)+Number(h2)
+           //alert(h2);
+           var h =0;
+           if(h1>h2)
+            h = h1;
+           else
+            h = h2;
+            //alert(h);
+           $('.sidebar').css('height',h);
+           $('.sidebar').css('background','#eee');
+        });
+        </script>
 		
 	</head>
 	<body>
@@ -28,16 +43,18 @@
         
         <div class="clear"></div>
         <ul>
-            <li><a href="<?php echo $this->webroot;?>admin/pages">Pages</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/destinations">Destinations</a></li>
-            <li><a href="<?php echo $this->webroot;?>dashboard/settings">Settings</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/banners">Banners</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/cruiseline">Cruiseline</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/resources">Resource Center</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/news">News</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/news">CSI</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/newsletters">Newsletter</a></li>
-            <li><a href="<?php echo $this->webroot;?>admin/logout">Logout</a></li>
+
+            <li <?php if($this->params['action']=='editPage')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/editPage/2">Pages</a></li>
+            <li <?php if($this->params['action']=='destinations')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/destinations/1">Destinations</a></li>
+            <li <?php if($this->params['action']=='page')echo "class='active'";?>><a href="<?php echo $this->webroot;?>dashboard/settings">Settings</a></li>
+            <li <?php if($this->params['action']=='banners')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/banners">Banners</a></li>
+            <li <?php if($this->params['action']=='cruiseline')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/cruiseline">Cruiseline</a></li>
+            <li <?php if($this->params['action']=='resources'|| $this->params['action']=='resource_pdf')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/resources">Resource Center</a></li>
+            <li <?php if($this->params['action']=='news')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/news">News</a></li>
+            <li <?php if($this->params['action']=='csi')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/csi">CSI</a></li>
+            <li <?php if($this->params['action']=='newsletters')echo "class='active'";?>><a href="<?php echo $this->webroot;?>admin/newsletters">Newsletter</a></li>
+            <li ><a href="<?php echo $this->webroot;?>admin/logout">Logout</a></li>
+
             
         </ul>
     </div>

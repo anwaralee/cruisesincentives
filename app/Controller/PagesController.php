@@ -30,44 +30,69 @@ App::uses('AppController', 'Controller');
  */
 class PagesController extends AppController {
     var $components = array('Email');
-function index()
-{
-    
-}
-function why_Cruise()
-{
-    $q = $this->Page->findBySlug('why-cruises');
-    $this->set('model',$q);
-}
-function contact()
-{
-    if(isset($_POST) && $_POST)
-    {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        //$message = $_POST['message'];
-        $emails = new CakeEmail();
-                $emails->from(array('noreply@islamisanghnepal.org'=>'Islami Sangh Nepal'));
-            
-                $emails->emailFormat('html');
-                
-                $emails->subject('New contact Message');
-                
-                
-                $message="
-                Assalam Alaikum,<br/><br/>
-                You have received a new message from islamisanghnepal.org<br/><br/> 
 
-<b>From</b> : ".$name."<br/>
-<b>Email</b> : ".$email."<br/>
-<b>Message</b> : ".$_POST['message'];
-                $emails->to('admin@web-nepal.com');
-                $emails->send($message);
-                $this->Session->setFlash('Message sent successfully');
-                $this->redirect('/');
+
+
+    
+    
+
+    function home()
+    {
+        $this->set('home',$this->Page->findBySlug('home'));
+        $this->set('events',$this->Page->findBySlug('corporate-events'));
+        $this->set('full',$this->Page->findBySlug('full-ship-charters'));
+        $this->set('csi',$this->Page->findBySlug('csi-insentive'));
+        
+           
+    }
+    function index($slug="")
+    {
+        $q = $this->Page->findBySlug($slug);
+        $this->set('model',$q);
     }
     
-}
+    
+    function why_cruise()
+
+    {
+        $q = $this->Page->findBySlug('why-cruises');
+        $this->set('model',$q);
+    }
+    
+    function csi($slug)
+    {
+        $this->loadModel('Csi');
+        $this->set('model',$this->Csi->findBySlug($slug));
+    }
+    function contact()
+    {
+        if(isset($_POST) && $_POST)
+        {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            //$message = $_POST['message'];
+            $emails = new CakeEmail();
+                    $emails->from(array('noreply@islamisanghnepal.org'=>'Islami Sangh Nepal'));
+                
+                    $emails->emailFormat('html');
+                    
+                    $emails->subject('New contact Message');
+                    
+                    
+                    $message="
+                    Assalam Alaikum,<br/><br/>
+                    You have received a new message from islamisanghnepal.org<br/><br/> 
+    
+    <b>From</b> : ".$name."<br/>
+    <b>Email</b> : ".$email."<br/>
+    <b>Message</b> : ".$_POST['message'];
+                    $emails->to('admin@web-nepal.com');
+                    $emails->send($message);
+                    $this->Session->setFlash('Message sent successfully');
+                    $this->redirect('/');
+        }
+        
+    }
     public function getpages($id)
     {
         return $dc = $this->Page->find('all',array('conditions'=>array('parent'=>$id)));;

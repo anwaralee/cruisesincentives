@@ -15,20 +15,16 @@ h1,h2{font-size:20px!important;color:#444!important;}
 .header li.active a{color:#fff;text-decoration:none;}
 .header a{text-decoration: none;display:block;padding:5px 24.8px;color:#FFF;}
 .header a:hover{color:#fff;text-decoration:none;}
-.header .active{color:#000;font-weight:bold;}
+.header .active{color:#000;}
 .content{border-radius: 0 0 10px 10px;
     padding: 20px 10px 20px 0;}
 .list{background:#e5e5e5;border-radius:5px;padding:10px;width:500px;margin:5px 0;}
 .list .number{width:50px;float:left;}
 .list .title{width:150px;float:left;}
 .list .action{width:210px;float:right;text-align: right;}
-#flashMessage{background: none repeat scroll 0 0 #3e9ded;
-    
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 17px;
-    padding: 10px;}
+
+#flashMessage{padding:10px;background:#007CCC;font-weight: bold;font-size: 18px;color:#FFF;margin-bottom: 10px;}
+
 .footer{padding-top:20px;text-align: center;font-size: 12px;}
 .footer a{text-decoration: none;font-weight: bold;}
 .floatLeft{float:left;}	

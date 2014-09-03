@@ -15,11 +15,13 @@
         </div>
         
         	<div class="csi left-block-content">
-            	<a href="csi.html"> <img src="<?php echo $this->webroot;?>images/csi.png"> </a>
+            	<a href="<?php echo $this->webroot;?>pages/csi"> <img src="<?php echo $this->webroot;?>images/csi.png"> </a>
             </div>
     </div><!-- left sidebar -->
     <div class="right-content why-cruise-content rightcontent clearfix">
+    <h2 class="page_title"><?php echo ucfirst($model['Page']['title']);?></h2>
     <?php echo $model['Page']['description'];?>
-        
-        <div class="pdf-part"> Click here to view the <a href="#" class="pdf-link"> Why Cruise </a> </div>
+        <?php if($model['Page']['pdf']!= "" && file_exists(APP."webroot/pdf/".$model['Page']['pdf'])){?>
+        <div class="pdf-part"> Click here to view the <a href="#" class="pdf-link"><?php echo ucfirst($model['Page']['title']);?> </a> </div>
+        <?php } ?>
     </div>

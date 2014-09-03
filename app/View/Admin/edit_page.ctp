@@ -31,14 +31,11 @@ foreach($pages as $p)
         ?>
         <h1 class="mytitle">Edit Page - <?php echo $c['Page']['title'];?></h1>
         <form action="<?php echo $this->webroot; ?>admin/editPage/<?php echo $c['Page']['id']; ?>" method="post" id="myform">
+        <div class="images"></div>
         <label>Page Title</label>
         <input type="text" value="<?php echo $c['Page']['title'];?>" name="title" class="required" />
         <label>Page Description</label>
         <textarea name="description" class="CKEDITOR required" id="ck"><?php echo $c['Page']['description'];?></textarea>
-        <script type="text/javascript">
-        	var CustomHTML = CKEDITOR.replace( 'ck');
-                                CKFinder.setupCKEditor( CustomHTML, '<?php echo $this->webroot;?>js/ckfinder/' );
-        </script>
         <label>SEO Title</label>
         <input type="text" value="<?php echo $c['Page']['seo_title'];?>" name="seo_title" class="" />
         <label>SEO Description</label>
@@ -61,15 +58,27 @@ foreach($pages as $p)
 
 
 
-
+<script type="text/javascript">
+        	var CustomHTML = CKEDITOR.replace( 'ck');
+                                CKFinder.setupCKEditor( CustomHTML, '<?php echo $this->webroot;?>js/ckfinder/' );
+        </script>
 <script>
 $(function(){
    $('#myform').validate();
    initiate_ajax_upload('upload'); 
+   $('.images').load('<?php echo $this->webroot;?>admin/add_images/pages/<?php echo $c['Page']['id'];?>');
    $('#remove').click(function(){
-        $('#pdf').val("");
-        $('.pdf').html("");
-        $(this).hide();
+    $.ajax({
+        'url':'<?php echo $this->webroot;?>admin/del_pdf/page/<?php echo $c['Page']['id'];?>',
+        'success':function(msg){
+            
+                $('#pdf').val("");
+                $('.pdf').html("");
+                $('#remove').hide();
+            
+        }
+    })
+       
    });
 });
 function initiate_ajax_upload(button_id){

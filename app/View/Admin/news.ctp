@@ -2,15 +2,21 @@
 
 
 <ul>
+
 <li class="titles">News/Deals</li>
+
 <?php foreach($allnews as $n)
 {?>
-    <li><a href="<?php echo $this->webroot;?>admin/news/<?php echo $n['News']['id'];?>"><?php echo $n['News']['title'];?></a></li>
+    <li><a href="<?php echo $this->webroot;?>admin/news/<?php echo $n['News']['id'];?>"><?php echo ucfirst($n['News']['title']);?></a></li>
 <?php 
 }?>
 </ul>
 </aside>
 <aside class="contentRight floatRight" >
+
+<?php if($id!="add"){?><a href="<?php echo $this->webroot.'admin/news/add'?>" class="btn btn-info">+Add News</a>&nbsp;&nbsp;&nbsp;&nbsp;<?php }?>
+<?php if($id!=""){?><a href="<?php echo $this->webroot;?>admin/news" class="btn ">Cancel</a><?php }?>
+
 <?php if($id != ""){?>
 <h3 class="mytitle"><?php echo ($id == "add")? "Add":"Edit"; ?> News or Deals </h3>
 <form action="<?php echo $this->webroot; ?>admin/news/<?php echo (isset($news)&& ($news['News']['id']!=""))?$news['News']['id']:"add"; ?>" method="post" id="myform">
@@ -21,6 +27,7 @@
 <?php if(isset($news)&& $news['News']['banner']!="" && file_exists(APP."webroot/doc/thumb/".$news['News']['banner'])){?>
 <a href="javascript:void(0);" class="btn btn-danger" id="remove" >Remove</a><?php }?>
 <input type="hidden" name="banner" value="<?php echo (isset($news)&& $news['News']['banner']!="" &&file_exists(APP."webroot/doc/thumb/".$news['News']['banner']))?$news['News']['banner']:""; ?>" id="image" />
+<div class="images"></div>
 <label>Title</label>
 <input type="text" value="<?php echo (isset($news)&& $news['News']['title']!="")?$news['News']['title']:""; ?>" name="title" class="required" />
 <label>Description</label>
@@ -35,8 +42,8 @@
 <textarea name="seo_desc" class="" ><?php echo (isset($news)&& $news['News']['seo_desc']!="")?$news['News']['seo_desc']:""; ?></textarea>
 
 <hr />
-<input type="hidden" name="added_on" value="<?php echo date('Y-m-d H:i:s');?>" />
-<input type="submit" value="<?php echo (isset($news)&& $news['News']['id']!="")?'Edit':'Add';?>" name="submit" class="btn btn-primary " />
+<input type="hidden" name="added_on" value="<?php echo date('Y-m-d');?>" />
+<input type="submit" value="<?php echo (isset($news)&& $news['News']['id']!="")?'Save':'Add';?>" name="submit" class="btn btn-primary " />
 <?php if(isset($news)&& $news['News']['id']!=""){ echo $this->Html->link("Delete","news_delete/".$news['News']['id'],array('class'=>'btn btn-danger'),"Confirm Delete News?");}?>
 </form>
 <div class="crop" style="display: none;">
@@ -54,16 +61,14 @@ Select the area to crop.
 
 </div>
 <?php }
-else
-{?>
-    <a href="<?php echo $this->webroot.'admin/news/add'?>" class="btn">Add News</a>
-<?php }?>
+?>
 </aside>
 
 <div class="clear"></div>
 <script>
 $(function(){
     initiate_ajax_upload('upload');
+    $('.images').load('<?php echo $this->webroot;?>admin/add_images/news/<?php echo($id!="add" && $id!="")?$id:"0";?>');
     $('#remove').click(function(){
         $('#image').val("");
         $('.thumb').html("");
@@ -99,7 +104,7 @@ $(function(){
         }
     $('.crop').show();
     $('.crop').dialog({width:'auto',resizable: false,
-            modal: true,});
+            modal: true});
     $('.savecrop').attr('title',$(this).attr('title'));
     $('.crop .fields').html('<img src="<?php echo $this->webroot.'doc/temp/'?>'+$("#image").val()+'" style="max-width:1000px;" id="tocrop"/>');
     $('#tocrop').Jcrop({

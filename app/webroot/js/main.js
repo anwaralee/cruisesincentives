@@ -8,6 +8,7 @@ $(document).ready(function() {
 	
 	    $(".close,.close-btn").click(function(){
 		$(".register-form,.overlay").hide();
+        
 	});
 	    $(".login").click(function(){
 		$(".login-form,.overlay").show();

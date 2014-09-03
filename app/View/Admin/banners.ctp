@@ -1,5 +1,5 @@
 
-    <a href="javascript:void(0)" id="addmore" class="btn btn-primary">Add Banner</a>
+    <div class="floatLeft">
     <form action="" method="post" id="myform">
     <div class="bannerlist" >
     
@@ -44,7 +44,7 @@ $(function(){
   
 <?php }?>
 </div>
-<input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
+<input type="submit" name="submit" value="Save" class="btn btn-primary"/>
 </form>
 <div class="crop" style="display: none;">
 <hr />
@@ -60,7 +60,9 @@ Select the area to crop.
 <input type="hidden" name="nu" value="0" class="nu" />
 <input type="hidden" name="added_on" value="<?php echo date('Y-m-d H:i:s');?>" />
 </div>
-
+</div>
+<div class="floatLeft" style="margin-left:10px;"><a href="javascript:void(0)" id="addmore" class="btn btn-info">+Add Banner</a></div>
+<div class="clear"></div>
 <script>
 $(function(){
     $('.savecrop').live('click',function(){
