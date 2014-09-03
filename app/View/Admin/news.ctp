@@ -26,6 +26,7 @@
 <a href="javascript:void(0);" class="recrop btn btn-primary" style="display: <?php echo (isset($news)&& $news['News']['banner']!="" && file_exists(APP."webroot/doc/thumb/".$news['News']['banner']))?'':'none'?>;" >Recrop</a>
 <?php if(isset($news)&& $news['News']['banner']!="" && file_exists(APP."webroot/doc/thumb/".$news['News']['banner'])){?>
 <a href="javascript:void(0);" class="btn btn-danger" id="remove" >Remove</a><?php }?>
+<hr />
 <input type="hidden" name="banner" value="<?php echo (isset($news)&& $news['News']['banner']!="" &&file_exists(APP."webroot/doc/thumb/".$news['News']['banner']))?$news['News']['banner']:""; ?>" id="image" />
 <div class="images"></div>
 <label>Title</label>

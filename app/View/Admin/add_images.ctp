@@ -64,7 +64,7 @@ function initiate_ajax_upload(button_id){
 					
                     // enable upload button
                     this.enable();
-                    $('.thumbs').append('<div style="float:left; margin-right:10px;margin-bottom:5px;"><img src="<?php echo $this->webroot.'doc';?>/temp/thumb/'+response+'" /><input type="hidden" name="images[]" value="'+response+'"/><br/><a href="javascript:void(0);" class="btn btn-danger remove" title="'+response+'">Remove</a></div>');
+                    $('.thumbs').prepend('<div style="float:left; margin-right:10px;margin-bottom:5px;"><img src="<?php echo $this->webroot.'doc';?>/temp/thumb/'+response+'" style="display: block;margin-bottom: 5px;height:110px;" /><input type="hidden" name="images[]" value="'+response+'"/><br/><a href="javascript:void(0);" class="btn btn-danger remove" title="'+response+'">Remove</a></div>');
                     
                                    
                 }
@@ -76,11 +76,13 @@ function initiate_ajax_upload(button_id){
 <div class="thumbs" style="margin-bottom: 5px;">
 <?php foreach($images as $i){?>
     <div style="float:left; margin-right:10px;margin-bottom:5px;">
-        <img src="<?php echo $this->webroot.'doc/thumb1/'.$i['Image']['file'];?>" />
-        <input type="hidden" name="images[]" value="<?php echo $i['Image']['file'];?>"/><br/>
+        <img src="<?php echo $this->webroot.'doc/thumb1/'.$i['Image']['file'];?>" style="display: block;margin-bottom: 5px;height:110px;" />
+        <input type="hidden" name="images[]" value="<?php echo $i['Image']['file'];?>"/>
         <a href="javascript:void(0);" id="<?php echo $i['Image']['id'];?>" class="btn btn-danger remove" title="<?php echo $i['Image']['file'];?>">Remove</a>
     </div>
 <?php }?>
-</div>
 <div class="clear"></div>
+</div>
+
 <a id="uploads" class="btn btn-info" href="javascript:void(0);" >+ Add Images </a>
+<hr />

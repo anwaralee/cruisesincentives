@@ -30,18 +30,35 @@
     <?php if($id!="add" && $id!=""){?>
     <hr />
   <h2 class="mytitle">Resource Pdfs  </h2>
-  <ul>
+  <ul class="resourcepdf">
   <?php foreach($pdfs as $pdf)
   {?>
-    <li><?php echo $pdf['ResourcePdf']['title'];?> <a href="<?php echo $this->webroot;?>admin/resource_pdf/<?php echo $id."/".$pdf['ResourcePdf']['id'];?>" class="btn btn-success">Edit</a>
-    <?php echo $this->Html->link("Delete","pdf_delete/".$pdf['ResourcePdf']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?");?>
+    <li>
+    <div>
+        <span class="icons-pdf floatLeft"></span>
+        <div class="floatLeft pdftitle"><?php echo $pdf['ResourcePdf']['title'];?></div>
+        <div class="floatRight">
+            <a href="<?php echo $this->webroot;?>admin/resource_pdf/<?php echo $id."/".$pdf['ResourcePdf']['id'];?>" class="btn btn-success">Edit</a>
+            <?php echo $this->Html->link("Delete","pdf_delete/".$pdf['ResourcePdf']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?");?>
+        </div>
+        <div class="clearfix"></div>
+    </div>
     <?php if( $child_pdf = $rp->find('all',array('conditions'=>array('parent_id'=>$pdf['ResourcePdf']['id'],'resource_id'=>$id))))
             {?>
              <ul>
                 <?php foreach($child_pdf as $ch)
                   {?>
-                  <li><?php echo $ch['ResourcePdf']['title'];?> <a href="<?php echo $this->webroot;?>admin/resource_pdf/<?php echo $id."/".$ch['ResourcePdf']['id'];?>" class="btn btn-success">Edit</a>
-                  <?php echo $this->Html->link("Delete","pdf_delete/".$ch['ResourcePdf']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?");?></li>
+                  <li>
+                  <div>
+                  <span class="icons-pdf floatLeft"></span>
+                  <div class="floatLeft pdftitle"><?php echo $ch['ResourcePdf']['title'];?></div>
+                  <div class="floatRight">
+                      <a href="<?php echo $this->webroot;?>admin/resource_pdf/<?php echo $id."/".$ch['ResourcePdf']['id'];?>" class="btn btn-success">Edit</a>
+                      <?php echo $this->Html->link("Delete","pdf_delete/".$ch['ResourcePdf']['id'],array('class'=>'btn btn-danger'),"Confirm Delete?");?>
+                  </div>
+                  <div class="clearfix"></div>
+                  </div>
+                  </li>
                 <?php }?>
              </ul>   
                 

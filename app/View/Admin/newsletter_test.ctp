@@ -36,8 +36,8 @@ foreach($nl as $n)
             <hr />
             <strong>Send yourself an email</strong>
             <hr />
-            <p class="test">
-            <form action="" method="post">
+            <p>
+            <form action="" method="post" class="test">
             <input type="text" name="email" placeholder="Your Email Address" /> <input type="submit" value="Send" class="btn btn-info" />
             </form>
             </p>
