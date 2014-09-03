@@ -120,6 +120,7 @@
 
 <div id="main" class="clearfix">
 	<?php echo $this->fetch('content'); ?>
+    
 </div> <!-- main end -->
 
 <footer id="colophon">

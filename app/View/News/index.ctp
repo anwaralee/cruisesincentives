@@ -46,6 +46,7 @@
         	<div class="csi left-block-content">
             	<a href="<?php echo $this->webroot;?>pages/csi"> <img src="<?php echo $this->webroot;?>images/csi.png"> </a>
             </div>
+            
     </div><!-- left sidebar -->
     <div class="right-content why-cruise-content news clearfix">
     <h2 class="page_title"> <?php echo ucfirst($model['News']['title']);?> </h2>
