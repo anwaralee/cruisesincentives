@@ -1122,6 +1122,8 @@ class AdminController extends AppController
                 }
                 
                 }
+                $id = $this->Newsletter->id;
+                //die();
                 $pages = array('info','preview','test','send');
                 $key = array_search($page,$pages);
                 //echo $key;die();
@@ -1158,12 +1160,20 @@ class AdminController extends AppController
             if($id){
             $q2 = $this->Newsletter->findById($id);
             $this->set('news',$q2);
-            $this->loadModel('News');
+            
             $news = $q2['Newsletter']['news_id'];
             
             
             
             
+           
+            } 
+            if($page=='preview')
+            {
+                $this->render('newsletter_preview');
+            }
+            else $news = '';
+            $this->loadModel('News');
             if($news)
             {
                 //echo $news;die();
@@ -1172,11 +1182,6 @@ class AdminController extends AppController
             else
             $q3 = $this->News->find('all');
             $this->set('news_deals',$q3);
-            } 
-            if($page=='preview')
-            {
-                $this->render('newsletter_preview');
-            }
             if($page=='test')
             {
                 $this->render('newsletter_test');
@@ -1189,7 +1194,11 @@ class AdminController extends AppController
             $id = $_POST['id'];
             $this->loadModel('News');
             $q = $this->News->find('all',array('conditions'=>array('id IN('.$id.')'),'order'=>'id DESC'));
+            
             $this->set('model',$q);
+            $this->loadModel('Image');
+            $this->set('img',$this->Image);
+            
             
         }
         

@@ -78,6 +78,12 @@ foreach($nl as $n)
             </form>
             <?php
         }
+        else
+        {
+            ?>
+            <a href="<?php echo $this->webroot.'admin/newsletters/0'?>" class="btn btn-info">+Add Newsletter</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <?php
+        }
         ?>
 </aside>
 
@@ -139,7 +145,7 @@ $(function(){
             });
         
         }
-    $('.news-append').html('<?php echo $this->webroot;?>images/ajax-loader.gif');
+    
     <?php if($news['Newsletter']['news_id']){?>
     $.ajax({
         
@@ -154,6 +160,7 @@ $(function(){
     });
     <?php }?>
    $('#add_art').click(function(){
+    
     var val = $('#art_deal').val();
     
     if(val)
@@ -176,7 +183,8 @@ $(function(){
        type:'post',
        success:function(res)
        {
-        
+        $('.news-append .loader').remove();
+        $('.news-append').show();
         $('.news-append').append(res);
        } 
     }); 

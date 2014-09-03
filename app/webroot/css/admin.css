@@ -1531,3 +1531,6 @@ label{font-weight:bold;}
 .news-append p{margin-top:10px;color:#555;font-style: italic;}
 .attachment_titles{display:inline-block;color:#9E0A0A;font-weight:bold;padding-left:10px;}
 .test input[type="text"]{margin-bottom:0;}
+.news-append .img {width:120px;}
+.news-append .tit {width:300px;margin-left:10px;}
+.news-append .rem{margin-top:10px}
