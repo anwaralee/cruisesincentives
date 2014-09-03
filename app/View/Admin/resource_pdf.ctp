@@ -26,8 +26,9 @@
 <label>Resource Title</label>
 <input type="text" value="<?php if(isset($c) && $c['ResourcePdf']['title']!="")echo $c['ResourcePdf']['title'];?>" name="title" class="required" />
 
-<div class="pdf"><?php if(isset($c) && $c['ResourcePdf']['pdf']!="")echo $c['ResourcePdf']['pdf'];?></div>
+<div class="pdf pdftit"><?php if(isset($c) && $c['ResourcePdf']['pdf']!="")echo $c['ResourcePdf']['pdf'];?></div>
 <a href="javascript:void(0);" class="btn btn-danger" id="remove" style="display: <?php if((isset($c) && $c['ResourcePdf']['pdf']=="") || $id=='add')echo "none";?>;">Remove</a><br />
+<hr />
 <a href="javascript:void(0);" class="btn btn-info" id="upload">Upload Pdf</a>
 <input type="hidden" name="pdf" value="<?php if(isset($c) && $c['ResourcePdf']['pdf']!="" && file_exists(APP."webroot/pdf/".$c['ResourcePdf']['pdf']))echo $c['ResourcePdf']['pdf'];?>" id="pdf" />
 <hr />
@@ -91,7 +92,7 @@ function initiate_ajax_upload(button_id){
             },
             onComplete: function(file, response){
                
-                    button.text('Upload');
+                    button.text('Upload Pdf');
                     if( response=='news')
                     {   alert('Invalid Image Dimension.Minmum image dimension: 600X250')
                         return false;

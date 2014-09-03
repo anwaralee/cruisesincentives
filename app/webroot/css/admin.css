@@ -1534,3 +1534,8 @@ label{font-weight:bold;}
 .news-append .img {width:120px;}
 .news-append .tit {width:300px;margin-left:10px;}
 .news-append .rem{margin-top:10px}
+.resourcepdf li{background:#f5f5f5;border:1px solid #ddd;margin-bottom:5px;list-style:none;padding:10px;}
+.resourcepdf li li{background:none!important;border:none!important;padding:5px 0 0 0!important;margin-bottom:0!important;}
+.pdftitle{width:300px;}
+.pdftit{display:block;font-weight:bold;color:#2B579A;margin-bottom:5px;}
+.icons-pdf{display:block;padding:10px;background:url(../images/pdf.png) no-repeat;margin-right:4px;}
