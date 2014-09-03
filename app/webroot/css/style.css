@@ -43,7 +43,7 @@
     body{
        color: #111111;
        line-height:1.5;
-       font-size:13px;
+       font-size:14px;
        font-family: 'MyriadPro-Regular';
        position:relative;
        overflow-x: hidden; 
@@ -73,7 +73,7 @@
     border-right: 5px solid #004076;
     color: #004076;
     float: right;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 18px;
     padding: 8px 13px 5px 0;
     text-align: right;
@@ -171,8 +171,8 @@
 
 .map {
     color: #111111;
-    font-size: 13px;
-    line-height: 15.6px;
+    font-size: 14px;
+    line-height: 18.6px;
     padding: 0 10px 10px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -206,8 +206,9 @@
 }
 
 .detail {
-    font-size: 13px;
-    margin-top: 8px;
+     font-size: 14px;
+    line-height: 1;
+    margin-top: 18px;
 }
 
 .req_quote {
@@ -241,11 +242,15 @@
 
 .news-list li {
     background: url("../images/news-img.png") no-repeat scroll 9px 3px;
-    font-size: 13px;
-    line-height: 15.6px;
+    font-size: 15px;
+    line-height: 20.6px;
     list-style: none outside none;
     padding: 0 18px 15px 34px;
     cursor: pointer;
+}
+.news-list li a{
+    color: #FFF;
+    text-decoration: none;
 }
 .news-list li:hover {
     font-weight: 600;
@@ -315,7 +320,8 @@
 
 .cruse-from {
     background: none repeat scroll 0 0 #e5eef5;
-    padding: 0 23px 0 18px;
+    line-height: 1.7;
+    padding: 10px 23px 0 18px;
 }
 
 .req {
@@ -694,7 +700,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     float: left;
     padding: 8px 11px;
     width: 300px;
-    position: absolute;
+    
     height: 100%;
 }
 #main{
@@ -1274,7 +1280,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 }
 /* CSS*/
 .rightcontent h2{color: #164a8b;
-    font-size: 16px;
+    font-size: 17px;
     margin: 10px 0 0;
  text-transform:capitalize;
  line-height:16px;
