@@ -4,7 +4,7 @@ class NewslettersController extends AppController
     function preview($id)
     {
         $whole =  Router::url(null,true);
-                $base_url_arr = explode('/admin',$whole);
+                $base_url_arr = explode('/newsletters',$whole);
                 $base_url = $base_url_arr['0'];
                 $this->set('base_url',$base_url);
         $this->loadModel('News');

@@ -30,14 +30,11 @@ App::uses('AppController', 'Controller');
  */
 class PagesController extends AppController {
     var $components = array('Email');
-    
-    
-
 function index()
 {
     
 }
-function why_cruise()
+function why_Cruise()
 {
     $q = $this->Page->findBySlug('why-cruises');
     $this->set('model',$q);
