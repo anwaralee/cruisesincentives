@@ -839,6 +839,13 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     text-indent: 12px;
     width: 109%;
 }
+.sub-menu-sidebar li .active{
+    background: none repeat scroll 0 0 #bbd0e2;
+    color: #1a4c89;
+    margin-left: -12px;
+    text-indent: 12px;
+    width: 109%;
+}
 
 .sub-menu-sidebar li a {
     color: #6899c0;
@@ -1173,15 +1180,17 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
 }
 
 .news .img-wrap {
-    margin-left: 27px;
-    margin-top: -60px;
+     background: none repeat scroll 0 0 #fff;
+    margin-left: 17px;
+    margin-top: -45px;
+    padding: 22px 7px;
     position: relative;
-    width: 100%;
+    width: 91%;
 }
 
 .news .img-block {
     margin-left: 10px;
-    width: 27.8%;
+    width: 30.8%;
 }
 .news .img-block img {
     width: 100%;

@@ -29,6 +29,12 @@
     Router::connect("/pages/why_cruise", array('controller' => 'pages', 'action'=>'why_cruise'));
     Router::connect("/csi/*", array('controller' => 'pages', 'action'=>'csi'));
     Router::connect("/pages/*", array('controller' => 'pages', 'action'=>'index'));
+    Router::connect("/cruisesinternational/*", array('controller' => 'cruisesinternational', 'action'=>'index'));
+    Router::connect("/news/getnews", array('controller' => 'news', 'action'=>'getnews'));
+    Router::connect("/news/getcsi", array('controller' => 'news', 'action'=>'getcsi'));
+    Router::connect("/news/all", array('controller' => 'news', 'action'=>'all'));
+    Router::connect("/news/getnewsletter", array('controller' => 'news', 'action'=>'getnewsletter'));
+    Router::connect("/news/*", array('controller' => 'news', 'action'=>'index'));
     Router::connect('/view/*', array('controller' => 'pages', 'action' => 'detail'));
     Router::connect('/contact', array('controller' => 'pages', 'action' => 'contact'));
     Router::connect('/media/*', array('controller' => 'pages', 'action' => 'media'));

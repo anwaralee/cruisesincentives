@@ -70,13 +70,13 @@
                         <?php $news = $this->requestAction('news/getnews'); 
                             foreach($news as $n)
                             {?>
-                            <li><?php echo $n['News']['title'];?></li>
+                            <li><a href="<?php echo $this->webroot."news/".$n['News']['slug'];?>"><?php echo $n['News']['title'];?></a></li>
                             <?php
                             }
                         ?>
                         	
                         </ul>
-                        <span style="margin-left: 200px;"><a href="<?php echo $this->webroot;?>news/all">View All</a></span>
+                        <!--<span style="margin-left: 200px;"><a href="<?php echo $this->webroot;?>news/all">View All</a></span>-->
                 </div>
                 
                 

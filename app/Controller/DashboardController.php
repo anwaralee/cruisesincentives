@@ -357,8 +357,9 @@ class DashboardController extends AppController
                 $img->save(APP.'webroot/doc/temp/'.$rand,$ty);
                 if($from=='images')
                 {
-                    $img->createThumbnail($rand,193,163,APP.'webroot/doc/',APP.'webroot/doc/temp/thumb/');
-                    //$img->save(APP.'webroot/doc/thumb1/'.$rand,$ty); 
+                    $img->resizeToHeight(163);
+                    //$img->createThumbnail($rand,193,163,APP.'webroot/doc/',APP.'webroot/doc/temp/thumb/');
+                    $img->save(APP.'webroot/doc/temp/thumb/'.$rand,$ty); 
                 }
             unlink(APP.'webroot/doc/'.$rand);
             //$img->resizeToWidth(700);

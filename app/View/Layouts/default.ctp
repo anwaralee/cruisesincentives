@@ -110,7 +110,7 @@
   	<ul class="clearfix">
     	<li> <a href="<?php echo $this->webroot;?>"> Home </a> </li>
         <li> <a href="<?php echo $this->webroot;?>pages/why_cruise"> Why cruise </a> </li>
-        <li> <a href="<?php echo $this->webroot;?>CruisesInternational"> Cruise International Experiences </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>cruisesinternational"> Cruise International Experiences </a> </li>
         <li> <a href="<?php echo $this->webroot;?>destinations"> Destinations </a> </li>
         <li> <a href="<?php echo $this->webroot;?>resources"> Resource Center </a> </li>
          <li> <a href="<?php echo $this->webroot;?>cruise-search"> Cruise Search </a> </li>

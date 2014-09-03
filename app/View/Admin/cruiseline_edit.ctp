@@ -77,7 +77,7 @@ foreach($cruiselines as $id=>$cruise)
     <h2 class="mytitle"><?php echo (isset($cruise1) && $cruise1['Cruiseline']['id']!="")?'EDIT':'ADD';?> Cruiseline </h2>
 
 <div class="form">
-    <form action="<?php echo $this->webroot;?>admin/<?php echo (isset($cruise1) && $cruise1['Cruiseline']['id']!="")? "cruiseline_edit/".$cruise['Cruiseline']['id']:"cruiseline_add" ;?>" method="post" id="myform">
+    <form action="<?php echo $this->webroot;?>admin/<?php echo (isset($cruise1) && $cruise1['Cruiseline']['id']!="")? "cruiseline_edit/".$cruise1['Cruiseline']['id']:"cruiseline_add" ;?>" method="post" id="myform">
         <div class="images"></div>
         <label>Cruiselines:
         <select name="parent_id" class="required">
