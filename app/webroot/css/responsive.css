@@ -63,6 +63,85 @@
 		position: absolute;
 		width: 245px;
 	}
+	.right-content {
+		width: 355px;
+	}
+
+	.img-wrap > img {
+		width: 100%;
+	}
+	.request img {
+    display: block;
+    width: 100%;
+}
+
+.destination-img > img {
+    width: 100%;
+}
+
+.thumb > img {
+    width: 100%;
+}
+
+.destination-content {
+    width: 150px;
+}
+.destination-img-block {
+    display: block;
+    float: none;
+    text-align: center;
+}
+.destination-content {
+    width: 100%;
+}
+.resource-pdf-link{
+	width: 160px;
+}
+.news-banner > img {
+    width: 100%;
+}
+
+.news .img-block{
+    margin-left: 8px;
+    width: 27.7%;
+}
+
+.img-block > img {
+    width: 100%;
+}
+.news .img-wrap {
+    margin-left: 15px;
+    margin-top: -38px;
+ }
+ .additonal textarea {
+    width: 360px;
+}
+
+.choose-deastnation select {
+    text-indent: 0px;
+}
+.right-content.cruise-international-content.clearfix {
+    padding-right: 0;
+    width: 408px;
+}
+.right-content.why-cruise-content.news.clearfix, .right-content.why-cruise-content.clearfix, .right-content.why-cruise-content.request-porposal.clearfix, .right-content.why-cruise-content.resource-center.clearfix {
+    padding-right: 0;
+    width: 408px;
+}
+.name-block > div {
+    display: block;
+    float: none;
+}
+
+.request-proposal-form .name-block > div:last-child label, .select div:last-child label {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 140px;
+}
+
+.company input {
+    width: 130px;
+}
 
 }
 
@@ -223,6 +302,179 @@
 	.news-list > li {
 		text-align: left;
 	}
+	.left-sidebar.why-cruise-sidebar, #mains .left-sidebar{
+		margin: 0 auto;
+		float: none;
+		position: static;
+	}
+	.right-content, .right-content.why-cruise-content.resource-center.clearfix, .right-content.why-cruise-content.clearfix {
+		float: none;
+		margin-top: 30px;
+		padding-right: 0;
+		width: 100%;
+	}
+
+	.img-block {
+		float: none;
+		margin-left: 0;
+	}
+
+	.img-block > img {
+		width: 100%;
+	}
+	.request img {
+    display: block;
+    width: 100%;
+}
+
+.csi.left-block-content img {
+    width: 100%;
+}
+
+.destination-content {
+    float: none;
+    width: 100%;
+}
+
+.destination-img-block {
+    display: block;
+    float: none;
+    text-align: center;
+}
+.resource-pdf-link{
+	width: 48%;
+}
+.img-wrap {
+    margin-left: 0;
+    width: 100%;
+}
+
+.news-banner > img {
+    width: 100%;
+}
+
+.news .img-block {
+    float: left;
+    margin-left: 10px;
+    width: 28.5%;
+}
+.news .img-wrap {
+    margin-left: 12px;
+    margin-top: -52px;
+}
+.request-proposal-form .name-block > div:last-child label, .select div:last-child label {
+    display: inline;
+    margin-left: 0;
+    width: 100%;
+}
+.name-block > div {
+    float: none;
+}
+
+.request-proposal-form label {
+    display: block;
+    width: 100%;
+}
+
+.request-proposal-form .name-block > div input, .company input, .additonal textarea {
+    padding-left: 1%;
+    padding-right: 1%;
+    width: 98%;
+}
+
+.select div {
+    float: none;
+}
+.select select, .right-content.why-cruise-content.request-porposal.clearfix {
+    width: 100%;
+}
+
+.choose-deastnation select {
+    width: 100%;
+    text-indent: 0px;
+}
+.right-content.cruise-international-content.clearfix {
+    width: 100%;
+}
+.right-content.why-cruise-content.news.clearfix {
+    width: 100%;
+}
+
+.news .img-block {
+    float: left;
+    margin-left: 20px;
+    width: 28.4%;
+}
+.numb-info {
+    float: none;
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+}
+.submit-quote {
+    text-align: center;
+}
+
+}
+@media (max-width: 480px) {
+	.left-sidebar.why-cruise-sidebar {
+		margin-top: 20px;
+		padding: 0;
+		width: 100%;
+	}
+
+	.call-us-wrap.left-content-block > img {
+		width: 100%;
+	}
+
+	.csi.left-block-content img {
+		width: 100%;
+	}
+	.siderbar-title{
+		margin-left: 0;
+		width: 100%;
+	}
+	.parent-list > a{
+		text-align: center;
+	}
+	.request img {
+    display: block;
+    width: 100%;
+}
+
+.img-wrap > img {
+    width: 100%;
+}
+.img-wrap {
+    width: 100%;
+}
+
+.resource-pdf-link {
+    float: none;
+    margin-left: 0;
+    width: 100%;
+}
+
+.news-banner {
+    margin-top: 15px;
+}
+
+.news .img-block {
+    float: left;
+    margin-left: 10px;
+    width: 28.4%;
+}
+}
 
 
+@media (max-width: 320px) {
+.news .img-block {
+    float: left;
+    margin-left: 10px;
+    width: 26%;
+}
+.news .img-wrap {
+    margin-left: 12px;
+    margin-top: -30px;
+}
 }

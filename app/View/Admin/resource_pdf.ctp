@@ -42,9 +42,16 @@ $(function(){
    $('#myform').validate();
    initiate_ajax_upload('upload'); 
    $('#remove').click(function(){
-        $('#pdf').val("");
-        $('.pdf').html("");
-        $(this).hide();
+        $.ajax({
+        'url':'<?php echo $this->webroot;?>admin/del_pdf/resource/<?php if(isset($c)&& $c['ResourcePdf']['id']!="") echo $c['ResourcePdf']['id'];?>',
+        'success':function(msg){
+            if(msg == "OK"){
+                $('#pdf').val("");
+                $('.pdf').html("");
+                $('#remove').hide();
+            }
+        }
+    });
    });
 });
 function initiate_ajax_upload(button_id){

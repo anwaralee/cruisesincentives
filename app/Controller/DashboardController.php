@@ -336,7 +336,10 @@ class DashboardController extends AppController
                     $min_width = 600;
                     $min_height = 250; 
                     break;
-                
+                case 'images':
+                    $min_width = 193;
+                    $min_height = 163; 
+                    break;
                 default:
                     $min_width = 300;
                     $min_height = 180; 
@@ -352,6 +355,11 @@ class DashboardController extends AppController
                 $img->resizeToWidth(900);
             }
                 $img->save(APP.'webroot/doc/temp/'.$rand,$ty);
+                if($from=='images')
+                {
+                    $img->createThumbnail($rand,193,163,APP.'webroot/doc/',APP.'webroot/doc/temp/thumb/');
+                    //$img->save(APP.'webroot/doc/thumb1/'.$rand,$ty); 
+                }
             unlink(APP.'webroot/doc/'.$rand);
             //$img->resizeToWidth(700);
             

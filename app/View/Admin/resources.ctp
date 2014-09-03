@@ -20,8 +20,7 @@
     <form action="<?php echo $this->webroot; ?>admin/resources/<?php echo (isset($res)&& ( $res['Resource']['id']!=""))? $res['Resource']['id']:"add"; ?>" id="myform" method="post">
         <label>Title: </label><input type="text" name="title" class="required" value="<?php   if(isset($res)&& $res['Resource']['title']!= "" )echo $res['Resource']['title'];?>" />
         <label>Description: </label>
-        <textarea name="desc" class="required" >
-        <?php if(isset($res)&& $res['Resource']['desc']!= "" ) echo $res['Resource']['desc'];?>
+        <textarea name="desc" class="required" ><?php if(isset($res)&& $res['Resource']['desc']!="" )echo trim($res['Resource']['desc']);?>
         </textarea>
         
         <hr />
@@ -60,16 +59,7 @@
 <script>
 $(function(){
    $('#myform').validate();
-   var h1 = $('.sidebar').height(); 
-   var h2 = $('.contentRight').height();
-   var h =0;
-   if(h1>h2)
-    h = h1;
-   else
-    h = h2;
-    //alert(h);
-   $('.sidebar').css('height',h);
-   $('.sidebar').css('background','#eee');
+   
    
 });
 </script>

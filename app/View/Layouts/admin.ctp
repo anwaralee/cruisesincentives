@@ -15,6 +15,25 @@
             <script type="text/javascript" src="<?php echo $this->webroot;?>js/jquery.Jcrop.js"></script>
             <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 		
+        <script>
+        $(function(){
+           $('#flashMessage').fadeOut(3000,'linear'); 
+           
+           var h1 = $('.sidebar').height(); 
+           var h2 = $('.contentRight').height();
+           //var h3 = $('.CKEDITOR').height();
+            //h2 = Number(h3)+Number(h2)
+           //alert(h2);
+           var h =0;
+           if(h1>h2)
+            h = h1;
+           else
+            h = h2;
+            //alert(h);
+           $('.sidebar').css('height',h);
+           $('.sidebar').css('background','#eee');
+        });
+        </script>
 		
 	</head>
 	<body>

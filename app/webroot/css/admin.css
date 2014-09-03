@@ -22,7 +22,7 @@ h1,h2{font-size:20px!important;color:#444!important;}
 .list .number{width:50px;float:left;}
 .list .title{width:150px;float:left;}
 .list .action{width:210px;float:right;text-align: right;}
-#flashMessage{padding:10px;border-radius:10px;background:#007CCC;font-weight: bold;font-size: 18px;color:#FFF;}
+#flashMessage{padding:10px;background:#007CCC;font-weight: bold;font-size: 18px;color:#FFF;margin-bottom: 10px;}
 .footer{padding-top:20px;text-align: center;font-size: 12px;}
 .footer a{text-decoration: none;font-weight: bold;}
 .floatLeft{float:left;}	

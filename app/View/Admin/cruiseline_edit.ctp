@@ -1,5 +1,6 @@
 <script type="text/javascript">
 $(function(){
+    $('.images').load('<?php echo $this->webroot;?>admin/add_images/cruises/<?php echo(isset($cruise1) && $cruise1['Cruiseline']['id']!="")?$cruise1['Cruiseline']['id']:"0";?>');
     $('#page-lists ul').sortable({
          items: "li:not(.ui-state-disabled)",
          update : function (event,ui) {
@@ -77,6 +78,7 @@ foreach($cruiselines as $id=>$cruise)
 
 <div class="form">
     <form action="<?php echo $this->webroot;?>admin/<?php echo (isset($cruise1) && $cruise1['Cruiseline']['id']!="")? "cruiseline_edit/".$cruise['Cruiseline']['id']:"cruiseline_add" ;?>" method="post" id="myform">
+        <div class="images"></div>
         <label>Cruiselines:
         <select name="parent_id" class="required">
             <option value="0"> Select Cruiseline</option>
