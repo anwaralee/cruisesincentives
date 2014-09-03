@@ -159,6 +159,11 @@
     float: left;
     
 }
+.left-block-content1 {
+    float: left;
+    width:615px;
+    
+}
 
 .map img {
     margin-left: -10px;

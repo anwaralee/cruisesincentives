@@ -71,11 +71,11 @@ $(function(){
     $.ajax({
         'url':'<?php echo $this->webroot;?>admin/del_pdf/page/<?php echo $c['Page']['id'];?>',
         'success':function(msg){
-            if(msg == "OK"){
+            
                 $('#pdf').val("");
                 $('.pdf').html("");
                 $('#remove').hide();
-            }
+            
         }
     })
        

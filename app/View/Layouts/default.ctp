@@ -110,7 +110,7 @@
   	<ul class="clearfix">
     	<li> <a href="<?php echo $this->webroot;?>"> Home </a> </li>
         <li> <a href="<?php echo $this->webroot;?>pages/why_cruise"> Why cruise </a> </li>
-        <li> <a href="<?php echo $this->webroot;?>pages/cruise-international"> Cruise International Experiences </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>CruisesInternational"> Cruise International Experiences </a> </li>
         <li> <a href="<?php echo $this->webroot;?>destinations"> Destinations </a> </li>
         <li> <a href="<?php echo $this->webroot;?>resources"> Resource Center </a> </li>
          <li> <a href="<?php echo $this->webroot;?>cruise-search"> Cruise Search </a> </li>
@@ -124,9 +124,9 @@
 
 <footer id="colophon">
 	<ul>
-    	<li> <a href="<?php echo $this->webroot;?>">  legal </a> </li>
-         <li> <a href="<?php echo $this->webroot;?>">  Privacy </a> </li>
-         <li> <a href="<?php echo $this->webroot;?>">  copyrights </a> </li>
+    	<li> <a href="<?php echo $this->webroot;?>pages/legal">  legal </a> </li>
+         <li> <a href="<?php echo $this->webroot;?>pages/privacy">  Privacy </a> </li>
+         <li> <a href="<?php echo $this->webroot;?>pages/copyright">  copyrights </a> </li>
     </ul>
 </footer>
 </div>

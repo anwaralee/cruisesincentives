@@ -47,10 +47,11 @@ class AdminController extends AppController
             $this->Cruiseline->create();
             if($this->Cruiseline->save($arr))
             {
+                $id = $this->Cruiseline->id;
                 $this->Session->setFlash("Cruiseline Saved.");
                 $this->redirect("cruiseline");
             }
-        }
+        
          $this->loadModel('Image');
          $this->Image->deleteAll(array('type_id'=>$id,'type'=>'cruises'));
           foreach($_POST['images'] as $image)
@@ -67,6 +68,7 @@ class AdminController extends AppController
                     unlink(APP."webroot/doc/temp/thumb/".$image);
                 }
           }
+        }
         $this->render('cruiseline_edit');
     }
     
@@ -1081,7 +1083,7 @@ class AdminController extends AppController
                 }   
                 
             }
-            if($mod == 'resource')
+            elseif($mod == 'resource')
             {
                 $this->loadModel('ResourcePdf');
                 $p = $this->ResourcePdf->findById($id);
