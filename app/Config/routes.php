@@ -26,6 +26,7 @@
  */
     
 	Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
+    Router::connect("/cruise_search", array('controller' => 'pages', 'action'=>'cruise_search'));
     Router::connect("/pages/why_cruise", array('controller' => 'pages', 'action'=>'why_cruise'));
     Router::connect("/csi/*", array('controller' => 'pages', 'action'=>'csi'));
     Router::connect("/pages/*", array('controller' => 'pages', 'action'=>'index'));

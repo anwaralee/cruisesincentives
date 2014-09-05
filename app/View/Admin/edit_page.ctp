@@ -43,10 +43,10 @@ foreach($pages as $p)
         <div class="pdfs">
         <div class="pdf floatLeft"><?php echo $c['Page']['pdf'];?></div><a href="javascript:void(0);" class="btn btn-danger floatLeft marLeft10" id="remove" style="display: <?php if($c['Page']['pdf']=="")echo "none";?>;">Remove</a>
         <div class="clearfix"></div>
-        <a href="javascript:void(0);" class="btn btn-info uploadbtn" id="upload">Upload PDF</a>
+        <a href="javascript:void(0);" class="btn btn-info uploadbtn" id="upload"> Upload Pdf</a>
         
         </div>
-        <input type="hidden" name="pdf" value="" id="pdf" />
+        <input type="hidden" name="pdf" value="<?php echo $c['Page']['pdf'];?>" id="pdf" />
         <hr />
          
         <input type="submit" value="Save" name="submit" class="btn btn-primary" />
@@ -60,7 +60,7 @@ foreach($pages as $p)
 
 <script type="text/javascript">
         	var CustomHTML = CKEDITOR.replace( 'ck');
-                                CKFinder.setupCKEditor( CustomHTML, '<?php echo $this->webroot;?>js/ckfinder/' );
+                CKFinder.setupCKEditor( CustomHTML, '<?php echo $this->webroot;?>js/ckfinder/' );
         </script>
 <script>
 $(function(){
@@ -90,17 +90,9 @@ function initiate_ajax_upload(button_id){
             name: 'file',
             onSubmit : function(file, ext){
               // change button text, when user selects file
-                
-               	if(ext == "pdf")		
-                {
-                    return true;
-                }
-                else
-                {
-                       alert("Please Select a Pdf file.");
-                    return false;
-                }
                 button.text('Uploading');
+               	
+                
 	
                 // If you want to allow uploading only 1 file at time,
                 // you can disable upload button
@@ -115,14 +107,21 @@ function initiate_ajax_upload(button_id){
                         button.text('Uploading');				
                     }
                 }, 200);
+                if(ext == "pdf")		
+                {
+                    return true;
+                }
+                else
+                {
+                       alert("Please Select a Pdf file.");
+                    return false;
+                }
+                
+                
             },
             onComplete: function(file, response){
                
-                    button.text('Upload');
-                    if( response=='news')
-                    {   alert('Invalid Image Dimension.Minmum image dimension: 600X250')
-                        return false;
-                    }
+                    button.text('Upload Pdf');
                     window.clearInterval(interval);
 					
                     // enable upload button

@@ -141,15 +141,7 @@ function initiate_ajax_upload(button_id){
             onSubmit : function(file, ext){
               // change button text, when user selects file
                 
-               	if(ext == "jpg" || ext == "GIF" || ext =="gif" || ext =="JPG" || ext =="png" || ext =="JPEG" || ext =="jepg" || ext== "PNG")		
-                {
-                    return true;
-                }
-                else
-                {
-                       alert("Invalid Image file");
-                    return false;
-                }
+               	
                 button.text('Uploading');
 	
                 // If you want to allow uploading only 1 file at time,
@@ -165,20 +157,34 @@ function initiate_ajax_upload(button_id){
                         button.text('Uploading');				
                     }
                 }, 200);
+                if(ext == "jpg" || ext == "GIF" || ext =="gif" || ext =="JPG" || ext =="png" || ext =="JPEG" || ext =="jepg" || ext== "PNG")		
+                {
+                    return true;
+                }
+                else
+                {
+                       alert("Invalid Image file");
+                       button.text('Upload');
+                       window.clearInterval(interval);
+                       this.enable();
+                    return false;
+                }
             },
             onComplete: function(file, response){
                 //alert(button_id);
                     
                 //alert(response);
                     button.text('Upload');
+                    window.clearInterval(interval);
+                    this.enable();
                     if( response=='news')
                     {   alert('Invalid Image Dimension.Minmum image dimension: 600X250')
                         return false;
                     }
-                    window.clearInterval(interval);
+                    
 					
                     // enable upload button
-                    this.enable();
+                   
                     
                     $('#savecrop').show();
                     $('.crop').show();

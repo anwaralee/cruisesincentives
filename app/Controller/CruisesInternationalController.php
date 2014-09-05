@@ -1,7 +1,8 @@
 <?php
 class CruisesInternationalController extends AppController
 {
-    function index($slug=""){
+    function index($slug="")
+    {
         $this->loadModel('Cruiseline');
         $this->loadModel('Image');
         $this->set('cruises',$this->Cruiseline->find('all',array('conditions'=>array('parent_id'=>0),'order'=>'sort')));
@@ -12,5 +13,7 @@ class CruisesInternationalController extends AppController
             $model = $this->Cruiseline->findBySlug($slug);
         $this->set('model',$model);
         $this->set('images', $this->Image->find('all',array('conditions'=>array('type'=>'cruises','type_id'=>$model['Cruiseline']['id']),'limit'=>3,'order'=>'rand()')));
+        $this->set('seoTitle',$model['Cruiseline']['seo_title']);
+        $this->set('seoDesc',$model['Cruiseline']['seo_desc']);
     }    
 }

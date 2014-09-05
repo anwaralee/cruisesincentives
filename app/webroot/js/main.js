@@ -4,6 +4,7 @@ $(document).ready(function() {
 	
     $(".register").click(function(){
 		$(".register-form,.overlay").show();
+        $('#register1').validate();
 	});
 	
 	    $(".close,.close-btn").click(function(){

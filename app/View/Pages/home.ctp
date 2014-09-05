@@ -26,18 +26,18 @@
         <div class="post-block-wrap clearfix">
         	<div class="post-block">
             	<div class="title-post"> Corporate Events </div>
-                <div class="content-post"> <?php echo substr($events['Page']['description'],0,200);?></div>
+                <div class="content-post"> <?php echo substr(preg_replace("/<img[^>]+\>/i", "(image) ", $events['Page']['description']),0,200);?></div>
                  <a class="view-more" href="<?php echo $this->webroot."pages/corporate-events";?>"> view more </a>
             </div>
             <div class="post-block">
             	<div class="title-post"> Full Ship Charters </div>
-                <div class="content-post"><?php echo substr($full['Page']['description'],0,200);?></div>
+                <div class="content-post"><?php echo substr(preg_replace("/<img[^>]+\>/i", "(image) ", $full['Page']['description']),0,200);?></div>
                 <a class="view-more" href="<?php echo $this->webroot."pages/full-ship-charters";?>"> view more </a>
             </div>
             <div class="post-block">
             	<div class="title-post"> CSI Insentive</div>
-                <div class="content-post"><?php echo substr($csi['Page']['description'],0,200);?></div>
-                <a class="view-more" href="<?php echo $this->webroot."pages/csi-insentive";?>"> view more </a>
+                <div class="content-post"><?php echo substr( preg_replace("/<img[^>]+\>/i", "", $csi['Page']['description']),0,200);?></div>
+                <a class="view-more" href="<?php echo $this->webroot."pages/csi";?>"> view more </a>
             </div>
         </div><!--post-block-->
     </div><!--left-block-conten-->
@@ -61,7 +61,7 @@
 			RoyalMeetingsandIncentives@rccl.com
             </div>
             </div>
-            <a href="#" class="req_quote">Request a Quote >></a>
+            <a href="<?php echo $this->webroot."requests";?>" class="req_quote">Request a Quote >></a>
         </div><!--book-event-block-->
         
         		<div class="lates-news-wrap">
@@ -114,12 +114,13 @@
                             	<label> Largest meeting rooms (seats) </label>
                                 <input type="text">
                             </div>
-                       </div> <!-- sec_block -->
+                       </div> 
                        <div class="submit">
                        	<input type="button" value="search >>"/>
                         <a href="#" class="advance"> Advance search </a>
                        </div>
                     </form>
+                    <!--<iframe src="http://smartsitesa.cruisefactory.net/specials/searchupdate?__ajax=true&smartsiteid=179" frameborder="0" border="0" width="290" height="402"></iframe>-->
                 </div>
     	
     </div>

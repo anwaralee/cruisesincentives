@@ -36,6 +36,10 @@
 		float: left;
 		width: 418px;
 	}
+    .left-block-content1 {
+		float: left;
+		width: 418px;
+	}
 
 	.map > img {
 		width: 100%;
@@ -185,6 +189,10 @@
 		padding-left: 0;
 	}
 	.left-block-content {
+		width: 100%;
+		margin-top: 20px;
+	}
+    .left-block-content1 {
 		width: 100%;
 		margin-top: 20px;
 	}
@@ -428,6 +436,9 @@
 	}
 
 	.csi.left-block-content img {
+		width: 100%;
+	}
+    .csi.left-block-content1 img {
 		width: 100%;
 	}
 	.siderbar-title{

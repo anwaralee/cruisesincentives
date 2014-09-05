@@ -146,7 +146,7 @@ class AdminController extends AppController
                 foreach($_POST as $k=>$val)
                 {
                     $this->Destination->saveField($k,$val);
-                    if($k == 'youtube_link')
+                    if($k == 'youtube_link' && $val != "")
                     {
                         $url = $val;
                         parse_str( parse_url( $url, PHP_URL_QUERY ) );

@@ -30,9 +30,6 @@ App::uses('AppController', 'Controller');
  */
 class PagesController extends AppController {
     var $components = array('Email');
-
-
-
     
     
 
@@ -41,7 +38,8 @@ class PagesController extends AppController {
         $this->set('home',$this->Page->findBySlug('home'));
         $this->set('events',$this->Page->findBySlug('corporate-events'));
         $this->set('full',$this->Page->findBySlug('full-ship-charters'));
-        $this->set('csi',$this->Page->findBySlug('csi-insentive'));
+        $this->set('csi',$this->Page->findBySlug('csi'));
+        
         
            
     }
@@ -49,20 +47,39 @@ class PagesController extends AppController {
     {
         $q = $this->Page->findBySlug($slug);
         $this->set('model',$q);
+        $this->loadModel('Image');
+        $this->set('images', $this->Image->find('all',array('conditions'=>array('type'=>'pages','type_id'=>$q['Page']['id']),'limit'=>3,'order'=>'rand()')));
+        $this->set('seoTitle',$q['Page']['seo_title']);
+        $this->set('seoDesc',$q['Page']['seo_desc']);
     }
     
     
     function why_cruise()
-
     {
         $q = $this->Page->findBySlug('why-cruises');
         $this->set('model',$q);
+        $this->loadModel('Image');
+        $this->set('images', $this->Image->find('all',array('conditions'=>array('type'=>'pages','type_id'=>$q['Page']['id']),'limit'=>3,'order'=>'rand()')));
+        $this->set('seoTitle',$q['Page']['seo_title']);
+        $this->set('seoDesc',$q['Page']['seo_desc']);
     }
     
+    function cruise_search()
+    {
+        $q = $this->Page->findBySlug('cruise-search');
+        $this->set('model',$q);
+        $this->loadModel('Image');
+        $this->set('images', $this->Image->find('all',array('conditions'=>array('type'=>'pages','type_id'=>$q['Page']['id']),'limit'=>3,'order'=>'rand()')));
+        $this->set('seoTitle',$q['Page']['seo_title']);
+        $this->set('seoDesc',$q['Page']['seo_desc']);
+    }
     function csi($slug)
     {
         $this->loadModel('Csi');
-        $this->set('model',$this->Csi->findBySlug($slug));
+        $q = $this->Csi->findBySlug($slug);
+        $this->set('model',$q);
+        $this->set('seoTitle',$q['Csi']['title']);
+        $this->set('seoDesc',substr($q['Csi']['desc'],0,250));
     }
     function contact()
     {

@@ -26,15 +26,7 @@ function initiate_ajax_upload(button_id){
             onSubmit : function(file, ext){
               // change button text, when user selects file
                 
-               	if(ext == "jpg" || ext == "GIF" || ext =="gif" || ext =="JPG" || ext =="png" || ext =="JPEG" || ext =="jepg" || ext== "PNG")		
-                {
-                    return true;
-                }
-                else
-                {
-                       alert("Invalid Image file");
-                    return false;
-                }
+               	
                 button.text('Uploading');
 	
                 // If you want to allow uploading only 1 file at time,
@@ -50,20 +42,38 @@ function initiate_ajax_upload(button_id){
                         button.text('Uploading');				
                     }
                 }, 200);
+                if(ext == "jpg" || ext == "GIF" || ext =="gif" || ext =="JPG" || ext =="png" || ext =="JPEG" || ext =="jepg" || ext== "PNG")		
+                {
+                    return true;
+                }
+                else
+                {
+                       alert("Invalid Image file");
+                       
+                       window.clearInterval(interval);
+                       button.text('+ Add Images');
+                       this.enable();
+                    return false;
+                }
+                
+                
             },
             onComplete: function(file, response){
                 //alert(button_id);
                     
                 //alert(response);
                     button.text('+ Add Images');
+                    window.clearInterval(interval);
+                    this.enable();
                     if( response=='images')
-                    {   alert('Invalid Image Dimension.Minmum image dimension: 193X163')
+                    {   alert('Invalid Image Dimension.Minmum image dimension: 193X163');
+                        
                         return false;
                     }
-                    window.clearInterval(interval);
+                    
 					
                     // enable upload button
-                    this.enable();
+                    
                     $('.thumbs').prepend('<div style="float:left; margin-right:10px;margin-bottom:5px;"><img src="<?php echo $this->webroot.'doc';?>/temp/thumb/'+response+'" style="display: block;margin-bottom: 5px;height:110px;" /><input type="hidden" name="images[]" value="'+response+'"/><br/><a href="javascript:void(0);" class="btn btn-danger remove" title="'+response+'">Remove</a></div>');
                     
                                    

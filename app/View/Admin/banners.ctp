@@ -146,15 +146,7 @@ function initiate_ajax_upload(button_id){
                 // change button text, when user selects file
                			
                 button.text('Uploading');
-	           if(ext == "jpg" || ext == "GIF" || ext =="gif" || ext =="JPG" || ext =="png" || ext =="JPEG" || ext =="jepg" || ext== "PNG")		
-                {
-                    return true;
-                }
-                else
-                {
-                       alert("Invalid Image file");
-                    return false;
-                }
+	           
                 // If you want to allow uploading only 1 file at time,
                 // you can disable upload button
                 this.disable();
@@ -168,6 +160,18 @@ function initiate_ajax_upload(button_id){
                         button.text('Uploading');				
                     }
                 }, 200);
+                if(ext == "jpg" || ext == "GIF" || ext =="gif" || ext =="JPG" || ext =="png" || ext =="JPEG" || ext =="jepg" || ext== "PNG")		
+                {
+                    return true;
+                }
+                else
+                {
+                       alert("Invalid Image file");
+                       window.clearInterval(interval);
+                       button.text('Upload');
+                       this.enable();
+                    return false;
+                }
             },
             onComplete: function(file, response){
                 
@@ -177,14 +181,16 @@ function initiate_ajax_upload(button_id){
                 $('.newr').show();//alert(id);
                 //alert(response);
                     button.text('Upload');
+                    window.clearInterval(interval);
+                    this.enable();
                     if( response=='')
                     {   alert('Invalid Image Dimension.Minmum image dimension: 300X180')
                         return false;
                     }
-                    window.clearInterval(interval);
+                    
 					
                     // enable upload button
-                    this.enable();
+                    
                     
                     $('#savecrop'+id).show();
                     $('.crop').show();

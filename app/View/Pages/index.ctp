@@ -45,12 +45,24 @@
     </div><!-- left sidebar -->
     <div class="right-content why-cruise-content rightcontent clearfix">
     <h2 class="page_title"><?php echo ucfirst($model['Page']['title']);?></h2>
+    <br />
+    <?php if(count($images)>0){?> 
+   	    <div class="img-wrap clearfix">
+        <?php foreach($images as $image){?>
+        	<?php if(file_exists(APP."webroot/doc/thumb1/".$image['Image']['file'])){?>
+        	<div class="img-block">
+            <img src="<?php echo $this->webroot."doc/thumb1/".$image['Image']['file'];?>"/>
+            </div>
+            <?php }?>
+        <?php }?>
+        </div>
+        <?php }?>
     <?php echo $model['Page']['description'];?>
     <?php if($this->params['pass'][0]=='csi'){?>
       <div class="csi"><a class="register" href="#"> Register now >> </a></div> 
      <?php }?> 
         <?php if($model['Page']['pdf']!= "" && file_exists(APP."webroot/pdf/".$model['Page']['pdf'])){?>
-        <div class="pdf-part"> Click here to view the <a href="#" class="pdf-link"> <?php echo ucfirst($model['Page']['title']);?> </a> </div>
+        <div class="pdf-part"> Click here to view the <a href="https://docs.google.com/gview?url=<?php echo $this->webroot."pdf/".$model['Page']['pdf'];?>" class="pdf-link"> <?php echo ucfirst($model['Page']['title']);?> </a> </div>
         <?php } ?>
         
         

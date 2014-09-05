@@ -5,7 +5,15 @@
         <div class="call-info-block"> <span class="call-place">North-America</span> <span class="call-no"> 800-529-6916 </span> <span class="call-place">Outside of North-America</span> <span class="call-no"> +1 305-539-6918 </span> </div>
       </div>
     </div>
-    <div class="csi left-block-content"> <a href="csi.html"> <img src="<?php echo $this->webroot;?>images/csi.png"> </a> </div>
+    <?php $banners = $this->requestAction('destinations/getbanners');
+                foreach($banners as $banner)
+                {?>
+                <div class="csi left-block-content">
+                   <a href="<?php if($banner['Banner']['link']!="")echo $banner['Banner']['link'];else echo "javascript:void(0);";?>" target="<?php if($banner['Banner']['target']=='1' && $banner['Banner']['link']!="")echo "_blank";?>"><img src="<?php echo $this->webroot.'doc/thumb/'.$banner['Banner']['file'];?>" /></a> 
+                </div>
+            <?php
+                }
+            ?>
   </div>
   <!-- left sidebar -->
   <div class="right-content cruise-international-content resource-download clearfix">

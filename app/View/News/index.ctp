@@ -63,7 +63,7 @@
         <img src="<?php echo $this->webroot."doc/thumb1/".$image['Image']['file'];?>"/>
         </div>
     <?php }?>
-    <br/> 
+    <div class="clear"></div> 
     <?php }?>
         <?php echo $model['News']['desc'];?>
     

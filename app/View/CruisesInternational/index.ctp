@@ -40,18 +40,26 @@
          </div>
        </div>
        
-       <div class="csi left-block-content">
-         <a href="<?php echo $this->webroot;?>pages/csi"> <img src="<?php echo $this->webroot;?>images/csi.png"> </a>
-       </div>
+       <?php $banners = $this->requestAction('destinations/getbanners');
+                foreach($banners as $banner)
+                {?>
+                <div class="csi left-block-content">
+                   <a href="<?php if($banner['Banner']['link']!="")echo $banner['Banner']['link'];else echo "javascript:void(0);";?>" target="<?php if($banner['Banner']['target']=='1' && $banner['Banner']['link']!="")echo "_blank";?>"><img src="<?php echo $this->webroot.'doc/thumb/'.$banner['Banner']['file'];?>" /></a> 
+                </div>
+            <?php
+                }
+            ?>
      </div><!-- left sidebar -->
      <div class="right-content cruise-international-content clearfix">
       <h2 class="page_title"><?php echo ucwords($model['Cruiseline']['title']);?></h2>
       <?php if(count($images)>0){?> 
    	    <div class="img-wrap clearfix">
         <?php foreach($images as $image){?>
+        	<?php if(file_exists(APP."webroot/doc/thumb1/".$image['Image']['file'])){?>
         	<div class="img-block">
             <img src="<?php echo $this->webroot."doc/thumb1/".$image['Image']['file'];?>"/>
             </div>
+            <?php }?>
         <?php }?>
         </div>
         <?php }?>

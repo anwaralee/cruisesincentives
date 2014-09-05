@@ -49,7 +49,7 @@ $(function(){
 <div id="main" class="clearfix"> 
 		<div class="left-sidebar why-cruise-sidebar clearfix">
         <div class="request left-content-block">
-        	<a href="#"> <img src="images/request.png"> </a>
+        	<a href="<?php echo $this->webroot;?>requests"> <img src="<?php echo $this->webroot;?>images/request.png"> </a>
         </div>
         <div class="siderbar-title">
         	Destinations
@@ -70,7 +70,7 @@ $(function(){
                 </div>
             </div>
         <div class="call-us-wrap left-content-block">
-        	<img src="images/call-us.png">
+        	<img src="<?php echo $this->webroot;?>images/call-us.png">
             <div class="call-info">
             	<div class="call-info-block">
                 	<span class="call-place">North-America</span>
@@ -81,12 +81,11 @@ $(function(){
             </div>
         </div>
         
-        	
             <?php $banners = $this->requestAction('destinations/getbanners');
                 foreach($banners as $banner)
                 {?>
                 <div class="csi left-block-content">
-                   <a href="<?php echo $banner['Banner']['link'];?>" target="<?php if($banner['Banner']['target']=='1')echo "_blank";?>"><img src="<?php echo $this->webroot.'doc/thumb/'.$banner['Banner']['file'];?>" /></a> 
+                   <a href="<?php if($banner['Banner']['link']!="")echo $banner['Banner']['link'];else echo "javascript:void(0);";?>" target="<?php if($banner['Banner']['target']=='1' && $banner['Banner']['link']!="")echo "_blank";?>"><img src="<?php echo $this->webroot.'doc/thumb/'.$banner['Banner']['file'];?>" /></a> 
                 </div>
             <?php
                 }
@@ -115,11 +114,13 @@ $(function(){
         <div class="destination-content">
         <h2 class="page_title"> <?php echo ucfirst($de['Destination']['title']);?> </h2>
         <?php echo $de['Destination']['desc'];?>
+        <?php $highlights = $highlight->find('all',array('conditions'=>array('destination_id'=>$de['Destination']['id'])));
+        if(count($highlights)>0){?>
         <div class="highlights-wrap">
         	<div class="highligt-title"> Highlight </div>
                 <ul>
 
-                <?php $highlights = $highlight->find('all',array('conditions'=>array('destination_id'=>$de['Destination']['id'])));
+                <?php 
                 foreach($highlights as $h)
                 {?>
                     <li><?php echo $h['Highlight']['desc'];?></li>
@@ -128,9 +129,11 @@ $(function(){
                 ?>
                 </ul>
         </div>
+        <?php }?>
         </div>
     </div>
  <?php
+ unset($highlights);
  }  ?> 
  </div>   
 <!--bottom-block-destination-->

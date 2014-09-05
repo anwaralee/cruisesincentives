@@ -67,7 +67,7 @@ function initiate_ajax_upload(button_id){
                 
                	if(ext == "pdf")		
                 {
-                    return true;
+                    //return true;
                 }
                 else
                 {
@@ -93,10 +93,6 @@ function initiate_ajax_upload(button_id){
             onComplete: function(file, response){
                
                     button.text('Upload Pdf');
-                    if( response=='news')
-                    {   alert('Invalid Image Dimension.Minmum image dimension: 600X250')
-                        return false;
-                    }
                     window.clearInterval(interval);
 					
                     // enable upload button

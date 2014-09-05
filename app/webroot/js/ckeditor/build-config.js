@@ -47,6 +47,8 @@ var CKBUILDER_CONFIG = {
 		'a11yhelp' : 1,
 		'about' : 1,
 		'basicstyles' : 1,
+        'colorbutton' : 1,
+		'colordialog' : 1,
 		'blockquote' : 1,
 		'clipboard' : 1,
 		'contextmenu' : 1,
