@@ -58,9 +58,10 @@
          <?php }?>  
         </div>
         <div class="news">
-            <strong><?php echo $new['News']['title'];?></strong>
-            <p><span><?php echo date('d F Y',time($new['News']['added_on']));?></span>
-            <?php echo substr($new['News']['desc'],0,250);?>
+            <h3><a href="<?php echo $this->webroot;?>news/<?php echo $new['News']['slug'];?>"><?php echo $new['News']['title'];?></a></h3>
+            <span><?php echo date('d F Y',time($new['News']['added_on']));?></span>
+            <p>
+            <?php echo strip_tags(substr($new['News']['desc'],0,150)).'...';?>
             </p>
         </div>
         <div class="clearfix"></div>
