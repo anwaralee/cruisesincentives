@@ -1143,7 +1143,7 @@ class AdminController extends AppController
             {
                 $email = $_POST['email'];
                 $emails = new CakeEmail();
-                $emails->from(array('noreply@cruises.co.za'=>'CSI'));
+                $emails->from(array('noreply@cruisesgroupsincentives.co.za'=>'CSI'));
             
                 $emails->emailFormat('html');
                 
@@ -1165,7 +1165,12 @@ class AdminController extends AppController
             $this->set('news',$q2);
             
             $news = $q2['Newsletter']['news_id'];
-            
+            if($page=='send')
+            {
+                $this->loadModel('Subscriber');
+                $this->set('subscriber',$this->Subscriber->find('all',array('order'=>'email')));
+                $this->render('send_newsletter');
+            }
             
             
             
@@ -1190,7 +1195,67 @@ class AdminController extends AppController
                 $this->render('newsletter_test');
             }
         }
+        function newsletter_send($id)
+        {
+            App::uses('CakeEmail', 'Network/Email');
+            if(isset($_POST['s']) && $_POST['s'])
+            {
+                foreach($_POST['s'] as $s)
+                {
+                    if($s){
+                    $email = $s;
+                    $emails = new CakeEmail();
+                    $emails->from(array('noreply@cruisesgroupsincentives.co.za'=>'CSI'));
+                
+                    $emails->emailFormat('html');
+                    
+                    $emails->subject('CSI - Newsletter');
+                    
+                    
+                    $message=file_get_contents($base_url.'/newsletters/preview/'.$id);
+                    $emails->to($email);
+                    $emails->send($message);
+                    $this->Session->setFlash('Newsletter Succesfully Sent');
+                    unset($emails);
+                    }
+                    
+                }
+            }
+            
+            $this->redirect('newsletters/'.$id.'/send');
+        }
         
+        function newsletter_sendall($id)
+        {
+            App::uses('CakeEmail', 'Network/Email');
+            $this->loadModel('Subscriber');
+            $q = $this->Subscriber->find('all');
+            if($q)
+            {
+                foreach($q as $s)
+                {
+                    if($s){
+                    $email = $s['Subscriber']['email'];
+                    $emails = new CakeEmail();
+                    $emails->from(array('noreply@cruisesgroupsincentives.co.za'=>'CSI'));
+                
+                    $emails->emailFormat('html');
+                    
+                    $emails->subject('CSI - Newsletter');
+                    
+                    
+                    $message=file_get_contents($base_url.'/newsletters/preview/'.$id);
+                    $emails->to($email);
+                    $emails->send($message);
+                    $this->Session->setFlash('Newsletter Succesfully Sent');
+                    unset($emails);
+                    }
+                    
+                }
+            }
+            
+            $this->redirect('newsletters/'.$id.'/send');
+        }
         function loadnews()
         {
             $this->layout = 'blank';
