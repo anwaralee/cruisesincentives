@@ -68,7 +68,7 @@
         <div class="clearfix"></div>
     </div>
     <?php }?>
-   
+   <?php if(count($newsz)>10){?>
    <div class="pagination">
    <ul>
    
@@ -77,4 +77,5 @@
    <?php echo $this->Paginator->next(">>", array('tag' => 'li'));?>
    </ul>
    </div>
+   <?php }?>
     </div><!-- right content -->

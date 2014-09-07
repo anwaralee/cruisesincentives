@@ -7,10 +7,11 @@ class NewsController extends AppController{
         $this->loadModel('Image');
         $this->Paginator->settings = array(
                 'order' => array('News.id' => 'desc'),
-                'limit' => 2
+                'limit' => 10
             );
         //$this->set('strain',$this->Paginator->paginate('Strain'));
         $this->set('news',$this->Paginator->paginate('News'));
+        $this->set('newsz',$this->News->find('all'));
         $this->set('image',$this->Image);
         
     }
