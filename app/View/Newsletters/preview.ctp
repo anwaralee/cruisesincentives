@@ -38,7 +38,7 @@ if($news)
         <div style="float: right;width:400px">
             <a href="<?php echo $base_url;?>/news/<?php echo $n['News']['slug'];?>" style="font-weight:bold;text-decoration:none;display:block;color:#2B579A;font-size:14px;padding-bottom:5px;"><?php echo $n['News']['title'];?></a>
             <em style="font-size: 12px;color:#777;"><?php echo $n['News']['added_on'];?></em>
-            <div style="color: #555;line-height:25px;font-size:14px;"><em><?php echo substr($n['News']['desc'],0,120).'...';?></em></div>
+            <div style="color: #555;line-height:25px;font-size:14px;"><em><?php echo strip_tags(substr($n['News']['desc'],0,120)).'...';?></em></div>
         </div>
         <div style="clear: both;"></div>
         </div>

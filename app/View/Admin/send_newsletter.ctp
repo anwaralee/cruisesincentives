@@ -52,7 +52,7 @@ foreach($nl as $n)
                         echo "<tr>";
                     }
                     ?>
-                    <td><input type="checkbox" name="s[]" value="<?php echo $s['Subscriber']['email'];?>" /> <?php echo $s['Subscriber']['email'];?></td>
+                    <td><input style="margin-top: 0;" type="checkbox" name="s[]" value="<?php echo $s['Subscriber']['email'];?>" /> <?php echo $s['Subscriber']['email'];?></td>
                     <?php
                     if(($i)%3==0)
                     {

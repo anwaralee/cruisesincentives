@@ -95,7 +95,7 @@ $(function(){
         
         var button = $('#'+button_id), interval;
         new AjaxUpload(button,{
-            action: '/cruisesincentives/admin/upload', 
+            action: '<?php echo $this->webroot?>admin/upload', 
              
             name: 'file',
             onSubmit : function(file, ext){
