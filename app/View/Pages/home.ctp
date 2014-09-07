@@ -79,7 +79,15 @@
                         <!--<span style="margin-left: 200px;"><a href="<?php echo $this->webroot;?>news/all">View All</a></span>-->
                 </div>
                 
-                
+                <div class="cruse-search-wrap">
+                <div class="crush-title">Join Our Newsletter</div>
+                    <div class="first-block clearfix">
+                        <label>Deals and Specials - Be the first to Know!</label>
+                        <input type="email" name="emailz" id="emailz" value="" placeholder="Your Email Address" />
+                        <input type="button" class="btn btn-info" value="Join"/>
+                        
+                    </div>
+                </div>
                 <div class="cruse-search-wrap">
                 	<div class="crush-title"> CRUISE SEARCH </div>
                     <form method="post" class="cruse-from">

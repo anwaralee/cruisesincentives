@@ -69,8 +69,9 @@
    
    <div class="pagination">
    <ul>
+   
    <?php echo $this->Paginator->prev("<<", array('tag' => 'li'));?>
-   <?php echo $this->Paginator->numbers(array('tag'=>'li','first' => 2, 'last' => 2));?>
+   <?php echo $this->Paginator->numbers(array('tag'=>'li','first' => 2, 'last' => 2,'separator'=>''));?>
    <?php echo $this->Paginator->next(">>", array('tag' => 'li'));?>
    </ul>
    </div>
