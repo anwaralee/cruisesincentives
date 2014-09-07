@@ -17,7 +17,7 @@
 		
         <script>
         $(function(){
-           $('#flashMessage').fadeOut(3000,'linear'); 
+           $('#flashMessage').fadeOut(10000,'linear'); 
            
            var h1 = $('.sidebar').height(); 
            var h2 = $('.contentRight').height();
