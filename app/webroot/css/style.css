@@ -324,9 +324,10 @@
 }
 
 .cruse-from {
-    background: none repeat scroll 0 0 #e5eef5;
+     background: none repeat scroll 0 0 #e5eef5;
     line-height: 1.7;
-    padding: 10px 23px 0 18px;
+    margin-bottom: 10px;
+    padding: 10px 23px 10px 18px;
 }
 
 .req {
