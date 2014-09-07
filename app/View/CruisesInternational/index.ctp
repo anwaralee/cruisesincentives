@@ -4,7 +4,7 @@
         </div>
         <div class="side-menu left-content-block">
          <div class="parent-list-wrap">
-           <ul>
+           <ul class="newsletters">
            <?php foreach($cruises as $k=>$cruise){?>
              <li class="parent-list"> <a href="<?php echo $this->webroot;?>cruisesinternational/<?php echo $cruise['Cruiseline']['slug'];?>"> <?php echo ucfirst($cruise['Cruiseline']['title']);?> </a>
                 <?php $childs = $cruiseline->find('all',array('conditions'=>array('parent_id'=>$cruise['Cruiseline']['id'])));

@@ -27,6 +27,12 @@ if($news)
             <img src="<?php echo $base_url;?>/doc/thumb1/<?php echo $q['Image']['file'];?>" style="width: 160px;" />
         <?php
         }
+        else
+        {
+            ?>
+            <img src="<?php echo $base_url;?>/images/default_big.png" style="width: 160px;" />
+            <?php
+        }
         ?>    
         </div>
         <div style="float: right;width:400px">

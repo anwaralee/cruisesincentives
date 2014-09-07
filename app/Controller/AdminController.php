@@ -1198,6 +1198,10 @@ class AdminController extends AppController
         function newsletter_send($id)
         {
             App::uses('CakeEmail', 'Network/Email');
+            $whole =  Router::url(null,true);
+                $base_url_arr = explode('/admin',$whole);
+                $base_url = $base_url_arr['0'];
+                $this->set('base_url',$base_url);
             if(isset($_POST['s']) && $_POST['s'])
             {
                 foreach($_POST['s'] as $s)
@@ -1227,7 +1231,12 @@ class AdminController extends AppController
         
         function newsletter_sendall($id)
         {
+            
             App::uses('CakeEmail', 'Network/Email');
+            $whole =  Router::url(null,true);
+                $base_url_arr = explode('/admin',$whole);
+                $base_url = $base_url_arr['0'];
+                $this->set('base_url',$base_url);
             $this->loadModel('Subscriber');
             $q = $this->Subscriber->find('all');
             if($q)

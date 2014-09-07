@@ -831,9 +831,10 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     display: block;
     font-size: 14px;
     font-weight: 700;
-    line-height: 35px;
+    line-height: 20px;
     text-decoration: none;
     text-transform: capitalize;
+    padding:7px;
 }
 
 .parent-list > a:hover,.parent-list.active > a {
