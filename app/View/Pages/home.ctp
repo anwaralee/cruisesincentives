@@ -79,14 +79,19 @@
                         <!--<span style="margin-left: 200px;"><a href="<?php echo $this->webroot;?>news/all">View All</a></span>-->
                 </div>
                 
-                <div class="cruse-search-wrap">
+                <div class="cruse-search-wrap clearfix">
                 <div class="crush-title">Join Our Newsletter</div>
-                    <div class="first-block clearfix">
+                <form method="post" class="cruse-from" >
+                    <div class="clearfix">
                         <label>Deals and Specials - Be the first to Know!</label>
-                        <input type="email" name="emailz" id="emailz" value="" placeholder="Your Email Address" />
-                        <input type="button" class="btn btn-info" value="Join"/>
+                        <input type="text" name="emailz" id="emailz" value="" placeholder="Your Email Address" />
+                        <div class="newsletter_error"></div>
+                        <div class="submit">
+                        <input type="button"  value="Join" class="add_news"/>
+                        </div>
                         
                     </div>
+                </form>
                 </div>
                 <div class="cruse-search-wrap">
                 	<div class="crush-title"> CRUISE SEARCH </div>
@@ -132,3 +137,43 @@
                 </div>
     	
     </div>
+    <script>
+    function validateEmail1(email){ 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+    } 
+    $(function(){
+        $('.add_news').click(function(){
+            $('.newsletter_error').html("");
+            $('.newsletter_error').show();
+            var email = $('#emailz').val();
+            if(validateEmail1(email)){            
+            $.ajax({
+                url:"<?php echo $this->webroot;?>newsletters/add/",
+                data:'email='+email,
+                type:'post',
+                success:function(msg)
+                {
+                    
+                    if(msg==1)
+                    {
+                        $('.newsletter_error').html("Sorry. The email provided has already been subscribed."); 
+                         $('#emailz').val("");  
+                    }
+                    else
+                    {
+                        $('.newsletter_error').html("Thankyou, Your email has been subscribed."); 
+                         $('#emailz').val(""); 
+                        
+                    }
+                }
+            });
+            }
+            else
+            {
+                $('.newsletter_error').html("Invalid Email");
+            }
+            $('.newsletter_error').fadeOut(3000,'linear');
+        })
+    })
+    </script>

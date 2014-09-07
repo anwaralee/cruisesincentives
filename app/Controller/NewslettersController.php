@@ -19,6 +19,27 @@ class NewslettersController extends AppController
         $this->set('news','');
     }
     
+    function add()
+    {
+        if(isset($_POST))
+        {
+        $email = $_POST['email'];
+        $this->loadModel('Subscriber');
+        if($this->Subscriber->findByEmail($email))
+        {
+            echo '1';
+        }
+        else
+        {
+            $this->Subscriber->create();
+            $this->Subscriber->save(array('email'=>$email));
+            echo '0'; 
+        }}
+            
+        die();
+        
+    }
+    
     
 }
 ?>
