@@ -66,17 +66,23 @@
         
         		<div class="lates-news-wrap">
                 	<div class="news-title">LATEST NEWS & DEALS </div>
+                    <?php $news = $this->requestAction('news/getnews');
+                    if(count($news)>0){?>
                     	<ul class="news-list">
-                        <?php $news = $this->requestAction('news/getnews'); 
+                        <?php 
+                        
                             foreach($news as $n)
-                            {?>
+                            {
+                                ?>
                             <li><a href="<?php echo $this->webroot."news/".$n['News']['slug'];?>"><?php echo $n['News']['title'];?></a></li>
                             <?php
                             }
                         ?>
                         	
                         </ul>
-                        <!--<span style="margin-left: 200px;"><a href="<?php echo $this->webroot;?>news/all">View All</a></span>-->
+                        
+                        <span style="margin-left: 200px;"><a href="<?php echo $this->webroot;?>news/all">View All</a></span>
+                        <?php }?>
                 </div>
                 
                 <div class="cruse-search-wrap clearfix">
