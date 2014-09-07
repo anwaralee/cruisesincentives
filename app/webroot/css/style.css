@@ -129,6 +129,9 @@
 .main-nav li:last-child a {
     padding: 0 20px 0 40px;
 }
+.main-nav li .active{
+    background:#6999c1;
+}
 @media screen and (-webkit-min-device-pixel-ratio:0) {
  .main-nav li:first-child a {
     padding: 0 27px;
@@ -283,6 +286,7 @@
     margin-bottom: 20px;
     min-height: 176px;
     padding: 15px 10px;
+    height:200px;
 }
 
 .post-block .view-more {
@@ -443,68 +447,67 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     -moz-transition:background 1s ease 0s;
     -webkit-transition:background 1s ease 0s;
 }
-
 .asia {
     bottom: 170px;
-    right: 90px;
+    right: 165px;
 }
-
 .europe {
-    right: 260px;
-    top: 60px;
+    right: 220px;
+    top: 68px;
 }
 .south-amerivca {
-    bottom: 110px;
-    left: 130px;
+    bottom: 75px;
+    left: 170px;
 }
-.north-america {
-    bottom: 210px;
+.hawaii {
+    bottom: 155px;
     left: 30px;
 }
 .africa {
-    bottom: 40px;
+    bottom: 110px;
     left: 300px;
 }
-.a {
-    right: 290px;
-    top:100px;
+.alaska {
+    left: 30px;
+    top: 55px;
 }
-.b {
-    right: 315px;
-    top: 117px;
+.estonia {
+    right: 279px;
+    top: 95px;
 }
-.c {
-    right: 365px;
-    top: 117px;
+.dubai {
+    right: 237px;
+    top: 150px;
 }
-.d {
-    left: 163px;
-    top: 87px;
+.canada {
+    left: 79px;
+    top: 72px;
 }
-.e {
-    left: 150px;
+.bahamas {
+    left: 148px;
     top: 140px;
 }
-.f {
+.bermuda {
     left: 163px;
-    top: 170px;
+    top: 115px;
 }
-.g {
-    left: 45px;
+.caribbean {
+    left: 120px;
+    top: 158px;
+}
+.indian {
+    right: 222px;
+    top: 215px;
+}
+.australia {
+    right: 113px;
+    top: 224px;
+}
+.panama {
+    left: 132px;
     top: 185px;
 }
-.h {
-    right: 175px;
-    top: 227px;
-}
-.i {
-    right: 95px;
-    top: 217px;
-}
-.j {
-    right: 225px;
-    top: 147px;
-}
+.parent-list:hover .sub-menu-sidebar{display:block}
 .destination-point > ul li:hover a {
     display: block;
     opacity: 1;
@@ -529,9 +532,9 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     transition: all 2s ease 0s;
     -webkit-transition: all 2s ease 0s;
     -moz-transition: all 2s ease 0s;
-    min-width: 100px;
-    max-width:200px;
-    width:170px;
+    min-width: 130px;
+    max-width:230px;
+    width:205px;
 }
 
 .destination-point > ul li a .name {
@@ -539,7 +542,7 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     color: #ffffff;
     display: block;
     float: left;
-    font-size: 13.5px;
+    font-size: 12.5px;
     padding: 0 20px;
     text-transform: uppercase;
     height: 20px;
@@ -554,6 +557,10 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     height: 20px;
     line-height: 20px;
     padding: 0 5px;
+}
+
+.view-video.modalButton {
+    cursor: pointer;
 }
 
 /* registration form design */
@@ -1279,6 +1286,20 @@ button, html input[type="button"], input[type="reset"], input[type="submit"] {
     padding-right: 24px;
     width: 584px;
 }
+
+.items .img img{
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #e5e5e5;
+    height: 90px;
+    padding: 5px;
+    width: 90px;
+    
+}
+.items .img{
+    float: left;
+    margin-right: 10px;
+}
+
 /* CSS*/
 .rightcontent h2{color: #164a8b;
     font-size: 17px;

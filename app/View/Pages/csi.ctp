@@ -10,9 +10,10 @@
                 	<ul>
                     <?php $lists = $this->requestAction('news/getcsi');
                     //var_dump($lists);
+                        
                         foreach($lists as $list)
                         {?>
-                            <li class="parent-list"> <a href="<?php echo $this->webroot."csi/".$list['Csi']['title'];?>"><?php echo ucwords($list['Csi']['title']);?> </a> </li>
+                            <li class="parent-list <?php if($this->params['pass'][0]==$list['Csi']['slug'])echo "active";?>"  > <a href="<?php echo $this->webroot."csi/".$list['Csi']['slug'];?>"><?php echo ucwords($list['Csi']['title']);?> </a> </li>
                    <?php
                         }
                     ?>

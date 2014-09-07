@@ -38,9 +38,15 @@
         </div>
         <?php if($this->params['pass'][0]!='csi')
         {?>
-        	<div class="csi left-block-content">
-            	<a href="<?php echo $this->webroot;?>pages/csi"> <img src="<?php echo $this->webroot;?>images/csi.png"> </a>
-            </div>
+        		<?php $banners = $this->requestAction('destinations/getbanners');
+                foreach($banners as $banner)
+                {?>
+                <div class="csi left-block-content">
+                   <a href="<?php if($banner['Banner']['link']!="")echo $banner['Banner']['link'];else echo "javascript:void(0);";?>" target="<?php if($banner['Banner']['target']=='1' && $banner['Banner']['link']!="")echo "_blank";?>"><img src="<?php echo $this->webroot.'doc/thumb/'.$banner['Banner']['file'];?>" /></a> 
+                </div>
+            <?php
+                }
+            ?>
          <?php }?>
     </div><!-- left sidebar -->
     <div class="right-content why-cruise-content rightcontent clearfix">

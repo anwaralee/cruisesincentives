@@ -63,7 +63,7 @@ $(function(){
                         
                         ?>
                             
-                            <li class="parent-list"> <a href="#<?php echo ucfirst($title);?>" class="scroll"> <?php echo ucfirst($destination['Destination']['title']);?> </a> </li> 
+                            <li class="parent-list"> <a href="#<?php echo $destination['Destination']['slug'];?>" class="scroll"> <?php echo ucfirst($destination['Destination']['title']);?> </a> </li> 
                     <?php }?>
                    
                     </ul>
@@ -106,7 +106,7 @@ $(function(){
     $title = str_replace(" ","_",$title);
                         
     ?>
-    <div class="destination-detail-wrap clearfix" id="<?php echo ucfirst($title);?>">
+    <div class="destination-detail-wrap clearfix" id="<?php echo $de['Destination']['slug'];?>">
         <div class="destination-img-block">
         	<img src="<?php echo $de['Destination']['thumb_img'];?>" width="190px" height="78px"/>
             <a class="view-video modalButton" data-toggle="modal" data-src="<?php echo $emb;?>" data-height=320 data-width=450 data-target=".modal-body">view video</a>
@@ -117,7 +117,7 @@ $(function(){
         <?php $highlights = $highlight->find('all',array('conditions'=>array('destination_id'=>$de['Destination']['id'])));
         if(count($highlights)>0){?>
         <div class="highlights-wrap">
-        	<div class="highligt-title"> Highlight </div>
+        	<div class="highligt-title"> Highlights </div>
                 <ul>
 
                 <?php 

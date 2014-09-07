@@ -3,21 +3,21 @@
         <div class="destination-point">
         	<img src="<?php echo $this->webroot;?>images/map.jpg">
             <ul>
-            	<li class="asia"> <a href="#" class="clearfix"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="europe"> <a href="#"><span class="name"> Europe </span> <span class="arrow">>></span> </a> </li>
-                <li class="south-amerivca"> <a href="#"><span class="name"> south-america </span><span class="arrow">>></span> </a> </li>
-                <li class="north-america"> <a href="#"><span class="name"> north-america </span> <span class="arrow">>></span> </a> </li>
-                <li class="africa"> <a href="#"><span class="name"> Africa </span> <span class="arrow">>></span> </a> </li>
-                <li class="a"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="b"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="c"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="d"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="e"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="f"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="g"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="h"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="i"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
-                <li class="j"> <a href="#"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
+            	<li class="asia"> <a href="<?php echo $this->webroot;?>destinations#Asia" class="clearfix"> <span class="name"> Asia </span> <span class="arrow">>></span> </a> </li>
+                <li class="europe"> <a href="<?php echo $this->webroot;?>destinations#Europe"><span class="name"> Europe </span> <span class="arrow">>></span> </a> </li>
+                <li class="south-amerivca"> <a href="<?php echo $this->webroot;?>destinations#South_America"><span class="name"> South America </span><span class="arrow">>></span> </a> </li>
+                <li class="hawaii"> <a href="<?php echo $this->webroot;?>destinations#Hawaii"><span class="name"> Hawaii </span> <span class="arrow">>></span> </a> </li>
+                <li class="africa"> <a href="<?php echo $this->webroot;?>destinations#Africa"><span class="name"> Africa </span> <span class="arrow">>></span> </a> </li>
+                <li class="alaska"> <a href="<?php echo $this->webroot;?>destinations#Alaska"> <span class="name"> Alaska </span> <span class="arrow">>></span> </a> </li>
+                <li class="estonia"> <a href="<?php echo $this->webroot;?>destinations#Estonia"> <span class="name"> Estonia </span> <span class="arrow">>></span> </a> </li>
+                <li class="dubai"> <a href="<?php echo $this->webroot;?>destinations#Dubai_Emirates"> <span class="name"> Dubai </span> <span class="arrow">>></span> </a> </li>
+                <li class="canada"> <a href="<?php echo $this->webroot;?>destinations#Canada_New_England"> <span class="name"> Canada </span> <span class="arrow">>></span> </a> </li>
+                <li class="bahamas"> <a href="<?php echo $this->webroot;?>destinations#Bahamas"> <span class="name"> Bahamas </span> <span class="arrow">>></span> </a> </li>
+                <li class="bermuda"> <a href="<?php echo $this->webroot;?>destinations#Bermuda"> <span class="name"> Bermuda </span> <span class="arrow">>></span> </a> </li>
+                <li class="caribbean"> <a href="<?php echo $this->webroot;?>destinations#Carribean"> <span class="name"> Carribean </span> <span class="arrow">>></span> </a> </li>
+                <li class="indian"> <a href="<?php echo $this->webroot;?>destinations#Indian_Ocean_Islands"> <span class="name"> Indian Ocean Islands </span> <span class="arrow">>></span> </a> </li>
+                <li class="australia"> <a href="<?php echo $this->webroot;?>destinations#Australia_Newzealand"> <span class="name">Australia </span> <span class="arrow">>></span> </a> </li>
+                <li class="panama"> <a href="<?php echo $this->webroot;?>destinations#Panama_Canal"> <span class="name"> Panama canal </span> <span class="arrow">>></span> </a> </li>
                 
         </div>
             <?php echo $home['Page']['description'];?>

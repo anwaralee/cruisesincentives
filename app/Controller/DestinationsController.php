@@ -8,7 +8,7 @@ class DestinationsController extends AppController {
         $this->set('page',$q);
         $this->loadModel('Highlight');
         $this->set('highlight',$this->Highlight);
-        $this->set('destinations',$this->Destination->find('all'));
+        $this->set('destinations',$this->Destination->find('all',array('order'=>'title')));
         $this->set('seoTitle',$q['Pages']['seo_title']);
         $this->set('seoDesc',$q['Pages']['seo_desc']);
         

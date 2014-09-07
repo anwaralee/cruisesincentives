@@ -156,10 +156,13 @@ class AdminController extends AppController
                 $this->Highlight->deleteAll(array('destination_id'=>$id));
                 foreach($_POST['highlight'] as $desc)
                 {
-                    $high['destination_id'] = $id;
-                    $high['desc'] =$desc;
-                    $this->Highlight->create();
-                    $this->Highlight->save($high);
+                    if($dest!="")
+                    {
+                        $high['destination_id'] = $id;
+                        $high['desc'] =$desc;
+                        $this->Highlight->create();
+                        $this->Highlight->save($high);
+                    }
                 }
                 $this->Session->setFlash("Destination Updated");
                 $this->redirect("");

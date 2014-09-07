@@ -1,9 +1,17 @@
 <?php
 class NewsController extends AppController{
     
+    public $components = array('Paginator');
     function all()
     {
-        $this->set('news',$this->News->find('all'));
+        $this->loadModel('Image');
+        $this->Paginator->settings = array(
+                'order' => array('News.id' => 'desc'),
+                'limit' => 2
+            );
+        //$this->set('strain',$this->Paginator->paginate('Strain'));
+        $this->set('news',$this->Paginator->paginate('News'));
+        $this->set('image',$this->Image);
         
     }
     function index($slug)

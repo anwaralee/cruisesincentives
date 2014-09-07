@@ -34,6 +34,7 @@
     Router::connect("/news/getnews", array('controller' => 'news', 'action'=>'getnews'));
     Router::connect("/news/getcsi", array('controller' => 'news', 'action'=>'getcsi'));
     Router::connect("/news/all", array('controller' => 'news', 'action'=>'all'));
+    Router::connect("/news/all/*", array('controller' => 'news', 'action'=>'all'));
     Router::connect("/news/getnewsletter", array('controller' => 'news', 'action'=>'getnewsletter'));
     Router::connect("/news/*", array('controller' => 'news', 'action'=>'index'));
     Router::connect('/view/*', array('controller' => 'pages', 'action' => 'detail'));

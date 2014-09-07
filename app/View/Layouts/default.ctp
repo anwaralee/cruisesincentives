@@ -16,6 +16,7 @@
 <link type="text/css" rel="stylesheet" href="<?php echo $this->webroot;?>css/style.css"/>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->webroot;?>css/responsive.css"/>
 <link type="text/css" rel="stylesheet" href="<?php echo $this->webroot;?>css/slicknav.css"/>
+<link rel="icon"  type="image/png" href="<?php echo $this->webroot;?>images/favicon.ico" />
 
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
@@ -117,14 +118,14 @@
                     <?php }
                         else
                         {?>
-                        <li>Welcome <?php echo $this->Session->read('name');?></li>
-                         <li><a href="<?php echo $this->webroot;?>login/userlogout">Logout</a></li>
+                        <li style="margin-left: 1px;">Welcome <?php echo $this->Session->read('name');?></li>
+                         <li style="margin-left: 11px;"><a href="<?php echo $this->webroot;?>login/userlogout">Logout</a></li>
                          <input type="hidden" id="password1"/>  
                          <input type="hidden" id="password2"/>
                           
                     <?php
                         }?>
-                    <li class="search-list"> <a href="#" class="search"> Search this site </a> 
+                    <li class="search-list" <?php if($this->Session->read('user')){?>style="margin-left: 11px;" <?php }?> > <a href="#" class="search"> Search this site </a> 
                     <div class="search-form">	
                         <form method="post">
                         	<input type="search"/> 
@@ -137,13 +138,14 @@
      </div> <!-- top-head -->
      
   <nav class="main-nav">
-  	<ul class="clearfix">
-    	<li> <a href="<?php echo $this->webroot;?>"> Home </a> </li>
-        <li> <a href="<?php echo $this->webroot;?>pages/why_cruise"> Why cruise </a> </li>
-        <li> <a href="<?php echo $this->webroot;?>cruisesinternational"> Cruise International Experiences </a> </li>
-        <li> <a href="<?php echo $this->webroot;?>destinations"> Destinations </a> </li>
-        <li> <a href="<?php echo $this->webroot;?>resources"> Resource Center </a> </li>
-         <li> <a href="<?php echo $this->webroot;?>cruise_search"> Cruise Search </a> </li>
+  	<ul class="clearfix" <?php if($this->params['action']=='cruise_search')echo "style='background:#6999c1;'";?> >
+    
+    	<li> <a href="<?php echo $this->webroot;?>" class="<?php if($this->params['action']=='home')echo "active";?>"> Home </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>pages/why_cruise" class="<?php if($this->params['action']=='why_cruise')echo "active";?>"> Why cruise </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>cruisesinternational" class="<?php if($this->params['controller']=='cruisesinternational')echo "active";?>"> Cruise International Experiences </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>destinations" class="<?php if($this->params['controller']=='destinations')echo "active";?>"> Destinations </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>resources"  class="<?php if($this->params['controller']=='resources')echo "active";?>"> Resource Center </a> </li>
+        <li> <a href="<?php echo $this->webroot;?>cruise_search" class="<?php if($this->params['action']=='cruise_search')echo "active";?>"> Cruise Search </a> </li>
     </ul>
   </nav>
 </header> <!--  header -->
