@@ -4,7 +4,7 @@
         </div>
     		<div class="side-menu left-content-block">
             	<div class="parent-list-wrap">
-                <ul>
+                <ul class="newsletters">
                 <?php $newsletters = $this->requestAction('news/getnewsletter');
                       foreach($newsletters as $newsletter)
                       {?>
