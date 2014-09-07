@@ -56,7 +56,7 @@ $(function(){
         </div>
     		<div class="side-menu left-content-block">
             	<div class="parent-list-wrap">
-                	<ul>
+                	<ul class="newsletters">
                     <?php foreach($destinations as $destination){
                         $title = str_replace("/","_",$destination['Destination']['title']);
                         $title = str_replace(" ","_",$title);

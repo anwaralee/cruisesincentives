@@ -81,24 +81,11 @@
                         	
                         </ul>
                         
-                        <span style="margin-left: 200px;"><a href="<?php echo $this->webroot;?>news/all">View All</a></span>
+                        
                         <?php }?>
                 </div>
                 
-                <div class="cruse-search-wrap clearfix">
-                <div class="crush-title">Join Our Newsletter</div>
-                <form method="post" class="cruse-from" >
-                    <div class="clearfix">
-                        <label>Deals and Specials - Be the first to Know!</label>
-                        <input type="text" name="emailz" id="emailz" value="" placeholder="Your Email Address" />
-                        <div class="newsletter_error"></div>
-                        <div class="submit">
-                        <input type="button"  value="Join" class="add_news"/>
-                        </div>
-                        
-                    </div>
-                </form>
-                </div>
+                
                 <div class="cruse-search-wrap">
                 	<div class="crush-title"> CRUISE SEARCH </div>
                     <form method="post" class="cruse-from">
@@ -140,6 +127,20 @@
                        </div>
                     </form>
                     <!--<iframe src="http://smartsitesa.cruisefactory.net/specials/searchupdate?__ajax=true&smartsiteid=179" frameborder="0" border="0" width="290" height="402"></iframe>-->
+                </div>
+                <div class="cruse-search-wrap clearfix subscription">
+                <div class="crush-title">Subscribe For Newsletter</div>
+                <form method="post" class="cruse-from" >
+                    <div class="clearfix">
+                        <label>News/Deals - Be the first to Know!</label>
+                        <input type="text" name="emailz" id="emailz" value="" placeholder="Your Email Address" />
+                        <div class="newsletter_error"></div>
+                        <div class="submit">
+                        <input type="button"  value="Join" class="add_news"/>
+                        </div>
+                        
+                    </div>
+                </form>
                 </div>
     	
     </div>

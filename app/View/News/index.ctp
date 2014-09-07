@@ -4,13 +4,13 @@
         </div>
     		<div class="side-menu left-content-block news-sidebar">
             	<div class="parent-list-wrap">
-                	<ul>
+                	<ul class="newsletters">
                     <?php foreach($news as $n)
                     {?>
                         <li class="parent-list"> <a href="<?php echo $this->webroot."news/".$n['News']['slug'];?>"><?php echo $n['News']['title']?> </a></li>
                     <?php
                     }?>
-                    	
+                    	<li class="parent-list viewall"><a href="<?php echo $this->webroot;?>news/all">View All</a></li>
                     </ul>
                 </div>
             </div>
