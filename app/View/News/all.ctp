@@ -44,6 +44,7 @@
      <?php foreach($news as $new){?>
     <div class="items">
         <div class="img">
+        <a href="<?php echo $this->webroot;?>news/<?php echo $new['News']['slug'];?>">
         <?php if($images =  $image->find('first',array('conditions'=>array('type'=>'news','type_id'=>$new['News']['id']))))
             {
                 if(file_exists(APP."webroot/doc/thumb1/".$images['Image']['file']))
@@ -55,14 +56,14 @@
             {
         ?>
          <img src="<?php echo $this->webroot;?>images/default.png" /> 
-         <?php }?>  
+         <?php }?></a>  
         </div>
         <div class="news">
             <h3><a href="<?php echo $this->webroot;?>news/<?php echo $new['News']['slug'];?>"><?php echo $new['News']['title'];?></a></h3>
-            <span><?php echo date('d F Y',time($new['News']['added_on']));?></span>
-            <p>
-            <?php echo strip_tags(substr($new['News']['desc'],0,150)).'...';?>
-            </p>
+            
+            <span class="newsdate"><?php echo date('d F Y',time($new['News']['added_on']));?></span>
+            <div><?php echo strip_tags(substr($new['News']['desc'],0,150)).'...';?></div>
+            
         </div>
         <div class="clearfix"></div>
     </div>
